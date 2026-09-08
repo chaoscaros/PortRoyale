@@ -1,0 +1,6 @@
+node_modules/
+dist/
+local-assets/
+*.blend1
+.DS_Store
+artifacts/

@@ -1,0 +1,27 @@
+# 文档导航
+
+向 ChatGPT 网页版交接时，优先上传 planning/GPT_PLANNING_BRIEF.md 与 planning/AI_HANDOFF.md。当前状态只记录在 AI_HANDOFF；未来设计均明确标为未实现。
+
+- [ARCHITECTURE](architecture/ARCHITECTURE.md)
+- [DATA_MODEL](architecture/DATA_MODEL.md)
+- [ONLINE_ARCHITECTURE](architecture/ONLINE_ARCHITECTURE.md)
+- [SAVE_FORMAT](architecture/SAVE_FORMAT.md)
+- [SYSTEMS](architecture/SYSTEMS.md)
+- [ART_DIRECTION](art/ART_DIRECTION.md)
+- [ASSET_CATALOG](art/ASSET_CATALOG.md)
+- [BLENDER_PIPELINE](art/BLENDER_PIPELINE.md)
+- [COMBAT_DESIGN](design/COMBAT_DESIGN.md)
+- [ECONOMY_DESIGN](design/ECONOMY_DESIGN.md)
+- [FLEET_DESIGN](design/FLEET_DESIGN.md)
+- [GAME_DESIGN](design/GAME_DESIGN.md)
+- [CODE_CONVENTIONS](development/CODE_CONVENTIONS.md)
+- [DEBUGGING](development/DEBUGGING.md)
+- [DECISIONS](development/DECISIONS.md)
+- [PERFORMANCE](development/PERFORMANCE.md)
+- [TESTING](development/TESTING.md)
+- [CHANGELOG](history/CHANGELOG.md)
+- [DEVLOG](history/DEVLOG.md)
+- [AI_HANDOFF](planning/AI_HANDOFF.md)
+- [GPT_PLANNING_BRIEF](planning/GPT_PLANNING_BRIEF.md)
+- [ROADMAP](planning/ROADMAP.md)
+- [TODO](planning/TODO.md)

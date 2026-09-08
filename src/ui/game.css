@@ -1,0 +1,243 @@
+:root {
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: #f2e6c9;
+  background: #163b44;
+  font-synthesis: none;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  outline: none;
+}
+main {
+  width: 100vw;
+  height: 100dvh;
+  min-height: 520px;
+  position: relative;
+  overflow: hidden;
+}
+.masthead {
+  position: absolute;
+  top: 26px;
+  left: 32px;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  pointer-events: none;
+}
+.emblem {
+  font-size: 35px;
+  color: #dfbc78;
+  border: 1px solid #b99b6366;
+  width: 66px;
+  height: 66px;
+  text-align: center;
+  line-height: 64px;
+}
+.masthead p,
+.location p {
+  font-size: 10px;
+  letter-spacing: 2.8px;
+  color: #d6c9aa;
+  margin: 0 0 8px;
+}
+h1 {
+  font-family: "Songti SC", Georgia, serif;
+  font-weight: 500;
+  font-size: 32px;
+  letter-spacing: 7px;
+  margin: 0;
+}
+h1 span {
+  font-family: "PingFang SC", sans-serif;
+  letter-spacing: 2px;
+  font-size: 13px;
+  margin-left: 12px;
+}
+.edition {
+  margin-left: auto;
+  font-size: 11px;
+  letter-spacing: 2px;
+  border-top: 1px solid #d1b375;
+  padding-top: 12px;
+}
+.location {
+  position: absolute;
+  left: 36px;
+  top: 145px;
+  pointer-events: none;
+  text-shadow: 0 2px 14px #102e36;
+}
+h2 {
+  font-family: "Songti SC", Georgia, serif;
+  font-size: 25px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  margin: 12px 0;
+}
+.rule {
+  height: 1px;
+  width: 50px;
+  background: #d8b36d;
+  margin: 20px 0;
+}
+.location span {
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+.location small {
+  display: block;
+  font-size: 10px;
+  color: #ced5c7;
+  margin-top: 12px;
+}
+.hud {
+  position: absolute;
+  right: 32px;
+  bottom: 72px;
+  width: 315px;
+  background: #10292eef;
+  border: 1px solid #ba995657;
+  box-shadow: 0 12px 40px #06181c44;
+  padding: 21px;
+}
+.hud-title {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+.hud-title b {
+  font-weight: 400;
+  color: #d9bd7d;
+  font-size: 10px;
+}
+.time {
+  font-family: Georgia, serif;
+  font-variant-numeric: tabular-nums;
+  font-size: 42px;
+  margin: 20px 0;
+}
+.time small {
+  font-family: "PingFang SC", sans-serif;
+  font-size: 10px;
+  margin-left: 12px;
+  color: #b8c6be;
+}
+.controls {
+  display: flex;
+  gap: 6px;
+}
+.controls button {
+  border: 1px solid #64706a;
+  background: transparent;
+  color: #f2e6c9;
+  cursor: pointer;
+  height: 35px;
+  flex: 1;
+  transition: background 0.15s;
+}
+.controls button:first-child {
+  flex: 1.6;
+}
+.controls button[aria-pressed="true"] {
+  background: #d1b475;
+  color: #122d32;
+  border-color: #d1b475;
+}
+.controls button:hover {
+  background: #52665c;
+}
+.controls button:focus-visible {
+  outline: 2px solid #f3dfaa;
+  outline-offset: 3px;
+}
+.metrics {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #a5aa8c35;
+  padding-top: 17px;
+  margin-top: 20px;
+  font-size: 10px;
+  color: #a9bcb8;
+}
+.metrics b {
+  color: #e2dbc3;
+  font-weight: 400;
+  margin-left: 5px;
+  font-variant-numeric: tabular-nums;
+}
+.asset-status {
+  font-size: 10px;
+  display: block;
+  color: #b0bfb7;
+  margin-top: 14px;
+}
+footer {
+  position: absolute;
+  bottom: 24px;
+  left: 36px;
+  right: 32px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #c0cdc5;
+  letter-spacing: 1px;
+  pointer-events: none;
+}
+.error {
+  position: absolute;
+  inset: 40% 10% auto;
+  background: #542f25;
+  padding: 24px;
+}
+@media (max-width: 700px) {
+  .masthead {
+    left: 18px;
+    right: 18px;
+    top: 16px;
+  }
+  .edition,
+  .location,
+  footer span:last-child {
+    display: none;
+  }
+  h1 {
+    font-size: 26px;
+  }
+  h1 span {
+    font-size: 11px;
+    margin-left: 0;
+  }
+  .emblem {
+    width: 48px;
+    height: 48px;
+    line-height: 46px;
+    font-size: 28px;
+  }
+  .masthead p {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+  .hud {
+    right: 16px;
+    bottom: 65px;
+    width: 280px;
+    padding: 16px;
+  }
+  footer {
+    left: 18px;
+    right: 18px;
+    font-size: 9px;
+    letter-spacing: 0;
+  }
+}
