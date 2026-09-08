@@ -8,19 +8,28 @@ import {
   Scene,
   StandardMaterial,
   Vector3,
+  PointerEventTypes,
 } from "@babylonjs/core";
 import type { WorldSnapshot } from "../simulation/Simulation";
 import { createStrategyCamera } from "../input/StrategyCamera";
 import { createOcean } from "./ocean/createOcean";
-import { createTestWorld } from "./scene/createTestWorld";
-import { loadTestShip } from "./assets/loadTestShip";
+import { PortRenderer } from "./ports/PortRenderer";
+import { FleetRenderer } from "./fleets/FleetRenderer";
+import type { PickTarget, SelectionState } from "../input/SelectionState";
 export class GameRenderer {
   private readonly engine: Engine;
   private readonly scene: Scene;
   private readonly ocean;
   readonly ready: Promise<void>;
+  private readonly ports: PortRenderer;
+  private readonly fleets: FleetRenderer;
   private disposed = false;
-  constructor(canvas: HTMLCanvasElement) {
+  constructor(
+    canvas: HTMLCanvasElement,
+    labels: HTMLElement,
+    initial: WorldSnapshot,
+    onPick: (target: PickTarget) => void,
+  ) {
     this.engine = new Engine(canvas, true, { preserveDrawingBuffer: false });
     this.engine.setHardwareScalingLevel(
       Math.max(1, window.devicePixelRatio / 1.5),
@@ -47,22 +56,38 @@ export class GameRenderer {
     sky.material = skyMat;
     sky.isPickable = false;
     this.ocean = createOcean(this.scene);
-    createTestWorld(this.scene);
-    this.ready = loadTestShip(this.scene)
+    this.ports = new PortRenderer(this.scene, labels, onPick);
+    this.fleets = new FleetRenderer(this.scene);
+    this.scene.onPointerObservable.add((info) => {
+      if (
+        info.type === PointerEventTypes.POINTERTAP &&
+        info.event.button === 0
+      ) {
+        const target = info.pickInfo?.pickedMesh?.metadata?.pickTarget as
+          PickTarget | undefined;
+        if (target) onPick(target);
+      }
+    });
+    this.ready = this.fleets
+      .initialize(initial.fleets)
       .then(() => undefined)
       .catch((error) => {
         if (!this.disposed) throw error;
       });
   }
-  render(snapshot: WorldSnapshot) {
+  render(snapshot: WorldSnapshot, selection: SelectionState) {
     this.ocean.setFloat("time", snapshot.clock.simulationTime);
+    this.fleets.update(snapshot.fleets, snapshot.ports, selection);
     this.scene.render();
+    this.ports.update(snapshot.ports, selection);
   }
   resize() {
     this.engine.resize();
   }
   dispose() {
     this.disposed = true;
+    this.ports.dispose();
+    this.fleets.dispose();
     this.scene.dispose();
     this.engine.dispose();
   }

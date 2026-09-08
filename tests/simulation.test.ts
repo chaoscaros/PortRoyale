@@ -59,9 +59,9 @@ describe("fixed simulation clock", () => {
       expect(() => c.advance(dt, () => {})).toThrow();
   });
   it("has no rendering or browser dependencies", () => {
-    for (const file of readdirSync("src/simulation", { recursive: true }).filter((f) =>
-      typeof f === "string" && f.endsWith(".ts"),
-    )) {
+    for (const file of readdirSync("src/simulation", {
+      recursive: true,
+    }).filter((f) => typeof f === "string" && f.endsWith(".ts"))) {
       expect(readFileSync(`src/simulation/${file}`, "utf8")).not.toMatch(
         /@babylonjs|from ['"]react|\bwindow\b|\bdocument\b|HTMLCanvasElement/,
       );

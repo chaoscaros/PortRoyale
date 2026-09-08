@@ -2,14 +2,20 @@ import { useEffect, useRef, useState } from "react";
 import { GameApplication, type DebugSnapshot } from "../app/GameApplication";
 import type { TimeScale } from "../simulation/SimulationClock";
 import "./game.css";
+import { FleetPanel } from "./FleetPanel";
 export function Game() {
+  const labels = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null),
     app = useRef<GameApplication | null>(null);
   const [debug, setDebug] = useState<DebugSnapshot | null>(null),
     [error, setError] = useState("");
   useEffect(() => {
     try {
-      app.current = new GameApplication(canvas.current!, setDebug);
+      app.current = new GameApplication(
+        canvas.current!,
+        labels.current!,
+        setDebug,
+      );
     } catch (e) {
       setError(`3D 场景启动失败，请检查 WebGL 支持。${String(e)}`);
     }
@@ -26,6 +32,7 @@ export function Game() {
         aria-label="航海测试海域，左键旋转，右键平移，滚轮缩放"
         onContextMenu={(e) => e.preventDefault()}
       />
+      <div ref={labels} className="map-labels" aria-label="海图港口" />
       <header className="masthead">
         <span className="emblem">⚓</span>
         <div>
@@ -34,15 +41,13 @@ export function Game() {
             远洋 <span>航海贸易原型</span>
           </h1>
         </div>
-        <span className="edition">基础海域 / 01</span>
+        <span className="edition">四港试航 / 02</span>
       </header>
-      <aside className="location">
-        <p>试航日志 · PROTOTYPE</p>
-        <h2>一切，从海上开始。</h2>
-        <div className="rule" />
-        <span>测试岛屿 / 港口标记 / 自制帆船</span>
-        <small>工程奠基阶段 · 尚未开放航行与贸易</small>
-      </aside>
+      <FleetPanel
+        debug={debug}
+        onSelect={(target) => app.current?.select(target)}
+        onCommand={(command) => app.current?.dispatch(command)}
+      />
       <section className="hud" aria-label="模拟调试面板">
         <div className="hud-title">
           <span>航海时钟</span>
@@ -91,6 +96,10 @@ export function Game() {
             Tick <b>{clock?.tickCount ?? 0}</b>
           </span>
         </div>
+        <small className="world-count">
+          港口 {debug?.world.ports.length ?? 0} · 舰队{" "}
+          {debug?.world.fleets.length ?? 0}
+        </small>
         <small className="asset-status">
           {debug?.assetStatus ?? "准备场景…"}
         </small>

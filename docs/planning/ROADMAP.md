@@ -9,3 +9,5 @@
 6. 海战：独立设计并验证。
 
 未来联机单独评估，不与早期单机 MVP 绑定。每阶段先提交独立任务范围，不自动顺延开发。
+
+Task02已实现Phase1四港航行代码，Runtime待验。下一轮只推荐Goods + Market + Fleet Cargo + Buy/Sell Foundation，尚未授权自动实施。

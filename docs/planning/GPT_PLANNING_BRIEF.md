@@ -35,8 +35,8 @@ Blender 是正式船只、建筑、码头、环境建模工具，流程 .blend �
 ## 阶段规划
 
 Phase 0：工程、Clock、测试场景、策略相机、Blender 管线、接力文档。
-Phase 1：World Map + Ports + Fleet Navigation Foundation，优先 4 港，不包含贸易。
-Phase 2：Goods / Market / Inventory / Price / Buy / Sell，先完成可验证的经济闭环。
+Phase 1：World Map + Ports + Fleet Navigation Foundation 已实现四港、单舰队、选择确认、直线航行、抵达和改道；运行验收当前待用户启动服务。没有贸易。
+Phase 2 推荐：Goods + Market + Fleet Cargo + Buy/Sell Foundation。后续细化 Inventory / Stock / Dynamic Price，先完成可验证的经济闭环，尚未实施。
 之后：自动贸易 → 生产与城市 → 国家关系与任务 → 海战；每阶段单独细化、验收。
 
 未来联机：Browser Command → WebSocket → Server Authoritative Simulation → Snapshot → Browser。当前只保留边界，不实现服务器、同步或预测。未来存档保存带 saveVersion 的 Simulation State，不保存 Mesh、Material、DOM 或相机运行对象。

@@ -1,3 +1,4 @@
+import type { PickTarget, SelectionState } from "../input/SelectionState";
 import {
   Simulation,
   type Command,
@@ -9,8 +10,16 @@ export interface DebugSnapshot {
   fps: number;
   tps: number;
   assetStatus: string;
+  selection: SelectionState;
+  commandMessage: string;
 }
 export class GameApplication {
+  private selection: SelectionState = {
+    selectedFleetId: null,
+    selectedPortId: null,
+  };
+  private commandMessage = "";
+  private publishSeconds = 0;
   private readonly simulation = new Simulation(10);
   private readonly renderer: GameRenderer;
   private frame = 0;
@@ -25,9 +34,15 @@ export class GameApplication {
   private readonly resizeObserver: ResizeObserver;
   constructor(
     canvas: HTMLCanvasElement,
+    labels: HTMLElement,
     private readonly publish: (state: DebugSnapshot) => void,
   ) {
-    this.renderer = new GameRenderer(canvas);
+    this.renderer = new GameRenderer(
+      canvas,
+      labels,
+      this.simulation.snapshot(),
+      (target) => this.select(target),
+    );
     this.resizeObserver = new ResizeObserver(() => this.renderer.resize());
     this.resizeObserver.observe(canvas);
     document.addEventListener("visibilitychange", this.visibilityChanged);
@@ -56,10 +71,27 @@ export class GameApplication {
       fps: this.fps,
       tps: this.tps,
       assetStatus: this.assetStatus,
+      selection: this.selection,
+      commandMessage: this.commandMessage,
     });
   }
+  select(target: PickTarget) {
+    this.selection =
+      target.kind === "fleet"
+        ? { ...this.selection, selectedFleetId: target.id }
+        : { ...this.selection, selectedPortId: target.id };
+    this.commandMessage = "";
+    this.emit();
+  }
   dispatch(command: Command) {
-    this.simulation.dispatch(command);
+    const result = this.simulation.dispatch(command);
+    if (command.type === "move-fleet")
+      this.commandMessage =
+        result.outcome === "accepted"
+          ? "航行指令已下达"
+          : result.outcome === "noop"
+            ? "舰队已在此港或正前往此港"
+            : "航行指令被拒绝，请重新选择舰队和港口";
     this.emit();
   }
   private update = (now: number) => {
@@ -70,7 +102,7 @@ export class GameApplication {
       : Math.min(0.25, Math.max(0, (now - this.previous) / 1000));
     this.previous = now;
     this.sampleTicks += this.simulation.advance(elapsed);
-    this.renderer.render(this.simulation.snapshot());
+    this.renderer.render(this.simulation.snapshot(), this.selection);
     this.sampleSeconds += elapsed;
     this.sampleFrames++;
     if (this.sampleSeconds >= 1) {
@@ -79,6 +111,10 @@ export class GameApplication {
       this.sampleSeconds = 0;
       this.sampleFrames = 0;
       this.sampleTicks = 0;
+    }
+    this.publishSeconds += elapsed;
+    if (this.publishSeconds >= 0.1) {
+      this.publishSeconds = 0;
       this.emit();
     }
     this.frame = requestAnimationFrame(this.update);

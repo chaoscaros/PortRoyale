@@ -1,22 +1,29 @@
-# 架构
+# 当前架构 · Phase 1
 
 ```text
-React HUD / Input
-  → Command
-  → GameApplication.dispatch
-  → Simulation (authoritative)
-  → frozen WorldSnapshot
-  → React HUD + GameRenderer
+Data/portDefinitions → PortRegistry → PortSnapshot ───→ PortRenderer
+                                   ↘ WorldSnapshot
+Canvas picking / HTML 港口标签 → SelectionState（客户端）
+                                 ↓ 确认前往
+                            MoveFleetCommand
+                                 ↓ 校验
+Simulation → Map<FleetId,FleetState> ← FleetNavigationSystem.tick(dt)
+                                 ↓ 深只读快照
+                          FleetSnapshot → FleetRenderer → GLB transform
 ```
 
-GameApplication 持有 Simulation 与 GameRenderer，负责 requestAnimationFrame、ResizeObserver、visibilitychange、取消帧和 dispose。UI 每秒接收一次统计，按钮命令立即发布新快照。渲染每帧消费快照。
+src/data/ports/portDefinitions.ts 是港口唯一数据来源。Simulation 的 PortRegistry 复制并冻结定义，投影到快照；Renderer 不另存港口定义。src/data/worldDefinition.ts 定义初始港、舰队 ID 与 speed=8。
 
-SimulationClock 只接收经过宿主处理的 elapsed seconds：累加 elapsed × timeScale，以固定 dt 触发 tick，保留余数。simulationTime = tickCount × tickSeconds。暂停期间不累计新时间，保留已有余数。核心无现实时间、随机、浏览器和渲染依赖。
+Simulation 持有 Fleet collection 和 Clock，Command 仅修改模拟意图。固定 tick 调用集中 FleetNavigationSystem，直线每步 min(speed*dt, remaining)，到港精确 snap 并更新 docked/currentPort/destination。航行中改道保留当前位置，同目的地为 no-op。世界位置为纯 x/z，不含 Babylon Vector3。
 
-宿主把长帧截断为最多 250ms，隐藏标签期间不推进，重新可见重置基准，防止追赶风暴。因此不是离线时间模拟。时钟本身不丢传入时间。TPS 是每真实秒执行的 tick，正常倍率对应 10/20/40；FPS 是实际 frame 数，不是硬编码目标。
+快照 ports、fleets、position 均只读并冻结；不泄露内部可变舰队。heading 航行时按当前位置到目标派生，停泊默认 0（+Z）。ETA 和 remainingDistance 为 UI 派生，不保存冗余权威状态。
 
-WorldSnapshot 当前只有 clock。测试岛、测试船、港口标记都是静态渲染夹具，没有 Fleet 权威状态；下一阶段才增加位置和 ID。禁止从渲染 Mesh 反推模拟。
+GameApplication 持有客户端 SelectionState（不进入 WorldSnapshot）。点击船/港只更新选择，确认“前往”才发送 move-fleet。Renderer picking metadata 只携带稳定英文 ID，不以 mesh name 或 index 为身份。
 
-Renderer 使用 Babylon WebGL、右手坐标、ArcRotateCamera、简单天空、程序海面、primitive 岛屿。GLB loader 在放置前校验三个命名方向节点（10 米），不做任意缩放。
+GameRenderer 消费 Snapshot 与独立 SelectionState。PortRenderer 创建程序岛、码头、金色标记和 HTML 名称标签，远距离固定小字号；标签每帧投影，不随模型无限缩放。FleetRenderer 维护 FleetId → GLB root，选中显示圆环及当前目标航线；没有第二艘静态假船，也不读取 Mesh 反写模拟。
 
-当前没有 persistence 模块、data 定义或事件总线的空架子；需要时再添加。SAVE_FORMAT 和 DATA_MODEL 是未来设计。
+宿主 requestAnimationFrame 与 10 TPS 分离；模拟倍率 1/2/4，自然对应 10/20/40 tick/真实秒。UI 最多约 10Hz 更新，性能数值每秒采样。长帧截断 250ms，隐藏页不补算；纯 Clock 不截断传入时间。ResizeObserver、pointer observer、标签、场景和引擎随应用 dispose 清理。
+
+## 已知边界
+
+只有 4 港/1 Fleet；直线可能穿视觉岛，无海路/避障/碰撞/风/加速度。无经济、货物、完整 ShipState、存档或联机。正式模型保持 Blender→GLB、米制、Babylon 右手 +Y 上/+Z 船首。相机只调初始距离、最大距离和平移边界以覆盖四港，没有重构。

@@ -10,14 +10,12 @@ export async function loadTestShip(scene: Scene) {
     ["axis_up", [0, 10, 0]],
     ["axis_right", [10, 0, 0]],
   ] as const) {
-    const node = scene.getTransformNodeByName(name);
+    const node = result.transformNodes.find((node) => node.name === name);
     if (!node) throw new Error(`GLB 缺少校验节点：${name}`);
     node.computeWorldMatrix(true);
     const p = node.getAbsolutePosition();
     if ([p.x, p.y, p.z].some((n, i) => Math.abs(n - expected[i]) > 0.001))
       throw new Error(`GLB 方向校验失败：${name}`);
   }
-  root.position.set(26, 0.6, -39);
-  root.rotation.y = -0.5;
   return root;
 }

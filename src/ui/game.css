@@ -241,3 +241,188 @@ footer {
     letter-spacing: 0;
   }
 }
+.map-labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.port-label {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  pointer-events: auto;
+  background: #12373bee;
+  border: 1px solid #b59862;
+  color: #f1ddb4;
+  padding: 7px 12px;
+  font:
+    13px "PingFang SC",
+    sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.port-label::before {
+  content: "⚑";
+  margin-right: 7px;
+  color: #e2bb71;
+}
+.port-label.far {
+  font-size: 10px;
+  padding: 4px 8px;
+}
+.port-label:hover,
+.port-label[aria-pressed="true"] {
+  background: #d2b57c;
+  color: #143338;
+  outline: 1px solid #ecd6a3;
+  outline-offset: 3px;
+}
+.port-label:focus-visible {
+  outline: 2px solid #fff0cc;
+  outline-offset: 4px;
+}
+.fleet-panel {
+  position: absolute;
+  left: 32px;
+  top: 130px;
+  width: 260px;
+  padding: 20px;
+  background: #10292eea;
+  border-top: 2px solid #c5a363;
+  box-shadow: 0 12px 30px #071d2533;
+}
+.fleet-panel .eyebrow {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #d7be8c;
+}
+.fleet-panel h2 {
+  font-size: 24px;
+  margin: 12px 0 20px;
+}
+.fleet-panel p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #c3cec7;
+}
+.fleet-panel small {
+  font-size: 10px;
+  color: #b8c8c0;
+  display: block;
+}
+.fleet-state {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+.fleet-state b {
+  color: #e9ca89;
+  font-weight: 500;
+}
+.fleet-panel dl {
+  margin: 18px 0;
+}
+.fleet-panel dl div {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 0;
+  font-size: 11px;
+}
+.fleet-panel dt {
+  color: #aebeb6;
+}
+.fleet-panel dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+.target-port {
+  border-top: 1px solid #baa16955;
+  margin-top: 20px;
+  padding-top: 18px;
+}
+.target-port > span {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #c5b38d;
+}
+.target-port h3 {
+  font-size: 18px;
+  font-weight: 400;
+  margin: 12px 0;
+}
+.sail-button,
+.fleet-select {
+  width: 100%;
+  background: #d2b57c;
+  border: 1px solid #dfc68e;
+  color: #173136;
+  font-size: 12px;
+  padding: 10px;
+  cursor: pointer;
+  margin: 8px 0;
+}
+.sail-button:hover,
+.fleet-select:hover {
+  background: #eed8aa;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.fleet-panel button:focus-visible {
+  outline: 2px solid #f1deb2;
+  outline-offset: 3px;
+}
+.command-message {
+  min-height: 20px;
+}
+.world-count {
+  display: block;
+  font-size: 10px;
+  color: #c1cfbf;
+  margin-top: 12px;
+}
+@media (max-width: 1000px) {
+  .fleet-panel {
+    left: 18px;
+    width: 225px;
+    padding: 14px;
+  }
+  .hud {
+    right: 18px;
+    width: 270px;
+    padding: 16px;
+  }
+}
+@media (max-width: 700px) {
+  .fleet-panel {
+    top: 90px;
+    width: 190px;
+    font-size: 10px;
+    max-height: 48vh;
+    overflow: auto;
+  }
+  .fleet-panel dl div {
+    font-size: 10px;
+  }
+  .hud {
+    width: 230px;
+    bottom: 46px;
+    padding: 12px;
+  }
+  .time {
+    font-size: 28px;
+    margin: 10px 0;
+  }
+  .metrics {
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+  .world-count,
+  .asset-status {
+    font-size: 9px;
+  }
+  .masthead {
+    pointer-events: none;
+  }
+}
