@@ -19,4 +19,8 @@
 
 ## Phase 1.5 Rendering
 
-已接入英雄哈瓦那、双桅横帆船（历史资产键sloop）、阴影海面天空和尾流。VisualAssetLibrary管理24个GLB容器、共享纹理及实例；舰队映射仍按ID读快照。F3调试默认隐藏，正式UI只派生可用状态。旧船保留加载校准后释放。岛屿/建筑/尾流不是Simulation系统，没有碰撞、风力或浮力计算。
+已接入英雄哈瓦那、双桅横帆船（历史资产键sloop）、阴影海面天空和尾流。VisualAssetLibrary管理35个GLB容器、共享纹理及实例；舰队映射仍按ID读快照。F3调试默认隐藏，正式UI只派生可用状态。旧船保留加载校准后释放。岛屿/建筑/尾流不是Simulation系统，没有碰撞、风力或浮力计算。
+
+## Task05 表现层增量
+
+新增模块、材质图集、双 UV 和整岛烘焙均属于 Blender 资产层，manifest.havana 只描述视觉摆放。createPortVisual 在定位完成后缓存静态节点世界矩阵；舰队动态变换不冻结，仍严格来自 Snapshot。默认镜头与哈瓦那聚焦目标统一为 (-128, 0, 30)。art-hud.css 作为统一视觉主题覆盖，不增加游戏系统或权威状态。Simulation 与 Data 本轮没有改动。

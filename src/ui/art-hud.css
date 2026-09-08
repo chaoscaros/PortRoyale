@@ -1,0 +1,69 @@
+/* Task05: one material and spacing language across the strategy HUD. */
+:root {
+  --gold: #ac9471;
+  --gold-bright: #e5d2a6;
+  --muted: #a3ada9;
+  --line: #baa07838;
+  --panel: #102226f7;
+}
+.game-header, .game-footer, .object-panel, .main-menu, .port-list {
+  background-color: #102226;
+  background-image: linear-gradient(115deg, #b4a0780b, transparent 40%, #0000002a),
+    repeating-linear-gradient(0deg, transparent 0 3px, #ffffff02 3px 4px);
+  box-shadow: 0 12px 32px #00101166, inset 0 1px #ebd7ae30, inset 0 -1px #000a;
+}
+.game-header { border-bottom: 3px double #b9a07a55; }
+.game-footer { border-top: 3px double #b9a07a55; }
+.brand > svg { padding: 5px; width: 47px; height: 47px; border: 1px solid #ad92754d; border-radius: 50%; box-shadow: inset 0 0 0 3px #071318, 0 0 0 1px #070e14; }
+.brand h1 { color: #eee4d0; text-shadow: 0 2px 1px #000; }
+.world-caption strong { color: #c8bca4; }
+.voyage-clock b { color: #f0e3c5; text-shadow: 0 2px 2px #000; }
+.scene-caption { padding: 22px 24px; left: 24px; top: 103px; border-left: 2px solid #baa77b85; background: linear-gradient(90deg,#0b2025c4,#0b202552 70%,transparent); max-width: 292px; }
+.scene-caption p { font-size: 31px; letter-spacing: 4px; }
+.scene-caption > span { font-size: 10px; color: #cfbd96; }
+.scene-caption em { letter-spacing: 5px; color: #d0c6af; }
+.scene-caption small { font-size: 11px; color: #c2c6ba; text-wrap: balance; }
+.port-navigation { top: 354px; left: 24px; width: 230px; }
+.nav-toggle { background: #13272bf2; height: 43px; border: 1px solid #baa07866; box-shadow: inset 0 0 0 3px #07191d, 0 4px 15px #00141955; }
+.object-panel { border: 1px solid #baa07866; outline: 1px solid #071014; outline-offset: 3px; }
+.object-panel::before { height: 3px; top: 0; left: 0; right: 0; background: linear-gradient(90deg,#8f7856,#e3cd9d 45%,#8f7856); }
+.object-panel::after { content: ''; pointer-events: none; position: absolute; inset: 7px; border: 1px solid #bba27a25; }
+.object-illustration { background: radial-gradient(ellipse at 50% 50%,#a9956536,transparent 70%),repeating-linear-gradient(90deg,#c2ad7510 0 1px,transparent 1px 30px); color: #d5c197; height: 178px; }
+.object-illustration > span { color: #b4a689; letter-spacing: 3px; }
+.object-content { padding: 23px 26px 26px; }
+.object-panel h2 { color: #eee4cf; text-shadow: 0 2px #000; }
+.eyebrow { color: #b5a280; letter-spacing: 2px; }
+.fleet-stats { background: #06171c40; margin-inline: -10px; padding-inline: 10px; }
+.fleet-stats dt { color: #a8b2ac; }
+.fleet-stats dd { color: #efe2c5; }
+.primary-button { background: linear-gradient(#b5a180,#847050); color: #101e22; border: 1px solid #d3be95; box-shadow: inset 0 0 0 3px #68533966, 0 3px 8px #0006; text-shadow: 0 1px #e5d4b066; font-weight: 600; }
+.primary-button:hover:not(:disabled) { background: linear-gradient(#ceb88e,#a68a61); color: #101b1f; }
+.text-button, .quick-actions button { border: 1px solid #a58c633d; background: linear-gradient(#28404455,#11222788); box-shadow: inset 0 1px #dbc7a417; }
+.quick-actions { gap: 9px; }
+.quick-actions button { min-width: 106px; font-size: 12px; }
+.quick-actions button:hover:not(:disabled), .text-button:hover:not(:disabled) { border-color: #ceaf757a; background: #7a6d4144; }
+button:active:not(:disabled) { transform: translateY(1px); }
+button:disabled { filter: saturate(.25); opacity: .42; }
+.icon-button { z-index: 2; }
+.port-card-art { border-bottom: 1px solid #bda57a4d; background: linear-gradient(135deg,#a9986422,transparent); }
+.port-engraving { color: #c4af83; }
+@media(max-width:1450px) {
+  .scene-caption { left: 24px; top: 100px; padding: 18px; max-width: 246px; }
+  .scene-caption p { font-size: 27px; }
+  .port-navigation { top: 333px; left: 24px; width: 220px; }
+  .object-illustration { height: 139px; }
+  .object-content { padding: 19px 22px; }
+  .quick-actions button { min-width: 92px; }
+}
+@media(max-width:1100px) {
+  .scene-caption { max-width: 205px; padding: 14px; }
+  .port-navigation { top: 265px; width: 194px; }
+  .quick-actions button { min-width: 75px; }
+}
+@media(max-width:750px) {
+  .scene-caption { top: 89px; left: 13px; border: 0; padding: 8px 12px; }
+  .port-navigation { top: 191px; left: 13px; width: 175px; }
+  .object-illustration { height: 105px; }
+  .quick-actions { gap: 3px; }
+  .quick-actions button { min-width: 60px; }
+}

@@ -98,7 +98,7 @@ export class GameApplication {
       this.renderer.focus(world.fleets[0].position, 115);
     else {
       const p = world.ports[0].position;
-      this.renderer.focus({ x: p.x - 35, z: p.z + 52 }, 215);
+      this.renderer.focus({ x: p.x - 38, z: p.z + 60 }, 215);
     }
   }
   dispatch(command: Command) {

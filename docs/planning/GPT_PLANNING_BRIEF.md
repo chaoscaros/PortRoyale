@@ -36,7 +36,7 @@ Blender 是正式船只、建筑、码头、环境建模工具，流程 .blend �
 
 Phase 0：工程、Clock、测试场景、策略相机、Blender 管线、接力文档。
 Phase 1：World Map + Ports + Fleet Navigation Foundation 已实现四港、单舰队、选择确认、直线航行、抵达和改道；已在用户指定 Chrome 完成航行回归。没有贸易。
-Phase 1.5 / Phase Visual AAA Slice：AAA Visual Vertical Slice First。用户认为Task03视觉不达标，要求向现代高规格PC策略经营游戏靠拢。Task04重制1个Hero Port、1艘Hero Ship、正式HUD、材质、气氛与构图；玩法冻结。后续优先Hero Port / Hero Ship second pass或Visual Polish 02，只有用户明确确认画面达标才讨论经济。
+Phase 1.5 / Phase Visual AAA Slice：High-End Visual Target First。用户认为Task03视觉不达标，要求向现代高规格PC策略经营游戏靠拢。Task04建立英雄资产，Task05完成35套资产材质升级、商宅/港务所/装卸设施/广场、连续地表烘焙与统一HUD质感；仍未获得用户高规格美术验收，玩法冻结。后续优先Hero Port second pass，只有用户明确确认画面达标才讨论经济。
 Phase 2 延后：Goods + Market + Fleet Cargo + Buy/Sell Foundation。后续细化 Inventory / Stock / Dynamic Price，先完成可验证的经济闭环，尚未实施。
 之后：自动贸易 → 生产与城市 → 国家关系与任务 → 海战；每阶段单独细化、验收。
 
@@ -46,11 +46,17 @@ Phase 2 延后：Goods + Market + Fleet Cargo + Buy/Sell Foundation。后续细�
 
 结合 AI_HANDOFF 的实际进度，指定目标、禁止范围、涉及模块、命令/数据边界、测试、浏览器验收和文档更新要求。要求提交与推送结果如实报告。不要一次启动多个阶段，不要求本轮完成完整游戏。
 
-当前优先级：高级感 > 精致度 > 材质 > 构图 > HUD/UI > Hero Asset > 氛围 > 性能 > 新玩法。架构边界和已有航行正确性必须保持。经济、贸易、货舱暂缓，只有用户明确决定恢复后才制定对应开发任务。
+当前优先级：材质质量 > 模型质量 > 港口空间设计 > HUD / UI 高级感 > 环境氛围 > 植被与地形质量 > 性能控制 > 新玩法。架构边界和已有航行正确性必须保持。经济、贸易、货舱暂缓，只有用户明确决定恢复后才制定对应开发任务。
 
-视觉目标：Stylized Realism，17—18世纪加勒比殖民港口，向《纪元1800》这类现代桌面策略游戏的质感靠拢，不复制具体素材。否定低模小游戏、toy-like diorama和网页卡片工具感。集中英雄港、英雄船、HUD和气氛，不平均重制四港；真实美术验收以AI_HANDOFF及用户反馈为准，不能凭面数或功能PASS宣称3A达标。
+视觉目标：High-End Stylized Realism，17—18世纪加勒比殖民港口，向《纪元1800》这类现代桌面策略游戏的质感靠拢，不复制具体素材。否定低模小游戏、toy-like diorama和网页卡片工具感。集中英雄港、英雄船、HUD和气氛，不平均重制四港；真实美术验收以AI_HANDOFF及用户反馈为准，不能凭面数或功能PASS宣称3A达标。
 
 
 ## 用户指定的运行与测试方式
 
 开发服务的启动、重启由用户操作。Codex 不自行启动 dev/preview 服务；需要运行验收时告知用户所需命令并等待。只连接用户指定的现有 Chrome 标签，不自行启动 Playwright 浏览器或创建替代测试页面。默认 9999，占用顺延；若实际端口改变，请用户提供对应标签。
+
+## 当前最高优先级 · High-End Visual Target First
+
+材质质量 > 模型质量 > 港口空间设计 > HUD / UI 高级感 > 环境氛围 > 植被与地形质量 > 性能控制 > 新玩法。以《纪元1800》《纪元117》的美术生产和信息组织标准为参考，原创实现，不复制资产/UI。Task05 是进一步提升的美术 pass，不等于已经达到对应商业产品品质。
+
+交给下一轮 Codex 的任务只选择 Hero Port second pass、Hero Ship second pass、High-end HUD polish、Secondary port art pass 之一；优先第一项。用户明确认可视觉之前，不建议恢复 Goods + Market + Trade。未来经济、贸易、任务计划保留在本文和设计文档中。

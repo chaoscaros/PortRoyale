@@ -33,6 +33,18 @@ export function createPortVisual(
         p.heading,
         p.shadow ? shadows : undefined,
       );
+    // Hero architecture and vegetation are static render placements.
+    // Fleet roots remain dynamic and never pass through this freeze boundary.
+    root.computeWorldMatrix(true);
+    for (const node of root.getDescendants()) {
+      if (
+        "freezeWorldMatrix" in node &&
+        typeof node.freezeWorldMatrix === "function"
+      ) {
+        node.computeWorldMatrix(true);
+        node.freezeWorldMatrix();
+      }
+    }
   } else {
     const island = MeshBuilder.CreateSphere(
       `island:${port.id}`,

@@ -34,9 +34,11 @@ for a in m['assets'].values():
     out=struct.pack('<III',0x46546c67,2,12+8+len(encoded)+8+len(newbin))+struct.pack('<II',len(encoded),0x4e4f534a)+encoded+struct.pack('<II',len(newbin),0x004e4942)+newbin;path.write_bytes(out)
     a['textureUris']=sorted({'/assets/textures/shared/'+im['uri'].split('/')[-1] for im in images if 'uri' in im})
     name=Path(a['source']).stem
+    a['provenance']='Original Blender geometry; original AI-assisted albedo atlas plus authored PBR surfaces'
     a['category']=Path(a['source']).parent.name
-    a['role']='Secondary' if name in {'prop_barrel','prop_crate','prop_skiff','prop_cart','prop_market_awning','prop_stone_wall','prop_bush','prop_rock'} else 'Hero'
-    a['status']='新增正式模块' if name in {'building_house_c','building_warehouse_b','prop_stone_wall','port_quay','port_street','prop_cart','prop_market_awning','prop_palm_b','prop_rock'} else ('沿用次级' if name in {'prop_barrel','prop_crate','prop_skiff'} else '重制升级')
+    a['role']='Secondary' if a['category']=='props' or name in {'prop_bush','prop_grass','prop_rock'} else 'Hero'
+    new={'building_merchant_a','building_merchant_b','building_harbor_office','prop_tropical_tree_b','prop_cargo_stack','prop_sacks','prop_mooring','port_crane','port_plaza','prop_grass','port_pier_small'}
+    a['status']='Task05新增模块' if name in new else ('次级简化，材质升级' if name in {'prop_barrel','prop_crate','prop_skiff','prop_market_awning'} else 'Task05美术升级')
 m['sharedTextures']=sorted({u for a in m['assets'].values() for u in a.get('textureUris',[])})
 manifest_path.write_text(json.dumps(m,ensure_ascii=False,indent=2))
 print('Shared textures:',len(m['sharedTextures']),'GLB bytes:',sum((ROOT/('public'+a['url'])).stat().st_size for a in m['assets'].values()))

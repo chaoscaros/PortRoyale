@@ -68,7 +68,10 @@ export class PortRenderer {
         camera.radius > 330 ||
         Vector3.Distance(camera.target, entry.root.position) < 80;
       entry.root.setEnabled(showPort);
-      const anchor = new Vector3(port.position.x + 17, 4, port.position.z + 14);
+      const anchor =
+        port.id === "port-havana"
+          ? new Vector3(port.position.x - 44, 7, port.position.z + 40)
+          : new Vector3(port.position.x + 17, 4, port.position.z + 14);
       const screen = Vector3.Project(
         anchor,
         Matrix.Identity(),

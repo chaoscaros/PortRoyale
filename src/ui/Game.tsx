@@ -6,6 +6,7 @@ import { FleetPanel } from "./FleetPanel";
 import { PortPanel } from "./PortPanel";
 import { DeveloperHUD } from "./DeveloperHUD";
 import "./game.css";
+import "./art-hud.css";
 export function Game() {
   const canvas = useRef<HTMLCanvasElement>(null),
     labels = useRef<HTMLDivElement>(null),

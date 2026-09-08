@@ -41,3 +41,7 @@ UI 分为 Game、FleetPanel、PortPanel、DeveloperHUD、Icon；F3状态、选�
 源文件与manifest声明模块布局，Runtime加载GLB与共享PBR图片。VisualAssetLibrary规范化图片URL且只允许同源/assets；没有网络业务。地表高度近似在海面shader中复用以匹配岸边效果，不成为导航避障。PortRenderer在全览或目标附近展示次级港口；Ocean使用相同显示条件，避免留下独立浅水圆斑。
 
 右侧只显示一个对象面板；选港后保留客户端舰队选择以确认前往。顶部时钟为simulationTime派生的分秒，不是存档日期。菜单只有已实现的相机/调试/返回操作，不虚构经济或任务入口。
+
+## Task05 表现层增量
+
+新增模块、材质图集、双 UV 和整岛烘焙均属于 Blender 资产层，manifest.havana 只描述视觉摆放。createPortVisual 在定位完成后缓存静态节点世界矩阵；舰队动态变换不冻结，仍严格来自 Snapshot。默认镜头与哈瓦那聚焦目标统一为 (-128, 0, 30)。art-hud.css 作为统一视觉主题覆盖，不增加游戏系统或权威状态。Simulation 与 Data 本轮没有改动。
