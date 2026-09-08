@@ -1,4 +1,5 @@
 import {
+  ArcRotateCamera,
   Matrix,
   TransformNode,
   Vector3,
@@ -61,6 +62,12 @@ export class PortRenderer {
       );
     for (const port of ports) {
       const entry = this.entries.get(port.id)!;
+      const showPort =
+        port.id === "port-havana" ||
+        !(camera instanceof ArcRotateCamera) ||
+        camera.radius > 330 ||
+        Vector3.Distance(camera.target, entry.root.position) < 80;
+      entry.root.setEnabled(showPort);
       const anchor = new Vector3(port.position.x + 17, 4, port.position.z + 14);
       const screen = Vector3.Project(
         anchor,
@@ -71,6 +78,7 @@ export class PortRenderer {
       const x = (screen.x / engine.getRenderWidth()) * this.labels.clientWidth,
         y = (screen.y / engine.getRenderHeight()) * this.labels.clientHeight;
       entry.button.style.display =
+        !showPort ||
         screen.z < 0 ||
         screen.z > 1 ||
         x < 0 ||

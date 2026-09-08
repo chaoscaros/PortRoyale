@@ -15,13 +15,13 @@ export const portDefinitions: readonly PortDefinition[] = Object.freeze(
     {
       id: PORT_IDS.sanJuan,
       displayName: "圣胡安",
-      position: { x: 120, z: -20 },
+      position: { x: 240, z: -50 },
     },
     {
       id: PORT_IDS.santoDomingo,
       displayName: "圣多明各",
-      position: { x: 35, z: -50 },
+      position: { x: 85, z: -155 },
     },
-    { id: PORT_IDS.nassau, displayName: "拿骚", position: { x: -60, z: 45 } },
+    { id: PORT_IDS.nassau, displayName: "拿骚", position: { x: -160, z: 205 } },
   ].map((p) => Object.freeze({ ...p, position: Object.freeze(p.position) })),
 );

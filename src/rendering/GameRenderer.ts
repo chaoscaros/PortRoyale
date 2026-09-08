@@ -54,6 +54,10 @@ export class GameRenderer {
       this.environment.shadows,
     );
     this.scene.onPointerObservable.add((info) => {
+      if (info.type === PointerEventTypes.POINTERMOVE)
+        canvas.style.cursor = info.pickInfo?.pickedMesh?.metadata?.pickTarget
+          ? "pointer"
+          : "grab";
       if (info.type === PointerEventTypes.POINTERDOWN) this.focusTarget = null;
       if (
         info.type === PointerEventTypes.POINTERTAP &&

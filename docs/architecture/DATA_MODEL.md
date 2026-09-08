@@ -15,7 +15,7 @@
 
 WorldPosition = {x,z}；WORLD_DISTANCE_UNIT = 1 simulation world unit = 1 Babylon horizontal world unit。资产维持 1 米，不代表地图严格对应真实海里或地理投影。
 
-PortDefinition/PortSnapshot：id、displayName、position。四港：port-havana 哈瓦那(-90,-30)、port-san-juan 圣胡安(120,-20)、port-santo-domingo 圣多明各(35,-50)、port-nassau 拿骚(-60,45)。无 nation、market、stock、人口字段。
+PortDefinition/PortSnapshot：id、displayName、position。四港：port-havana 哈瓦那(-90,-30)、port-san-juan 圣胡安(240,-50)、port-santo-domingo 圣多明各(85,-155)、port-nassau 拿骚(-160,205)。无 nation、market、stock、人口字段。
 
 FleetState：id、position、status、currentPortId、destinationPortId、speed。初始 fleet-player-001 停泊哈瓦那，speed=8 世界单位/模拟秒，destination=null。内部 Map 支持多实体形态，当前配置只创建一个。
 

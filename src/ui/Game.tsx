@@ -13,7 +13,8 @@ export function Game() {
   const [debug, setDebug] = useState<DebugSnapshot | null>(null),
     [error, setError] = useState(""),
     [showDebug, setShowDebug] = useState(false),
-    [showPorts, setShowPorts] = useState(false);
+    [showPorts, setShowPorts] = useState(false),
+    [showMenu, setShowMenu] = useState(false);
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
       if (e.key === "F3") {
@@ -59,7 +60,7 @@ export function Game() {
         <div className="header-divider" />
         <div className="world-caption">
           <strong>加勒比海</strong>
-          <span>航海原型 · 视觉切片</span>
+          <span>西印度群岛 · 航海时代</span>
         </div>
         <div className="funds">
           <Icon name="coins" size={18} />
@@ -67,6 +68,19 @@ export function Game() {
             资金 <b>—</b>
             <small>经济系统未启用</small>
           </span>
+        </div>
+        <div className="voyage-clock">
+          <span>航海时钟</span>
+          <b>
+            {Math.floor((clock?.simulationTime ?? 0) / 60)
+              .toString()
+              .padStart(2, "0")}
+            :
+            {Math.floor((clock?.simulationTime ?? 0) % 60)
+              .toString()
+              .padStart(2, "0")}
+          </b>
+          <small>模拟时间</small>
         </div>
         <div className="time-controls" aria-label="航海时间控制">
           <button
@@ -101,7 +115,38 @@ export function Game() {
             ))}
           </div>
         </div>
+        <button
+          className="menu-button"
+          aria-label="主菜单"
+          aria-expanded={showMenu}
+          onClick={() => setShowMenu((v) => !v)}
+        >
+          <Icon name="settings" />
+        </button>
       </header>
+      {showMenu && (
+        <section className="main-menu" aria-label="主菜单">
+          <h2>航海设置</h2>
+          <p>拖动旋转 · 右键平移 · 滚轮缩放</p>
+          <button
+            onClick={() => {
+              app.current?.focusView("havana");
+              setShowMenu(false);
+            }}
+          >
+            <Icon name="focus" />
+            返回哈瓦那视角
+          </button>
+          <button onClick={() => setShowDebug((v) => !v)}>
+            <Icon name="settings" />
+            开发者信息 <kbd>F3</kbd>
+          </button>
+          <button onClick={() => setShowMenu(false)}>
+            <Icon name="close" />
+            返回航海
+          </button>
+        </section>
+      )}
       <nav className="port-navigation" aria-label="港口导航">
         <button
           className="nav-toggle"
@@ -130,19 +175,23 @@ export function Game() {
         )}
       </nav>
       <div className="scene-caption">
-        <span>西印度群岛</span>
-        <p>海风与远方</p>
+        <span>加勒比海 · 古巴北岸</span>
+        <p>哈瓦那港</p>
+        <em>HAVANA</em>
         <div />
+        <small>日光落在石砌码头，海风越过城市的钟楼。</small>
       </div>
       <div className="north-compass" aria-hidden="true">
         <span>北</span>
         <Icon name="compass" size={38} />
       </div>
-      <FleetPanel
-        debug={debug}
-        onClose={() => app.current?.clearSelection("fleet")}
-        onFocus={() => app.current?.focusView("fleet")}
-      />
+      {!debug?.selection.selectedPortId && (
+        <FleetPanel
+          debug={debug}
+          onClose={() => app.current?.clearSelection("fleet")}
+          onFocus={() => app.current?.focusView("fleet")}
+        />
+      )}
       <PortPanel
         debug={debug}
         onClose={() => app.current?.clearSelection("port")}
@@ -159,6 +208,7 @@ export function Game() {
         <div className="quick-actions">
           <button
             onClick={() => {
+              app.current?.clearSelection("port");
               if (debug)
                 app.current?.select({
                   kind: "fleet",
@@ -182,10 +232,10 @@ export function Game() {
             onClick={() => setShowDebug((v) => !v)}
           >
             <Icon name="settings" size={18} />
-            开发者信息 <kbd>F3</kbd>
+            调试 <kbd>F3</kbd>
           </button>
         </div>
-        <span className="build-caption">VISUAL FOUNDATION · 03</span>
+        <span className="build-caption">港湾 · 航行 · 探索</span>
       </footer>
       {loading && (
         <div className="loading-screen" role="status">

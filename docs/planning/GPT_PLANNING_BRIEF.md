@@ -36,7 +36,7 @@ Blender 是正式船只、建筑、码头、环境建模工具，流程 .blend �
 
 Phase 0：工程、Clock、测试场景、策略相机、Blender 管线、接力文档。
 Phase 1：World Map + Ports + Fleet Navigation Foundation 已实现四港、单舰队、选择确认、直线航行、抵达和改道；已在用户指定 Chrome 完成航行回归。没有贸易。
-Phase 1.5：Visual Foundation。Task 03 已接入哈瓦那视觉港口、15 个自制模块 GLB、单桅帆船、海面/光照/阴影/天空、正式 HUD 和 F3 开发面板。后续先做 Visual Polish 02 或 More Ship/Port Asset Pass，视觉验收由用户决定。
+Phase 1.5 / Phase Visual AAA Slice：AAA Visual Vertical Slice First。用户认为Task03视觉不达标，要求向现代高规格PC策略经营游戏靠拢。Task04重制1个Hero Port、1艘Hero Ship、正式HUD、材质、气氛与构图；玩法冻结。后续优先Hero Port / Hero Ship second pass或Visual Polish 02，只有用户明确确认画面达标才讨论经济。
 Phase 2 延后：Goods + Market + Fleet Cargo + Buy/Sell Foundation。后续细化 Inventory / Stock / Dynamic Price，先完成可验证的经济闭环，尚未实施。
 之后：自动贸易 → 生产与城市 → 国家关系与任务 → 海战；每阶段单独细化、验收。
 
@@ -46,9 +46,9 @@ Phase 2 延后：Goods + Market + Fleet Cargo + Buy/Sell Foundation。后续细�
 
 结合 AI_HANDOFF 的实际进度，指定目标、禁止范围、涉及模块、命令/数据边界、测试、浏览器验收和文档更新要求。要求提交与推送结果如实报告。不要一次启动多个阶段，不要求本轮完成完整游戏。
 
-当前优先级：画面质量 > 港口表现 > 船只表现 > UI 品质 > 新玩法。架构边界和已有航行正确性必须保持。经济、贸易、货舱暂缓，只有用户明确决定恢复后才制定对应开发任务。
+当前优先级：高级感 > 精致度 > 材质 > 构图 > HUD/UI > Hero Asset > 氛围 > 性能 > 新玩法。架构边界和已有航行正确性必须保持。经济、贸易、货舱暂缓，只有用户明确决定恢复后才制定对应开发任务。
 
-视觉目标：17 世纪加勒比殖民港口，半写实策略视角，暖阳、青蓝海水、红瓦灰泥、木船布帆；略风格化，但不以手游玩具低模为终点。当前完成的是视觉基础切片，植被、海岸细节和其他三港仍需下一轮美术精修。
+视觉目标：Stylized Realism，17—18世纪加勒比殖民港口，向《纪元1800》这类现代桌面策略游戏的质感靠拢，不复制具体素材。否定低模小游戏、toy-like diorama和网页卡片工具感。集中英雄港、英雄船、HUD和气氛，不平均重制四港；真实美术验收以AI_HANDOFF及用户反馈为准，不能凭面数或功能PASS宣称3A达标。
 
 
 ## 用户指定的运行与测试方式

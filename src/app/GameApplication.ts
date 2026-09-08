@@ -93,12 +93,12 @@ export class GameApplication {
   }
   focusView(mode: "fleet" | "havana" | "world") {
     const world = this.simulation.snapshot();
-    if (mode === "world") this.renderer.focus({ x: 0, z: 15 }, 430);
+    if (mode === "world") this.renderer.focus({ x: 0, z: 35 }, 650);
     else if (mode === "fleet")
-      this.renderer.focus(world.fleets[0].position, 100);
+      this.renderer.focus(world.fleets[0].position, 115);
     else {
       const p = world.ports[0].position;
-      this.renderer.focus({ x: p.x - 25, z: p.z + 35 }, 205);
+      this.renderer.focus({ x: p.x - 35, z: p.z + 52 }, 215);
     }
   }
   dispatch(command: Command) {

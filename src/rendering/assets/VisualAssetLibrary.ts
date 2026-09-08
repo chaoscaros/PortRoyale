@@ -20,6 +20,24 @@ export class VisualAssetLibrary {
         const container = await LoadAssetContainerAsync(
           manifest.assets[id].url,
           this.scene,
+          {
+            pluginOptions: {
+              gltf: {
+                preprocessUrlAsync: async (url: string) => {
+                  // Our authored GLBs share local textures above the model category folder.
+                  const resolved = new URL(url, window.location.href);
+                  if (
+                    resolved.origin !== window.location.origin ||
+                    !resolved.pathname.startsWith("/assets/")
+                  )
+                    throw new Error(
+                      "Asset URL outside the local asset library",
+                    );
+                  return resolved.href;
+                },
+              },
+            },
+          },
         );
         if (this.disposed) {
           container.dispose();

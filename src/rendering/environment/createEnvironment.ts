@@ -1,4 +1,6 @@
 import {
+  RawCubeTexture,
+  Constants,
   Color3,
   Color4,
   DefaultRenderingPipeline,
@@ -19,24 +21,51 @@ export function createEnvironment(scene: Scene, camera: Camera) {
   scene.fogStart = 550;
   scene.fogEnd = 1500;
   scene.fogColor = new Color3(0.53, 0.72, 0.75);
+  // Authored low-frequency sky/ground IBL: reusable faces, mipmapped reflections.
+  const size = 32;
+  const faces = Array.from({ length: 6 }, (_, face) => {
+    const pixels = new Uint8Array(size * size * 4);
+    for (let y = 0; y < size; y++)
+      for (let x = 0; x < size; x++) {
+        const h = face === 2 ? 1 : face === 3 ? 0 : 1 - y / (size - 1);
+        const sky = [0.46, 0.57, 0.64],
+          ground = [0.19, 0.18, 0.13];
+        const i = (y * size + x) * 4;
+        for (let c = 0; c < 3; c++)
+          pixels[i + c] = Math.round(255 * (ground[c] * (1 - h) + sky[c] * h));
+        pixels[i + 3] = 255;
+      }
+    return pixels;
+  });
+  const reflection = new RawCubeTexture(
+    scene,
+    faces,
+    size,
+    Constants.TEXTUREFORMAT_RGBA,
+    Constants.TEXTURETYPE_UNSIGNED_BYTE,
+    true,
+  );
+  reflection.gammaSpace = false;
+  scene.environmentTexture = reflection;
+  scene.environmentIntensity = 0.55;
   const ambient = new HemisphericLight(
     "tropical-skylight",
     new Vector3(0, 1, 0),
     scene,
   );
-  ambient.intensity = 0.38;
+  ambient.intensity = 0.28;
   ambient.diffuse = new Color3(0.81, 0.91, 1);
   ambient.groundColor = new Color3(0.32, 0.3, 0.22);
   const sun = new DirectionalLight(
     "afternoon-sun",
-    new Vector3(0.45, -1, 0.55).normalize(),
+    new Vector3(-0.65, -1, 0.35).normalize(),
     scene,
   );
-  sun.position.set(-190, 230, -120);
-  sun.diffuse = new Color3(1, 0.91, 0.73);
-  sun.intensity = 2.8;
+  sun.position.set(120, 250, -180);
+  sun.diffuse = new Color3(1, 0.94, 0.82);
+  sun.intensity = 3.2;
   sun.shadowMinZ = 1;
-  sun.shadowMaxZ = 550;
+  sun.shadowMaxZ = 800;
   const shadows = new ShadowGenerator(2048, sun);
   shadows.usePercentageCloserFiltering = true;
   shadows.filteringQuality = ShadowGenerator.QUALITY_MEDIUM;
@@ -68,17 +97,22 @@ export function createEnvironment(scene: Scene, camera: Camera) {
   ]);
   pipeline.fxaaEnabled = true;
   pipeline.samples = 1;
-  pipeline.bloomEnabled = false;
+  pipeline.bloomEnabled = true;
+  pipeline.bloomThreshold = 1.15;
+  pipeline.bloomWeight = 0.06;
+  pipeline.bloomKernel = 32;
+  pipeline.bloomScale = 0.35;
   scene.imageProcessingConfiguration.toneMappingEnabled = true;
   scene.imageProcessingConfiguration.toneMappingType =
     ImageProcessingConfiguration.TONEMAPPING_ACES;
-  scene.imageProcessingConfiguration.exposure = 1.0;
-  scene.imageProcessingConfiguration.contrast = 1.08;
+  scene.imageProcessingConfiguration.exposure = 1.13;
+  scene.imageProcessingConfiguration.contrast = 1.12;
   return {
     shadows,
     dispose() {
       pipeline.dispose();
       shadows.dispose();
+      reflection.dispose();
     },
   };
 }

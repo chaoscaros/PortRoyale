@@ -1,5 +1,6 @@
 import type { DebugSnapshot } from "../app/GameApplication";
 import { distance } from "../simulation/world/types";
+import { VesselPortrait } from "./VesselPortrait";
 import { Icon } from "./Icon";
 export function FleetPanel({
   debug,
@@ -24,15 +25,15 @@ export function FleetPanel({
   return (
     <section className="fleet-panel object-panel" aria-label="舰队信息">
       <div className="object-illustration">
-        <Icon name="ship" size={62} />
-        <span>单桅帆船</span>
+        <VesselPortrait />
+        <span>双桅横帆船</span>
       </div>
       <div className="object-content">
         <div className="panel-heading">
           <div>
             <p className="eyebrow">你的舰队</p>
             <h2>
-              晨曦号 <span>测试舰队</span>
+              晨曦号 <span>DAWN · BRIG</span>
             </h2>
           </div>
           <button

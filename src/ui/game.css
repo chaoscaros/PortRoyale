@@ -1,744 +1,1060 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600&display=swap");
 :root {
-  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-  color: #eee6d5;
-  background: #173845;
+  font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+  color: #e3e0d6;
+  background: #071d29;
   font-synthesis: none;
-  --ink: #102735;
-  --panel: #102735ef;
-  --gold: #b89c67;
-  --muted: #a3b3b9;
-  --line: #b89c6740;
+  font-weight: 400;
+  --gold: #b5a27c;
+  --gold-bright: #d6c39b;
+  --muted: #829297;
+  --line: rgba(193, 181, 150, 0.2);
+  --panel: rgba(12, 27, 34, 0.94);
 }
 * {
   box-sizing: border-box;
 }
-body {
+html,
+body,
+#root,
+main {
   margin: 0;
-  -webkit-font-smoothing: antialiased;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 button {
   font: inherit;
-  cursor: pointer;
   color: inherit;
+  cursor: pointer;
   border: 0;
   background: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   transition:
-    background 0.15s,
-    color 0.15s;
+    background 0.22s,
+    color 0.22s,
+    box-shadow 0.22s;
 }
 button:focus-visible {
-  outline: 2px solid #ead4a6;
-  outline-offset: 3px;
+  outline: 1px solid var(--gold-bright);
+  outline-offset: 4px;
 }
 button:disabled {
-  opacity: 0.48;
+  opacity: 0.38;
   cursor: default;
 }
-svg {
-  flex-shrink: 0;
-  vertical-align: middle;
+button:hover:not(:disabled) {
+  color: #f5e7c5;
+  background: rgba(189, 167, 116, 0.1);
 }
-main {
-  position: relative;
-  width: 100vw;
-  height: 100dvh;
-  min-height: 600px;
-  overflow: hidden;
+button svg {
+  flex-shrink: 0;
+}
+button:active:not(:disabled) {
+  box-shadow: inset 0 2px 10px #0007;
 }
 canvas {
   display: block;
   width: 100%;
   height: 100%;
-  touch-action: none;
   outline: none;
+  touch-action: none;
+}
+main::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 120px 30px #00142133;
+  z-index: 1;
 }
 .game-header {
   position: absolute;
-  inset: 0 0 auto;
-  height: 78px;
+  z-index: 12;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 74px;
   display: flex;
   align-items: center;
+  padding: 0 28px;
   gap: 25px;
-  padding: 0 32px;
-  background: linear-gradient(180deg, #102735fa, #102735ec);
-  border-bottom: 1px solid var(--line);
-  box-shadow: 0 5px 25px #0a1c2a22;
+  background: linear-gradient(180deg, #11252ef5, #10242ce8);
+  border-bottom: 1px solid #a7957047;
+  box-shadow:
+    0 4px 28px #00121c55,
+    inset 0 1px #ffffff0b;
 }
 .brand {
   display: flex;
   align-items: center;
-  gap: 14px;
-  color: #d9c292;
+  gap: 13px;
   min-width: 175px;
+  color: var(--gold-bright);
+}
+.brand > svg {
+  width: 36px;
+  height: 36px;
 }
 .brand h1 {
-  font-family: "Songti SC", "SimSun", serif;
-  margin: 0 0 3px;
-  font-size: 26px;
+  font:
+    500 23px "Noto Serif SC",
+    serif;
   letter-spacing: 9px;
-  font-weight: 500;
+  margin: 0 0 4px;
 }
 .brand span {
-  font-family: Georgia, serif;
-  font-size: 8px;
-  letter-spacing: 3px;
+  font:
+    9px Georgia,
+    serif;
+  letter-spacing: 3.5px;
+  color: #a0a59d;
 }
 .header-divider {
-  height: 32px;
   width: 1px;
+  height: 31px;
   background: var(--line);
 }
 .world-caption {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 6px;
 }
 .world-caption strong {
+  font-weight: 500;
   font-size: 13px;
   letter-spacing: 3px;
-  font-weight: 400;
 }
 .world-caption span {
   font-size: 10px;
-  color: var(--muted);
+  color: #7d929a;
+  letter-spacing: 1px;
 }
 .funds {
   margin-left: auto;
   display: flex;
-  gap: 12px;
   align-items: center;
-  color: #cbb580;
+  gap: 12px;
+  font-size: 10px;
+  color: var(--muted);
 }
-.funds span {
-  font-size: 11px;
+.funds > svg {
+  color: var(--gold);
 }
 .funds b {
   font-size: 18px;
-  margin-left: 14px;
   font-weight: 400;
+  margin-left: 14px;
+  color: #b8bcaf;
 }
 .funds small {
   display: block;
   font-size: 9px;
-  color: #8f9fa5;
-  margin-top: 5px;
+  margin-top: 3px;
+}
+.voyage-clock {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 2px 14px;
+  border-left: 1px solid var(--line);
+  padding-left: 24px;
+  color: #aeb8b7;
+  font-size: 10px;
+}
+.voyage-clock b {
+  grid-row: span 2;
+  font:
+    22px Georgia,
+    serif;
+  letter-spacing: 2px;
+  font-variant-numeric: tabular-nums;
+  color: #d6d8cd;
+}
+.voyage-clock small {
+  font-size: 8px;
+  color: #71888f;
 }
 .time-controls {
   display: flex;
+  gap: 12px;
   align-items: center;
-  gap: 14px;
-  margin-left: 28px;
-  padding-left: 28px;
-  border-left: 1px solid var(--line);
 }
 .pause-button {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  min-width: 70px;
+  font-size: 11px;
   height: 34px;
+  padding: 0 9px;
 }
-.pause-button[aria-pressed="true"] {
-  color: #dfbe79;
+.pause-button svg {
+  color: var(--gold);
 }
 .speed-controls {
   display: flex;
+  background: #05151b70;
   border: 1px solid var(--line);
   padding: 3px;
   gap: 2px;
 }
 .speed-controls button {
-  width: 42px;
-  height: 29px;
-  font-family: Georgia, serif;
-  font-size: 14px;
-  color: #aebabe;
+  width: 34px;
+  height: 27px;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: #899b9e;
 }
 .speed-controls button[aria-pressed="true"] {
-  background: #b89c67;
-  color: #132a35;
+  background: linear-gradient(#b5a07b, #928064);
+  box-shadow: inset 0 1px #e4cc9d66;
+  color: #13242b;
 }
-.speed-controls button:hover {
-  background: #b89c6750;
-  color: #fff0d1;
-}
-.map-labels {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-.port-label {
-  position: absolute;
-  transform: translate(-50%, -100%);
-  pointer-events: auto;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 6px 12px 6px 7px;
-  background: #142c38dc;
-  color: #eee0c2;
-  border: 1px solid #b89c6760;
-  box-shadow: 0 3px 14px #0b293544;
-  white-space: nowrap;
-  font-size: 12px;
-  letter-spacing: 2px;
-}
-.port-emblem {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 26px;
-  color: #d5b982;
-  border-right: 1px solid var(--line);
-  padding-right: 5px;
-}
-.port-emblem svg {
-  width: 19px;
-  height: 21px;
-}
-.port-label.far {
-  font-size: 10px;
-  padding: 4px 8px 4px 5px;
-  gap: 5px;
-}
-.port-label.far .port-emblem {
-  width: 18px;
-  height: 22px;
-}
-.port-label:hover,
-.port-label[aria-pressed="true"] {
-  background: #d2ba88;
-  color: #152d38;
-  border-color: #e6cf9f;
-}
-.port-label:hover .port-emblem,
-.port-label[aria-pressed="true"] .port-emblem {
-  color: #243c45;
-}
-.port-navigation {
-  position: absolute;
-  top: 100px;
-  left: 28px;
-}
-.nav-toggle {
-  background: #142b38e8;
-  border: 1px solid var(--line);
-  padding: 11px 13px;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  font-size: 11px;
-  letter-spacing: 1px;
-}
-.nav-toggle > span {
-  font:
-    11px Georgia,
-    serif;
-  color: #cdb782;
+.menu-button {
+  width: 33px;
+  height: 33px;
   border-left: 1px solid var(--line);
-  padding-left: 12px;
-}
-.port-list {
-  width: 190px;
-  background: #102735f7;
-  border: 1px solid var(--line);
-  margin-top: 5px;
-  padding: 5px;
-}
-.port-list button {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  padding: 12px 9px;
-  font-size: 12px;
-  text-align: left;
-}
-.port-list button svg:last-child {
-  margin-left: auto;
-}
-.port-list button:hover {
-  background: #b89c6725;
+  padding-left: 16px;
+  color: var(--gold);
 }
 .scene-caption {
   position: absolute;
-  top: 175px;
-  left: 34px;
+  z-index: 3;
+  top: 117px;
+  left: 36px;
   pointer-events: none;
-  text-shadow: 0 2px 12px #0c303c77;
+  text-shadow: 0 2px 15px #00141acc;
+  max-width: 270px;
 }
 .scene-caption > span {
   font-size: 10px;
-  letter-spacing: 4px;
-  color: #dbe4de;
+  letter-spacing: 3px;
+  color: #c4d0ce;
 }
 .scene-caption p {
-  font-family: "Songti SC", serif;
-  font-size: 28px;
+  font:
+    400 36px "Noto Serif SC",
+    serif;
   letter-spacing: 5px;
-  margin: 12px 0 17px;
+  margin: 12px 0 8px;
+  color: #f1ece0;
+}
+.scene-caption em {
+  font:
+    11px Georgia,
+    serif;
+  letter-spacing: 7px;
+  font-style: normal;
+  color: #c8c7b9;
 }
 .scene-caption > div {
+  width: 35px;
   height: 1px;
-  width: 34px;
-  background: #d4bc8b;
+  background: var(--gold);
+  margin: 20px 0 14px;
+}
+.scene-caption small {
+  display: block;
+  max-width: 218px;
+  font-size: 10px;
+  line-height: 1.9;
+  letter-spacing: 1px;
+  color: #b8c5c4;
+}
+.port-navigation {
+  position: absolute;
+  z-index: 10;
+  top: 319px;
+  left: 36px;
+  width: 206px;
+}
+.nav-toggle {
+  width: 100%;
+  height: 39px;
+  padding: 0 14px;
+  justify-content: flex-start;
+  background: #112b35bb;
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--line);
+  font-size: 11px;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 16px #00182333;
+}
+.nav-toggle svg {
+  color: var(--gold);
+}
+.nav-toggle span {
+  margin-left: auto;
+  font: 12px Georgia;
+  color: var(--gold);
+}
+.port-list {
+  margin-top: 6px;
+  padding: 7px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 25px #0004;
+}
+.port-list button {
+  width: 100%;
+  height: 41px;
+  font-size: 12px;
+  justify-content: flex-start;
+  padding: 0 8px;
+}
+.port-list button svg:first-child {
+  color: var(--gold);
+}
+.port-list button svg:last-child {
+  margin-left: auto;
+  width: 13px;
 }
 .north-compass {
   position: absolute;
-  right: 35px;
+  right: 34px;
   top: 106px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 7px;
-  color: #e7dfc8;
+  gap: 5px;
   pointer-events: none;
-  opacity: 0.8;
+  color: #d6cfb6a8;
+  z-index: 3;
 }
-.north-compass span {
-  font-size: 10px;
+.north-compass > span {
+  font-size: 9px;
+}
+.north-compass svg {
+  width: 41px;
+  height: 41px;
 }
 .object-panel {
   position: absolute;
-  bottom: 83px;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  box-shadow: 0 12px 35px #0b23343b;
+  z-index: 8;
+  right: 30px;
+  bottom: 89px;
+  width: 338px;
+  background: linear-gradient(135deg, #23373def, #0d2028f5 55%);
+  border: 1px solid #ad9d744a;
+  box-shadow:
+    0 18px 44px #00101e66,
+    inset 0 1px #e9d4a41a;
+  backdrop-filter: blur(24px);
+  animation: panel-enter 0.35s ease-out both;
 }
-.fleet-panel {
-  left: 28px;
-  width: 470px;
-  display: flex;
+.object-panel::before {
+  content: "";
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #dcc695aa, transparent);
 }
 .object-illustration {
-  width: 104px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 13px;
-  background: radial-gradient(ellipse at center, #38536380, transparent);
-  border-right: 1px solid var(--line);
-  color: #c9b07b;
+  height: 166px;
+  position: relative;
+  background: radial-gradient(ellipse at 55% 60%, #9e94761c, transparent 65%);
+  padding: 10px 21px 23px;
+  color: #bbab88;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
 }
-.object-illustration span {
+.object-illustration > svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 3px 5px #0005);
+}
+.object-illustration > span {
+  position: absolute;
+  bottom: 9px;
+  left: 0;
+  right: 0;
+  text-align: center;
   font-size: 9px;
-  letter-spacing: 2px;
+  letter-spacing: 4px;
+  color: #9faaa7;
 }
 .object-content {
-  padding: 19px 21px;
-  flex: 1;
-  min-width: 0;
+  padding: 22px 23px;
 }
 .panel-heading {
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
-  gap: 8px;
+  align-items: flex-start;
 }
 .eyebrow {
   font-size: 9px;
-  letter-spacing: 2px;
-  color: #aa956d;
-  margin: 0 0 8px;
+  letter-spacing: 2.5px;
+  color: var(--gold);
+  margin: 0 0 9px;
 }
 .object-panel h2 {
-  font-family: "Songti SC", serif;
-  font-size: 24px;
-  letter-spacing: 2px;
-  font-weight: 400;
+  font:
+    400 27px "Noto Serif SC",
+    serif;
+  letter-spacing: 3px;
   margin: 0;
+  color: #e6e1d5;
 }
 .object-panel h2 span {
-  font-family: "PingFang SC", sans-serif;
-  font-size: 9px;
-  letter-spacing: 1px;
-  color: var(--muted);
-  margin-left: 10px;
+  display: block;
+  font:
+    9px Georgia,
+    serif;
+  letter-spacing: 3px;
+  color: #7f979c;
+  margin-top: 9px;
 }
 .icon-button {
-  width: 24px;
-  height: 24px;
-  display: grid;
-  place-items: center;
-  color: #9aadb4;
+  width: 28px;
+  height: 28px;
+  color: #8d9c9e;
+  padding: 5px;
 }
-.icon-button:hover {
-  color: #f6e6bd;
-  background: #b89c6720;
+.fleet-panel .icon-button {
+  position: absolute;
+  right: 12px;
+  top: 12px;
 }
 .fleet-state {
+  font-size: 11px;
+  line-height: 1.8;
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 16px 0 18px;
-  font-size: 11px;
+  margin: 22px 0;
+  color: #a3b4b6;
 }
 .fleet-state > span:last-child {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: #d0d9d6;
+  gap: 5px;
 }
 .status {
-  border: 1px solid #72988b60;
-  color: #b1ccae;
-  padding: 3px 6px;
-  font-size: 10px;
+  color: #adc4b2;
+  font-size: 9px;
+  padding: 3px 8px;
+  border: 1px solid #97b49d44;
+  background: #adc1a30b;
+  white-space: nowrap;
 }
 .status.sailing {
-  color: #d5bd86;
-  border-color: #bca16570;
+  color: #d2bd8b;
+  border-color: #d2bd8b55;
 }
 .fleet-stats {
   display: flex;
-  justify-content: space-between;
-  gap: 14px;
-  border-top: 1px solid var(--line);
-  padding-top: 14px;
+  padding: 19px 0;
   margin: 0 0 13px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  gap: 18px;
+}
+.fleet-stats > div {
+  flex: 1;
 }
 .fleet-stats dt {
   font-size: 9px;
-  color: var(--muted);
-  margin-bottom: 7px;
+  color: #81969d;
+  letter-spacing: 1px;
 }
 .fleet-stats dd {
-  margin: 0;
+  margin: 9px 0 0;
   font:
-    22px Georgia,
+    24px Georgia,
     serif;
+  color: #e1ddcf;
   font-variant-numeric: tabular-nums;
 }
-.fleet-stats dd small {
+.fleet-stats small {
   display: block;
   font:
-    8px "PingFang SC",
+    8px "Noto Sans SC",
     sans-serif;
-  color: #96a8ae;
-  margin-top: 5px;
+  color: #788e93;
+  margin-top: 7px;
 }
 .text-button {
-  display: flex;
-  gap: 7px;
-  align-items: center;
-  font-size: 10px;
-  color: #ccb688;
-  padding: 0;
-}
-.text-button:hover {
-  color: #ffdda0;
-}
-.port-panel {
-  right: 28px;
-  width: 320px;
+  height: 35px;
+  font-size: 11px;
+  color: var(--gold-bright);
+  width: 100%;
+  border: 1px solid #bba37533;
+  background: #ac9d7c09;
 }
 .port-card-art {
+  padding: 26px 23px;
   display: flex;
   align-items: center;
-  gap: 17px;
-  padding: 21px 20px;
-  background: linear-gradient(120deg, #37535a88, transparent);
+  gap: 18px;
   border-bottom: 1px solid var(--line);
 }
 .port-card-art > svg {
-  color: #c7af78;
+  color: var(--gold);
+  width: 35px;
+  height: 35px;
 }
-.port-card-art > .icon-button {
-  margin-left: auto;
-  align-self: flex-start;
+.port-card-art .icon-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
 }
 .port-card-content {
-  padding: 17px 20px;
+  padding: 19px 23px 23px;
 }
-.port-card-content p {
+.port-card-content > p {
   font-size: 11px;
-  line-height: 1.9;
-  color: #b2c0c1;
-  margin: 0 0 15px;
+  line-height: 2.1;
+  color: #a7b7b7;
+  margin: 16px 0 23px;
+  letter-spacing: 0.4px;
 }
-.primary-button {
+.port-engraving {
+  height: 93px;
+  color: #a39371;
+  opacity: 0.85;
+  padding: 2px 0;
+  background: radial-gradient(ellipse, #a9a08313, transparent 75%);
+}
+.port-engraving svg {
+  height: 100%;
+  width: 100%;
+}
+.selected-fleet {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: #bea36f;
-  color: #142b38;
-  width: 100%;
-  padding: 10px;
-  font-size: 12px;
+  gap: 11px;
+  padding: 14px 0;
+  margin: 0 0 18px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
-.primary-button svg:last-child {
+.selected-fleet > svg {
+  color: var(--gold);
+}
+.selected-fleet div {
+  display: grid;
+  gap: 4px;
+}
+.selected-fleet span {
+  font-size: 8px;
+  color: #83989f;
+  letter-spacing: 1px;
+}
+.selected-fleet strong {
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+.selected-fleet small {
+  margin-left: auto;
+  font-size: 10px;
+  color: #b4c0b4;
+}
+.primary-button {
+  height: 44px;
+  width: 100%;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #10232a;
+  background: linear-gradient(110deg, #bfae8a, #d5c097 60%, #b6a17d);
+  border: 1px solid #dfcda58c;
+  box-shadow:
+    inset 0 1px #f3e6c95c,
+    0 3px 12px #0003;
+  justify-content: flex-start;
+  padding: 0 14px;
+}
+.primary-button > svg:last-child {
   margin-left: auto;
 }
 .primary-button:hover:not(:disabled) {
-  background: #dfc28a;
+  background: linear-gradient(110deg, #d4c2a0, #e0caa3);
+  color: #09202b;
+  box-shadow: 0 0 20px #c9af7220;
 }
-.port-card-content small {
+.primary-button:disabled {
+  opacity: 0.4;
+  filter: saturate(0.35);
+}
+.port-card-content > small {
   display: block;
+  text-align: center;
+  margin-top: 12px;
   font-size: 10px;
-  color: #bbc4bb;
-  margin-top: 10px;
-}
-.developer-hud {
-  position: absolute;
-  right: 28px;
-  top: 164px;
-  width: 280px;
-  background: #071923f5;
-  padding: 17px;
-  border: 1px solid #63828170;
-  font-family: monospace;
-  color: #c7d3cf;
-}
-.developer-hud h2 {
-  font:
-    12px "PingFang SC",
-    sans-serif;
-  margin: 0 0 15px;
-}
-.developer-hud h2 small {
-  float: right;
-  color: #87a39e;
-}
-.developer-hud dl {
-  font-size: 10px;
-}
-.developer-hud dl div {
-  display: flex;
-  justify-content: space-between;
-  margin: 10px 0;
-}
-.developer-hud dd {
-  margin: 0;
-}
-.developer-hud p,
-.developer-hud > small {
-  font-size: 9px;
-  color: #9aafa6;
+  color: #8ca0a4;
 }
 .game-footer {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 59px;
-  background: #102735f0;
-  border-top: 1px solid var(--line);
+  height: 63px;
+  z-index: 12;
   display: flex;
   align-items: center;
+  padding: 0 30px;
   justify-content: space-between;
-  padding: 0 28px;
-  gap: 20px;
+  background: linear-gradient(0deg, #0c202af7, #102732d9);
+  border-top: 1px solid #b8a57a40;
+  box-shadow: 0 -5px 25px #001a2422;
 }
 .camera-help {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   font-size: 9px;
-  color: #91a6af;
+  color: #88a0a8;
+  letter-spacing: 0.5px;
 }
 .camera-help i {
-  height: 3px;
-  width: 3px;
+  width: 2px;
+  height: 2px;
   border-radius: 50%;
-  background: #7e938e;
+  background: #ad9e73;
 }
 .quick-actions {
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: 5px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
 }
 .quick-actions button {
-  height: 35px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0 13px;
+  height: 41px;
   font-size: 11px;
-  color: #c6d0ce;
+  padding: 0 19px;
+  letter-spacing: 1px;
+  border-left: 1px solid #a4916926;
 }
-.quick-actions button:hover,
-.quick-actions button[aria-pressed="true"] {
-  background: #b69d6525;
-  color: #dec48a;
+.quick-actions button:last-child {
+  border-right: 1px solid #a4916926;
 }
 .quick-actions svg {
-  color: #baa67c;
+  color: var(--gold);
+  width: 19px;
 }
-kbd {
-  font:
-    9px Georgia,
-    serif;
-  border: 1px solid #71858160;
-  padding: 2px 4px;
-  color: #91a4aa;
+.quick-actions button[aria-pressed="true"] {
+  background: #ad987d15;
 }
 .build-caption {
-  font:
-    8px Georgia,
-    serif;
-  letter-spacing: 1.8px;
-  color: #748d98;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: #81959b;
 }
 .notice {
   position: absolute;
-  bottom: 77px;
+  z-index: 10;
+  bottom: 81px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 11px;
-  color: #ece2bf;
-  background: #152d38bb;
-  padding: 8px 14px;
+  letter-spacing: 1px;
+  color: #ded8c7;
+  text-shadow: 0 2px 8px #001522;
+  background: #0b252ccc;
+  padding: 10px 20px;
+  border-bottom: 1px solid #baa57888;
   pointer-events: none;
 }
 .notice:empty {
   display: none;
 }
+kbd {
+  font: 9px monospace;
+  border: 1px solid #899b9b44;
+  color: #8f9e9d;
+  padding: 1px 3px;
+}
+.map-labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  overflow: hidden;
+}
+.port-label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  padding: 0 15px 0 9px;
+  min-height: 34px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #dadacc;
+  background: linear-gradient(90deg, #112d39ed, #173240bd);
+  border: 1px solid #c3b18566;
+  border-radius: 1px 14px 14px 1px;
+  box-shadow:
+    0 4px 12px #00192488,
+    inset 0 1px #e2d2a918;
+  white-space: nowrap;
+  gap: 8px;
+}
+.port-emblem {
+  height: 21px;
+  width: 22px;
+  padding-right: 5px;
+  border-right: 1px solid #c2ab7d44;
+  color: #c8b68d;
+  display: flex;
+  align-items: center;
+}
+.port-emblem svg {
+  height: 18px;
+  width: 18px;
+}
+.port-label[aria-pressed="true"] {
+  background: linear-gradient(90deg, #b7a27a, #ccba95);
+  color: #152b34;
+  border-color: #dbc9a4;
+}
+.port-label[aria-pressed="true"] .port-emblem {
+  color: #263b40;
+}
+.port-label.far {
+  font-size: 9px;
+  min-height: 27px;
+  letter-spacing: 1px;
+  opacity: 0.88;
+}
+.developer-hud {
+  position: absolute;
+  z-index: 20;
+  top: 88px;
+  right: 28px;
+  width: 285px;
+  background: #06171ff5;
+  border: 1px solid #758e9266;
+  padding: 18px;
+  color: #b8c5c5;
+  font:
+    10px ui-monospace,
+    monospace;
+  box-shadow: 0 5px 30px #0006;
+}
+.developer-hud h2 {
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0 0 13px;
+}
+.developer-hud h2 span {
+  float: right;
+  font-size: 10px;
+}
+.developer-hud dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.developer-hud dt {
+  color: #789097;
+}
+.developer-hud dd {
+  margin: 0;
+  text-align: right;
+}
+.developer-hud p {
+  font-size: 9px;
+  line-height: 1.8;
+  margin: 12px 0 0;
+  color: #9badac;
+}
+.main-menu {
+  position: absolute;
+  top: 84px;
+  right: 25px;
+  z-index: 30;
+  width: 285px;
+  padding: 23px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 35px #0006;
+  animation: panel-enter 0.25s;
+}
+.main-menu h2 {
+  font:
+    20px "Noto Serif SC",
+    serif;
+  letter-spacing: 2px;
+  margin: 0 0 16px;
+}
+.main-menu p {
+  font-size: 10px;
+  color: #889da3;
+  line-height: 1.9;
+}
+.main-menu button {
+  width: 100%;
+  justify-content: flex-start;
+  font-size: 11px;
+  height: 43px;
+  border-top: 1px solid var(--line);
+}
+.main-menu svg {
+  width: 16px;
+  color: var(--gold);
+}
 .loading-screen {
   position: absolute;
-  inset: 78px 0 59px;
+  inset: 0;
+  z-index: 40;
+  background: radial-gradient(ellipse at center, #203c47, #091d28);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #173642e8;
-  color: #d5c297;
-  z-index: 5;
+  color: #c9b78f;
 }
 .loading-screen h2 {
   font:
-    30px "Songti SC",
+    28px "Noto Serif SC",
     serif;
-  letter-spacing: 5px;
-  font-weight: 400;
+  letter-spacing: 7px;
+  margin: 25px 0 13px;
 }
 .loading-screen p {
-  font-size: 12px;
-  color: #b2c3c3;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #a1b0b2;
 }
 .error {
   position: absolute;
-  left: 25%;
-  right: 25%;
-  top: 40%;
-  padding: 25px;
-  background: #593b30;
-  z-index: 10;
-  font-size: 12px;
-  overflow-wrap: anywhere;
+  z-index: 50;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 20px;
+  background: #502a2bf5;
+  color: #ffe2d7;
+  max-width: 80%;
+  font-size: 13px;
+}
+@keyframes panel-enter {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 @media (max-width: 1450px) {
   .game-header {
     gap: 18px;
-    padding: 0 24px;
+    padding: 0 23px;
   }
-  .game-footer {
-    padding: 0 20px;
+  .brand {
+    min-width: 152px;
+  }
+  .brand h1 {
+    font-size: 21px;
+  }
+  .world-caption span {
+    font-size: 9px;
+  }
+  .voyage-clock {
+    padding-left: 18px;
+  }
+  .funds {
+    gap: 8px;
+  }
+  .object-panel {
+    right: 23px;
+    width: 315px;
+    bottom: 84px;
+  }
+  .object-illustration {
+    height: 135px;
+  }
+  .object-content {
+    padding: 19px 21px;
+  }
+  .fleet-state {
+    margin: 17px 0;
+  }
+  .fleet-stats {
+    padding: 15px 0;
   }
   .build-caption {
     display: none;
   }
+  .quick-actions {
+    left: auto;
+    right: 20px;
+    transform: none;
+  }
   .scene-caption {
-    top: 165px;
+    left: 29px;
+    top: 111px;
   }
-  .fleet-panel {
-    width: 430px;
+  .scene-caption p {
+    font-size: 32px;
   }
-  .object-content {
-    padding: 17px;
+  .port-navigation {
+    left: 29px;
+    top: 302px;
   }
-  .object-illustration {
-    width: 86px;
+  .port-card-art {
+    padding: 22px;
+  }
+  .port-card-content {
+    padding: 15px 22px 21px;
+  }
+  .port-engraving {
+    height: 77px;
+  }
+  .port-card-content > p {
+    margin: 12px 0 17px;
+  }
+  .selected-fleet {
+    padding: 11px 0;
+    margin-bottom: 14px;
   }
 }
-@media (max-width: 1050px) {
-  .funds {
+@media (max-width: 1100px) {
+  .world-caption,
+  .header-divider,
+  .funds small,
+  .voyage-clock {
     display: none;
   }
-  .time-controls {
+  .funds {
     margin-left: auto;
   }
-  .world-caption span {
-    display: none;
+  .game-header {
+    gap: 15px;
+  }
+  .scene-caption {
+    max-width: 200px;
+  }
+  .scene-caption p {
+    font-size: 28px;
+  }
+  .scene-caption small {
+    font-size: 9px;
+    max-width: 185px;
+  }
+  .port-navigation {
+    width: 180px;
   }
   .camera-help {
     display: none;
   }
   .quick-actions {
-    margin: auto;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    white-space: nowrap;
   }
-  .fleet-panel {
-    width: 390px;
-    left: 16px;
+  .object-panel {
+    width: 292px;
   }
-  .port-panel {
-    width: 285px;
-    right: 16px;
-  }
-  .object-panel h2 span {
-    display: none;
-  }
-  .fleet-stats {
-    gap: 8px;
-  }
-  .scene-caption {
+  .north-compass {
     display: none;
   }
 }
 @media (max-width: 750px) {
   .game-header {
-    padding: 0 12px;
+    height: 63px;
+    padding: 0 14px;
     gap: 10px;
   }
   .brand {
-    min-width: 120px;
+    min-width: 100px;
     gap: 8px;
   }
   .brand h1 {
-    font-size: 22px;
+    font-size: 18px;
+    letter-spacing: 5px;
   }
   .brand span {
     font-size: 7px;
+    letter-spacing: 1px;
   }
-  .world-caption,
-  .header-divider {
+  .brand > svg {
+    width: 25px;
+  }
+  .funds {
     display: none;
   }
   .time-controls {
-    padding-left: 8px;
-    gap: 6px;
+    margin-left: auto;
+    gap: 5px;
   }
-  .speed-controls button {
-    width: 29px;
-  }
-  .fleet-panel {
-    width: 320px;
-    bottom: 72px;
-  }
-  .port-panel {
-    width: 270px;
-    bottom: 340px;
-  }
-  .object-illustration {
+  .pause-button span {
     display: none;
   }
-  .quick-actions button {
+  .speed-controls button {
+    width: 26px;
+  }
+  .menu-button {
+    width: 25px;
+    padding: 0;
+    border: 0;
+  }
+  .scene-caption {
+    top: 88px;
+    left: 20px;
+  }
+  .scene-caption p {
+    font-size: 25px;
+  }
+  .scene-caption small,
+  .scene-caption > div {
+    display: none;
+  }
+  .port-navigation {
+    top: 203px;
+    left: 20px;
+    width: 165px;
+  }
+  .object-panel {
+    right: 14px;
+    bottom: 79px;
+    width: 270px;
+    max-height: 60vh;
+    overflow: auto;
+  }
+  .object-illustration {
+    height: 110px;
+  }
+  .game-footer {
+    height: 59px;
     padding: 0 8px;
+  }
+  .quick-actions button {
     font-size: 10px;
+    padding: 0 10px;
+    gap: 6px;
+  }
+  .quick-actions svg {
+    width: 16px;
   }
   .quick-actions kbd {
     display: none;
   }
   .developer-hud {
-    top: 153px;
+    top: 73px;
     right: 14px;
+    width: 265px;
   }
-  .scene-caption {
-    display: none;
+  .notice {
+    bottom: 67px;
+    max-width: 80%;
+    font-size: 10px;
+  }
+  .main-menu {
+    top: 73px;
+    right: 14px;
   }
 }

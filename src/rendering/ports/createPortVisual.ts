@@ -1,7 +1,6 @@
 import {
   Color3,
   MeshBuilder,
-  StandardMaterial,
   PBRMaterial,
   type Scene,
   type ShadowGenerator,
@@ -34,30 +33,6 @@ export function createPortVisual(
         p.heading,
         p.shadow ? shadows : undefined,
       );
-    const stone = new PBRMaterial("havana-plaza", scene);
-    stone.albedoColor = Color3.FromHexString("#ad9b79").toLinearSpace();
-    stone.roughness = 1;
-    stone.metallic = 0;
-    const plaza = MeshBuilder.CreateGround(
-      "havana-plaza",
-      { width: 70, height: 8 },
-      scene,
-    );
-    plaza.parent = root;
-    plaza.position.set(-38, 3.13, 47);
-    plaza.material = stone;
-    plaza.receiveShadows = true;
-    plaza.isPickable = false;
-    const road = MeshBuilder.CreateGround(
-      "havana-quay-road",
-      { width: 7, height: 28 },
-      scene,
-    );
-    road.parent = root;
-    road.position.set(-18, 3.15, 43);
-    road.material = stone;
-    road.receiveShadows = true;
-    road.isPickable = false;
   } else {
     const island = MeshBuilder.CreateSphere(
       `island:${port.id}`,

@@ -8,11 +8,11 @@
 | FleetNavigationSystem | Implemented | 集中 fixed tick、直线移动、精确抵达、改道 |
 | Fleet Selection | Implemented | 客户端选船/港、确认前往、不污染世界 |
 | Fleet Rendering | Implemented | ID→GLB、snapshot位置朝向、选中圈、目标线 |
-| PortRenderer | Implemented | 金色 marker、程序占位物、标签投影、远距简化、点击 |
+| PortRenderer | Implemented | 模块化英雄港/次级港、铭牌投影、距离显隐、点击 |
 | GameApplication | Implemented | frame、snapshot桥、10Hz HUD、1Hz统计、生命周期 |
-| 运行验收 | Partial | Phase 0 有历史观察；Phase 1 当前页面无法连接，待验 |
+| 运行验收 | 当前记录见AI_HANDOFF | 功能、视觉与性能分别记录 |
 | 海路避障 | Planned | 当前直线可穿岛，不实施 |
-| 经济/货舱/交易 | Planned | 下一阶段独立授权 |
+| 经济/货舱/交易 | Planned | 延后，需用户确认画面达标并授权 |
 | 存档/多人/战斗 | Planned | 未实现 |
 
 执行顺序：宿主 elapsed → Clock fixed ticks → FleetNavigationSystem → Snapshot → Renderer/UI。新增系统需明确顺序，未来随机数必须种子化。

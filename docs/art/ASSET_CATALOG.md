@@ -1,33 +1,40 @@
-# 资产清单
+# 正式资产目录 · Task 04
 
-本轮全部为项目自制（Self-created），无第三方模型或原作提取资源。作者：本项目开发过程；使用范围：随本项目源文件交付，未引入额外第三方许可。15个正式视觉资产均为 LOD0 only；数据源 assets-source/blender/visual/manifest.json，包含材质名、包围盒和哈瓦那布局。所有 .blend 可独立编辑，运行仅加载 GLB。
+全部由本项目自制，无第三方模型和原作提取内容。24项资产均保留可编辑.blend与运行GLB，当前LOD0 only。Hero/Secondary指本轮呈现职责，不代表商业品质认证。ship_test作为历史校准资产保留，不重复显示。
 
-| 资产 | Blender源文件 | 运行资源 | 三角面 | 材质数 | GLB KiB |
-|---|---|---|---:|---:|---:|
-| sloop | assets-source/blender/ships/sloop.blend | public/assets/models/ships/sloop.glb | 6222 | 9 | 3379.5 |
-| building_house_a | assets-source/blender/buildings/building_house_a.blend | public/assets/models/buildings/building_house_a.glb | 714 | 7 | 1699.2 |
-| building_house_b | assets-source/blender/buildings/building_house_b.blend | public/assets/models/buildings/building_house_b.glb | 1206 | 8 | 1624.8 |
-| building_warehouse | assets-source/blender/buildings/building_warehouse.blend | public/assets/models/buildings/building_warehouse.glb | 978 | 7 | 1712.3 |
-| building_governor | assets-source/blender/buildings/building_governor.blend | public/assets/models/buildings/building_governor.glb | 1630 | 8 | 3303.6 |
-| building_church | assets-source/blender/buildings/building_church.blend | public/assets/models/buildings/building_church.glb | 502 | 7 | 1685.3 |
-| port_lighthouse | assets-source/blender/ports/port_lighthouse.blend | public/assets/models/ports/port_lighthouse.glb | 676 | 5 | 1696.8 |
-| port_pier | assets-source/blender/ports/port_pier.blend | public/assets/models/ports/port_pier.glb | 4704 | 2 | 1808.5 |
-| prop_barrel | assets-source/blender/props/prop_barrel.blend | public/assets/models/props/prop_barrel.glb | 1692 | 2 | 1617.9 |
-| prop_crate | assets-source/blender/props/prop_crate.blend | public/assets/models/props/prop_crate.glb | 156 | 2 | 1560.6 |
-| prop_skiff | assets-source/blender/props/prop_skiff.blend | public/assets/models/props/prop_skiff.glb | 308 | 3 | 1565.2 |
-| prop_palm | assets-source/blender/environment/prop_palm.blend | public/assets/models/environment/prop_palm.glb | 356 | 3 | 1576.8 |
-| prop_tropical_tree | assets-source/blender/environment/prop_tropical_tree.blend | public/assets/models/environment/prop_tropical_tree.glb | 708 | 3 | 1575.8 |
-| prop_bush | assets-source/blender/environment/prop_bush.blend | public/assets/models/environment/prop_bush.glb | 360 | 1 | 13.1 |
-| island_visual_test | assets-source/blender/environment/island_visual_test.blend | public/assets/models/environment/island_visual_test.glb | 13110 | 1 | 411.0 |
+| Asset | Category / Role | Source .blend | Runtime .glb | tris | 材质数 | Status |
+|---|---|---|---|---:|---:|---|
+| building_house_a | buildings / Hero | assets-source/blender/buildings/building_house_a.blend | public/assets/models/buildings/building_house_a.glb | 12046 | 8 | 重制升级 |
+| building_house_b | buildings / Hero | assets-source/blender/buildings/building_house_b.blend | public/assets/models/buildings/building_house_b.glb | 16342 | 8 | 重制升级 |
+| building_house_c | buildings / Hero | assets-source/blender/buildings/building_house_c.blend | public/assets/models/buildings/building_house_c.glb | 11086 | 8 | 新增正式模块 |
+| building_warehouse | buildings / Hero | assets-source/blender/buildings/building_warehouse.blend | public/assets/models/buildings/building_warehouse.glb | 19570 | 9 | 重制升级 |
+| building_warehouse_b | buildings / Hero | assets-source/blender/buildings/building_warehouse_b.blend | public/assets/models/buildings/building_warehouse_b.glb | 17610 | 9 | 新增正式模块 |
+| building_governor | buildings / Hero | assets-source/blender/buildings/building_governor.blend | public/assets/models/buildings/building_governor.glb | 32190 | 8 | 重制升级 |
+| building_church | buildings / Hero | assets-source/blender/buildings/building_church.blend | public/assets/models/buildings/building_church.glb | 26138 | 9 | 重制升级 |
+| sloop | ships / Hero | assets-source/blender/ships/sloop.blend | public/assets/models/ships/sloop.glb | 66810 | 9 | 重制升级 |
+| port_pier | ports / Hero | assets-source/blender/ports/port_pier.blend | public/assets/models/ports/port_pier.glb | 5724 | 3 | 重制升级 |
+| port_lighthouse | ports / Hero | assets-source/blender/ports/port_lighthouse.blend | public/assets/models/ports/port_lighthouse.glb | 4436 | 6 | 重制升级 |
+| prop_stone_wall | props / Secondary | assets-source/blender/props/prop_stone_wall.blend | public/assets/models/props/prop_stone_wall.glb | 1804 | 1 | 新增正式模块 |
+| port_quay | ports / Hero | assets-source/blender/ports/port_quay.blend | public/assets/models/ports/port_quay.glb | 5544 | 1 | 新增正式模块 |
+| port_street | ports / Hero | assets-source/blender/ports/port_street.blend | public/assets/models/ports/port_street.glb | 13640 | 1 | 新增正式模块 |
+| prop_barrel | props / Secondary | assets-source/blender/props/prop_barrel.blend | public/assets/models/props/prop_barrel.glb | 1692 | 2 | 沿用次级 |
+| prop_crate | props / Secondary | assets-source/blender/props/prop_crate.blend | public/assets/models/props/prop_crate.glb | 92 | 2 | 沿用次级 |
+| prop_skiff | props / Secondary | assets-source/blender/props/prop_skiff.blend | public/assets/models/props/prop_skiff.glb | 308 | 3 | 沿用次级 |
+| prop_cart | props / Secondary | assets-source/blender/props/prop_cart.blend | public/assets/models/props/prop_cart.glb | 2012 | 2 | 新增正式模块 |
+| prop_market_awning | props / Secondary | assets-source/blender/props/prop_market_awning.blend | public/assets/models/props/prop_market_awning.glb | 224 | 2 | 新增正式模块 |
+| prop_palm | environment / Hero | assets-source/blender/environment/prop_palm.blend | public/assets/models/environment/prop_palm.glb | 13104 | 3 | 重制升级 |
+| prop_palm_b | environment / Hero | assets-source/blender/environment/prop_palm_b.blend | public/assets/models/environment/prop_palm_b.glb | 14112 | 3 | 新增正式模块 |
+| prop_tropical_tree | environment / Hero | assets-source/blender/environment/prop_tropical_tree.blend | public/assets/models/environment/prop_tropical_tree.glb | 7460 | 2 | 重制升级 |
+| prop_bush | environment / Secondary | assets-source/blender/environment/prop_bush.blend | public/assets/models/environment/prop_bush.glb | 1244 | 2 | 重制升级 |
+| prop_rock | environment / Secondary | assets-source/blender/environment/prop_rock.blend | public/assets/models/environment/prop_rock.glb | 960 | 1 | 新增正式模块 |
+| island_visual_test | environment / Hero | assets-source/blender/environment/island_visual_test.blend | public/assets/models/environment/island_visual_test.glb | 42240 | 1 | 重制升级 |
 
-## 共享纹理
+## 材质与纹理使用
 
-public/assets/textures/timber.png、sail_canvas.png、lime_plaster.png：各1024×1024，自制程序纹理，生成方法见 build_visual_assets.py。同一资产实例共享材质/贴图；GLB 为独立交付而嵌入图片，不同资产之间仍存在图片重复，后续可优化资源去重。
+每项精确材质名和运行纹理URI见assets-source/blender/visual/manifest.json中的materials/textureUris。建筑主要使用石灰灰泥、陶瓦、石基、木材、涂装、窗玻璃；船使用船体木、甲板木、帆布、绳索、铁、黄铜与涂装；石岸街道使用石材；植被使用树干材质和叶片分色；地形为地表Normal/Roughness加顶点着色。
 
-## 技术基线
+原始编辑贴图public/assets/textures/hero_{wood,deck,cloth,wall,roof,stone,ground}_{color,normal,roughness}.png，共21张1024×1024。运行GLB共享20张内容散列图片（地形color由顶点颜色代替）；均自制程序PBR贴图。原Task03 timber/sail_canvas/lime_plaster保留作历史资产，现行PBR以hero组为准。
 
-assets-source/blender/ships/ship_test.blend → public/assets/models/ship_test.glb，由 scripts/create_test_ship.py 自制。仅用于三轴/尺寸导入校验，校验后释放，不与正式 sloop 重复显示。旧测试海面纹理若保留，只作历史实验资源，正式海面使用 shader。
+英雄船sloop路径沿用，实际为双桅BRIG：66810三角面，包围盒X约±6.8米（含横桁）、Y[-2.40,31.02]、Z[-16.15,22.05]，pivot水线中心，未加运行缩放。部件包括曲面船体、船舷、甲板、艉楼、桅杆、横桁、主帆/前帆、索具/绳梯、舵、绞盘与舱口。
 
-## 后续预算
-
-本轮实际面数如上；后续hero船可按20k～60k三角面、常规建筑2k～10k、小道具0.2k～3k的量级评估，必须结合视距与实例数量实测，不要求低于预算的资产无意义加面。1K纹理优先，确有近景收益再用2K；当前没有4K纹理。LOD0已交付，LOD1/2只是未来方案。
+参考预算与例外：BLENDER_PIPELINE.md。总督府/教堂和棕榈高于建议，需后续专门LOD处理；小箱、小艇和遮棚仍为次级简化资产，不作为本轮Hero近景质量标杆。

@@ -1,7 +1,6 @@
 import {
   Color3,
   MeshBuilder,
-  StandardMaterial,
   Vector3,
   type LinesMesh,
   type Scene,
@@ -29,24 +28,28 @@ export class FleetRenderer {
     private readonly assets: VisualAssetLibrary,
     private readonly shadows: ShadowGenerator,
   ) {
-    this.selectionRing = MeshBuilder.CreateTorus(
-      "fleet-selection",
-      { diameter: 25, thickness: 0.19, tessellation: 48 },
+    const arcs = Array.from({ length: 3 }, (_, sector) =>
+      Array.from({ length: 25 }, (_, i) => {
+        const angle = (sector * Math.PI * 2) / 3 + (i / 24) * Math.PI * 0.49;
+        return new Vector3(Math.cos(angle) * 20, 0, Math.sin(angle) * 20);
+      }),
+    );
+    this.selectionRing = MeshBuilder.CreateLineSystem(
+      "fleet-bearing-arcs",
+      { lines: arcs },
       scene,
     );
-    const material = new StandardMaterial("fleet-selection-gold", scene);
-    material.disableLighting = true;
-    material.emissiveColor = Color3.FromHexString("#8b784e");
-    this.selectionRing.material = material;
+    this.selectionRing.color = Color3.FromHexString("#ab9467");
+    this.selectionRing.alpha = 0.72;
     this.selectionRing.isPickable = false;
     this.selectionRing.setEnabled(false);
     this.direction = MeshBuilder.CreateLines(
       "fleet-direction",
       {
         points: [
-          new Vector3(-1.5, 0, 11),
-          new Vector3(0, 0, 14),
-          new Vector3(1.5, 0, 11),
+          new Vector3(-1.3, 0, 19),
+          new Vector3(0, 0, 22),
+          new Vector3(1.3, 0, 19),
         ],
       },
       scene,
@@ -117,7 +120,8 @@ export class FleetRenderer {
       this.selectionRing.position.set(fleet.position.x, 0.12, fleet.position.z);
       this.direction.setEnabled(true);
       this.direction.position.copyFrom(this.selectionRing.position);
-      this.direction.rotation.y = fleet.heading;
+      this.direction.rotation.y =
+        fleet.status === "docked" ? 0.8 : fleet.heading;
       const target = ports.find((port) => port.id === fleet.destinationPortId);
       if (target) {
         this.route = MeshBuilder.CreateDashedLines(
@@ -131,6 +135,7 @@ export class FleetRenderer {
           },
           this.scene,
         );
+        this.route.alpha = 0.52 + Math.sin(time * 0.7) * 0.08;
         this.route.setEnabled(true);
       }
     }
