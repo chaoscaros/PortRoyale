@@ -1,29 +1,32 @@
 import {
-  Color3,
-  Color4,
   Engine,
-  HemisphericLight,
-  Mesh,
-  MeshBuilder,
   Scene,
-  StandardMaterial,
   Vector3,
   PointerEventTypes,
+  type ArcRotateCamera,
 } from "@babylonjs/core";
 import type { WorldSnapshot } from "../simulation/Simulation";
+import type { WorldPosition } from "../simulation/world/types";
 import { createStrategyCamera } from "../input/StrategyCamera";
 import { createOcean } from "./ocean/createOcean";
+import { createEnvironment } from "./environment/createEnvironment";
+import { VisualAssetLibrary } from "./assets/VisualAssetLibrary";
 import { PortRenderer } from "./ports/PortRenderer";
 import { FleetRenderer } from "./fleets/FleetRenderer";
 import type { PickTarget, SelectionState } from "../input/SelectionState";
 export class GameRenderer {
   private readonly engine: Engine;
   private readonly scene: Scene;
+  private readonly camera: ArcRotateCamera;
   private readonly ocean;
-  readonly ready: Promise<void>;
+  private readonly environment;
+  private readonly assets: VisualAssetLibrary;
   private readonly ports: PortRenderer;
   private readonly fleets: FleetRenderer;
+  private assetsReady = false;
   private disposed = false;
+  private focusTarget: { position: Vector3; radius: number } | null = null;
+  readonly ready: Promise<void>;
   constructor(
     canvas: HTMLCanvasElement,
     labels: HTMLElement,
@@ -31,34 +34,27 @@ export class GameRenderer {
     onPick: (target: PickTarget) => void,
   ) {
     this.engine = new Engine(canvas, true, { preserveDrawingBuffer: false });
-    this.engine.setHardwareScalingLevel(
-      Math.max(1, window.devicePixelRatio / 1.5),
-    );
+    this.engine.setHardwareScalingLevel(1);
     this.scene = new Scene(this.engine);
     this.scene.useRightHandedSystem = true;
-    this.scene.clearColor = new Color4(0.46, 0.68, 0.71, 1);
-    createStrategyCamera(this.scene, canvas);
-    const light = new HemisphericLight(
-      "sunlight",
-      new Vector3(-0.5, 1, -0.3),
+    this.camera = createStrategyCamera(this.scene, canvas);
+    this.environment = createEnvironment(this.scene, this.camera);
+    this.ocean = createOcean(this.scene, initial.ports);
+    this.assets = new VisualAssetLibrary(this.scene);
+    this.ports = new PortRenderer(
       this.scene,
+      labels,
+      onPick,
+      this.assets,
+      this.environment.shadows,
     );
-    light.intensity = 1.5;
-    light.groundColor = new Color3(0.22, 0.29, 0.3);
-    const sky = MeshBuilder.CreateSphere(
-      "sky",
-      { diameter: 1900, segments: 16, sideOrientation: Mesh.BACKSIDE },
+    this.fleets = new FleetRenderer(
       this.scene,
+      this.assets,
+      this.environment.shadows,
     );
-    const skyMat = new StandardMaterial("sky-material", this.scene);
-    skyMat.disableLighting = true;
-    skyMat.emissiveColor = new Color3(0.46, 0.68, 0.71);
-    sky.material = skyMat;
-    sky.isPickable = false;
-    this.ocean = createOcean(this.scene);
-    this.ports = new PortRenderer(this.scene, labels, onPick);
-    this.fleets = new FleetRenderer(this.scene);
     this.scene.onPointerObservable.add((info) => {
+      if (info.type === PointerEventTypes.POINTERDOWN) this.focusTarget = null;
       if (
         info.type === PointerEventTypes.POINTERTAP &&
         info.event.button === 0
@@ -68,18 +64,57 @@ export class GameRenderer {
         if (target) onPick(target);
       }
     });
-    this.ready = this.fleets
-      .initialize(initial.fleets)
-      .then(() => undefined)
+    this.ready = this.assets
+      .load()
+      .then(async () => {
+        if (this.disposed) return;
+        await this.fleets.initialize(initial.fleets);
+        if (!this.disposed) {
+          this.assetsReady = true;
+          this.ports.update(initial.ports, {
+            selectedFleetId: null,
+            selectedPortId: null,
+          });
+        }
+      })
       .catch((error) => {
         if (!this.disposed) throw error;
       });
   }
+  focus(position: WorldPosition, radius = 190) {
+    this.focusTarget = {
+      position: new Vector3(position.x, 0, position.z),
+      radius,
+    };
+  }
   render(snapshot: WorldSnapshot, selection: SelectionState) {
-    this.ocean.setFloat("time", snapshot.clock.simulationTime);
-    this.fleets.update(snapshot.fleets, snapshot.ports, selection);
+    this.engine.beginFrame();
+    if (this.focusTarget) {
+      const a = Math.min(1, this.engine.getDeltaTime() / 180);
+      this.camera.target = Vector3.Lerp(
+        this.camera.target,
+        this.focusTarget.position,
+        a,
+      );
+      this.camera.radius += (this.focusTarget.radius - this.camera.radius) * a;
+      if (
+        Vector3.Distance(this.camera.target, this.focusTarget.position) <
+          0.05 &&
+        Math.abs(this.camera.radius - this.focusTarget.radius) < 0.05
+      )
+        this.focusTarget = null;
+    }
+    this.ocean.update(snapshot.clock.simulationTime);
+    if (this.assetsReady)
+      this.fleets.update(
+        snapshot.fleets,
+        snapshot.ports,
+        selection,
+        snapshot.clock.simulationTime,
+      );
     this.scene.render();
-    this.ports.update(snapshot.ports, selection);
+    this.engine.endFrame();
+    if (this.assetsReady) this.ports.update(snapshot.ports, selection);
   }
   resize() {
     this.engine.resize();
@@ -88,6 +123,8 @@ export class GameRenderer {
     this.disposed = true;
     this.ports.dispose();
     this.fleets.dispose();
+    this.assets.dispose();
+    this.environment.dispose();
     this.scene.dispose();
     this.engine.dispose();
   }

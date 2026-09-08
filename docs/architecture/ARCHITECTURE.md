@@ -27,3 +27,9 @@ GameRenderer 消费 Snapshot 与独立 SelectionState。PortRenderer 创建程�
 ## 已知边界
 
 只有 4 港/1 Fleet；直线可能穿视觉岛，无海路/避障/碰撞/风/加速度。无经济、货物、完整 ShipState、存档或联机。正式模型保持 Blender→GLB、米制、Babylon 右手 +Y 上/+Z 船首。相机只调初始距离、最大距离和平移边界以覆盖四港，没有重构。
+
+## Phase 1.5 视觉资产边界
+
+VisualAssetLibrary 读取静态 manifest、加载 GLB 容器和实例化模块；createPortVisual 只构造港口外观。createEnvironment 负责灯光/阴影/天空/后处理，createOcean 和 ShipWake 仅生成视觉效果。FleetRenderer 按 FleetSnapshot 更新位置；摆动和停泊视觉朝向不写回 Simulation。GameRenderer 是组合协调层，初始化资产、调度更新和相机聚焦。
+
+UI 分为 Game、FleetPanel、PortPanel、DeveloperHUD、Icon；F3状态、选择、镜头目标属于客户端。正式HUD不虚构经济数据。Port/Fleet/Command/Clock/深冻结Snapshot保持不变，未添加贸易或城市业务状态。

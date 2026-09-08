@@ -1,14 +1,49 @@
 :root {
   font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-  color: #f2e6c9;
-  background: #163b44;
+  color: #eee6d5;
+  background: #173845;
   font-synthesis: none;
+  --ink: #102735;
+  --panel: #102735ef;
+  --gold: #b89c67;
+  --muted: #a3b3b9;
+  --line: #b89c6740;
 }
 * {
   box-sizing: border-box;
 }
 body {
   margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+  color: inherit;
+  border: 0;
+  background: none;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+button:focus-visible {
+  outline: 2px solid #ead4a6;
+  outline-offset: 3px;
+}
+button:disabled {
+  opacity: 0.48;
+  cursor: default;
+}
+svg {
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+main {
+  position: relative;
+  width: 100vw;
+  height: 100dvh;
+  min-height: 600px;
+  overflow: hidden;
 }
 canvas {
   display: block;
@@ -17,229 +52,116 @@ canvas {
   touch-action: none;
   outline: none;
 }
-main {
-  width: 100vw;
-  height: 100dvh;
-  min-height: 520px;
-  position: relative;
-  overflow: hidden;
-}
-.masthead {
+.game-header {
   position: absolute;
-  top: 26px;
-  left: 32px;
-  right: 32px;
+  inset: 0 0 auto;
+  height: 78px;
   display: flex;
   align-items: center;
-  gap: 16px;
-  pointer-events: none;
+  gap: 25px;
+  padding: 0 32px;
+  background: linear-gradient(180deg, #102735fa, #102735ec);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 5px 25px #0a1c2a22;
 }
-.emblem {
-  font-size: 35px;
-  color: #dfbc78;
-  border: 1px solid #b99b6366;
-  width: 66px;
-  height: 66px;
-  text-align: center;
-  line-height: 64px;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #d9c292;
+  min-width: 175px;
 }
-.masthead p,
-.location p {
-  font-size: 10px;
-  letter-spacing: 2.8px;
-  color: #d6c9aa;
-  margin: 0 0 8px;
-}
-h1 {
-  font-family: "Songti SC", Georgia, serif;
+.brand h1 {
+  font-family: "Songti SC", "SimSun", serif;
+  margin: 0 0 3px;
+  font-size: 26px;
+  letter-spacing: 9px;
   font-weight: 500;
-  font-size: 32px;
-  letter-spacing: 7px;
-  margin: 0;
 }
-h1 span {
-  font-family: "PingFang SC", sans-serif;
-  letter-spacing: 2px;
-  font-size: 13px;
-  margin-left: 12px;
-}
-.edition {
-  margin-left: auto;
-  font-size: 11px;
-  letter-spacing: 2px;
-  border-top: 1px solid #d1b375;
-  padding-top: 12px;
-}
-.location {
-  position: absolute;
-  left: 36px;
-  top: 145px;
-  pointer-events: none;
-  text-shadow: 0 2px 14px #102e36;
-}
-h2 {
-  font-family: "Songti SC", Georgia, serif;
-  font-size: 25px;
-  font-weight: 400;
-  letter-spacing: 3px;
-  margin: 12px 0;
-}
-.rule {
-  height: 1px;
-  width: 50px;
-  background: #d8b36d;
-  margin: 20px 0;
-}
-.location span {
-  font-size: 11px;
-  letter-spacing: 1px;
-}
-.location small {
-  display: block;
-  font-size: 10px;
-  color: #ced5c7;
-  margin-top: 12px;
-}
-.hud {
-  position: absolute;
-  right: 32px;
-  bottom: 72px;
-  width: 315px;
-  background: #10292eef;
-  border: 1px solid #ba995657;
-  box-shadow: 0 12px 40px #06181c44;
-  padding: 21px;
-}
-.hud-title {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  letter-spacing: 2px;
-}
-.hud-title b {
-  font-weight: 400;
-  color: #d9bd7d;
-  font-size: 10px;
-}
-.time {
+.brand span {
   font-family: Georgia, serif;
-  font-variant-numeric: tabular-nums;
-  font-size: 42px;
-  margin: 20px 0;
+  font-size: 8px;
+  letter-spacing: 3px;
 }
-.time small {
-  font-family: "PingFang SC", sans-serif;
-  font-size: 10px;
-  margin-left: 12px;
-  color: #b8c6be;
+.header-divider {
+  height: 32px;
+  width: 1px;
+  background: var(--line);
 }
-.controls {
+.world-caption {
   display: flex;
+  flex-direction: column;
   gap: 6px;
 }
-.controls button {
-  border: 1px solid #64706a;
-  background: transparent;
-  color: #f2e6c9;
-  cursor: pointer;
-  height: 35px;
-  flex: 1;
-  transition: background 0.15s;
-}
-.controls button:first-child {
-  flex: 1.6;
-}
-.controls button[aria-pressed="true"] {
-  background: #d1b475;
-  color: #122d32;
-  border-color: #d1b475;
-}
-.controls button:hover {
-  background: #52665c;
-}
-.controls button:focus-visible {
-  outline: 2px solid #f3dfaa;
-  outline-offset: 3px;
-}
-.metrics {
-  display: flex;
-  justify-content: space-between;
-  border-top: 1px solid #a5aa8c35;
-  padding-top: 17px;
-  margin-top: 20px;
-  font-size: 10px;
-  color: #a9bcb8;
-}
-.metrics b {
-  color: #e2dbc3;
+.world-caption strong {
+  font-size: 13px;
+  letter-spacing: 3px;
   font-weight: 400;
-  margin-left: 5px;
-  font-variant-numeric: tabular-nums;
 }
-.asset-status {
+.world-caption span {
   font-size: 10px;
-  display: block;
-  color: #b0bfb7;
-  margin-top: 14px;
+  color: var(--muted);
 }
-footer {
-  position: absolute;
-  bottom: 24px;
-  left: 36px;
-  right: 32px;
+.funds {
+  margin-left: auto;
   display: flex;
-  justify-content: space-between;
-  font-size: 10px;
-  color: #c0cdc5;
-  letter-spacing: 1px;
-  pointer-events: none;
+  gap: 12px;
+  align-items: center;
+  color: #cbb580;
 }
-.error {
-  position: absolute;
-  inset: 40% 10% auto;
-  background: #542f25;
-  padding: 24px;
+.funds span {
+  font-size: 11px;
 }
-@media (max-width: 700px) {
-  .masthead {
-    left: 18px;
-    right: 18px;
-    top: 16px;
-  }
-  .edition,
-  .location,
-  footer span:last-child {
-    display: none;
-  }
-  h1 {
-    font-size: 26px;
-  }
-  h1 span {
-    font-size: 11px;
-    margin-left: 0;
-  }
-  .emblem {
-    width: 48px;
-    height: 48px;
-    line-height: 46px;
-    font-size: 28px;
-  }
-  .masthead p {
-    font-size: 8px;
-    letter-spacing: 1px;
-  }
-  .hud {
-    right: 16px;
-    bottom: 65px;
-    width: 280px;
-    padding: 16px;
-  }
-  footer {
-    left: 18px;
-    right: 18px;
-    font-size: 9px;
-    letter-spacing: 0;
-  }
+.funds b {
+  font-size: 18px;
+  margin-left: 14px;
+  font-weight: 400;
+}
+.funds small {
+  display: block;
+  font-size: 9px;
+  color: #8f9fa5;
+  margin-top: 5px;
+}
+.time-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: 28px;
+  padding-left: 28px;
+  border-left: 1px solid var(--line);
+}
+.pause-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  min-width: 70px;
+  height: 34px;
+}
+.pause-button[aria-pressed="true"] {
+  color: #dfbe79;
+}
+.speed-controls {
+  display: flex;
+  border: 1px solid var(--line);
+  padding: 3px;
+  gap: 2px;
+}
+.speed-controls button {
+  width: 42px;
+  height: 29px;
+  font-family: Georgia, serif;
+  font-size: 14px;
+  color: #aebabe;
+}
+.speed-controls button[aria-pressed="true"] {
+  background: #b89c67;
+  color: #132a35;
+}
+.speed-controls button:hover {
+  background: #b89c6750;
+  color: #fff0d1;
 }
 .map-labels {
   position: absolute;
@@ -251,178 +173,572 @@ footer {
   position: absolute;
   transform: translate(-50%, -100%);
   pointer-events: auto;
-  background: #12373bee;
-  border: 1px solid #b59862;
-  color: #f1ddb4;
-  padding: 7px 12px;
-  font:
-    13px "PingFang SC",
-    sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 12px 6px 7px;
+  background: #142c38dc;
+  color: #eee0c2;
+  border: 1px solid #b89c6760;
+  box-shadow: 0 3px 14px #0b293544;
   white-space: nowrap;
-  cursor: pointer;
+  font-size: 12px;
+  letter-spacing: 2px;
 }
-.port-label::before {
-  content: "⚑";
-  margin-right: 7px;
-  color: #e2bb71;
+.port-emblem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 26px;
+  color: #d5b982;
+  border-right: 1px solid var(--line);
+  padding-right: 5px;
+}
+.port-emblem svg {
+  width: 19px;
+  height: 21px;
 }
 .port-label.far {
   font-size: 10px;
-  padding: 4px 8px;
+  padding: 4px 8px 4px 5px;
+  gap: 5px;
+}
+.port-label.far .port-emblem {
+  width: 18px;
+  height: 22px;
 }
 .port-label:hover,
 .port-label[aria-pressed="true"] {
-  background: #d2b57c;
-  color: #143338;
-  outline: 1px solid #ecd6a3;
-  outline-offset: 3px;
+  background: #d2ba88;
+  color: #152d38;
+  border-color: #e6cf9f;
 }
-.port-label:focus-visible {
-  outline: 2px solid #fff0cc;
-  outline-offset: 4px;
+.port-label:hover .port-emblem,
+.port-label[aria-pressed="true"] .port-emblem {
+  color: #243c45;
+}
+.port-navigation {
+  position: absolute;
+  top: 100px;
+  left: 28px;
+}
+.nav-toggle {
+  background: #142b38e8;
+  border: 1px solid var(--line);
+  padding: 11px 13px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+.nav-toggle > span {
+  font:
+    11px Georgia,
+    serif;
+  color: #cdb782;
+  border-left: 1px solid var(--line);
+  padding-left: 12px;
+}
+.port-list {
+  width: 190px;
+  background: #102735f7;
+  border: 1px solid var(--line);
+  margin-top: 5px;
+  padding: 5px;
+}
+.port-list button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 9px;
+  font-size: 12px;
+  text-align: left;
+}
+.port-list button svg:last-child {
+  margin-left: auto;
+}
+.port-list button:hover {
+  background: #b89c6725;
+}
+.scene-caption {
+  position: absolute;
+  top: 175px;
+  left: 34px;
+  pointer-events: none;
+  text-shadow: 0 2px 12px #0c303c77;
+}
+.scene-caption > span {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: #dbe4de;
+}
+.scene-caption p {
+  font-family: "Songti SC", serif;
+  font-size: 28px;
+  letter-spacing: 5px;
+  margin: 12px 0 17px;
+}
+.scene-caption > div {
+  height: 1px;
+  width: 34px;
+  background: #d4bc8b;
+}
+.north-compass {
+  position: absolute;
+  right: 35px;
+  top: 106px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 7px;
+  color: #e7dfc8;
+  pointer-events: none;
+  opacity: 0.8;
+}
+.north-compass span {
+  font-size: 10px;
+}
+.object-panel {
+  position: absolute;
+  bottom: 83px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 35px #0b23343b;
 }
 .fleet-panel {
-  position: absolute;
-  left: 32px;
-  top: 130px;
-  width: 260px;
-  padding: 20px;
-  background: #10292eea;
-  border-top: 2px solid #c5a363;
-  box-shadow: 0 12px 30px #071d2533;
+  left: 28px;
+  width: 470px;
+  display: flex;
 }
-.fleet-panel .eyebrow {
-  font-size: 10px;
+.object-illustration {
+  width: 104px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  background: radial-gradient(ellipse at center, #38536380, transparent);
+  border-right: 1px solid var(--line);
+  color: #c9b07b;
+}
+.object-illustration span {
+  font-size: 9px;
   letter-spacing: 2px;
-  color: #d7be8c;
 }
-.fleet-panel h2 {
+.object-content {
+  padding: 19px 21px;
+  flex: 1;
+  min-width: 0;
+}
+.panel-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.eyebrow {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #aa956d;
+  margin: 0 0 8px;
+}
+.object-panel h2 {
+  font-family: "Songti SC", serif;
   font-size: 24px;
-  margin: 12px 0 20px;
+  letter-spacing: 2px;
+  font-weight: 400;
+  margin: 0;
 }
-.fleet-panel p {
-  font-size: 12px;
-  line-height: 1.8;
-  color: #c3cec7;
+.object-panel h2 span {
+  font-family: "PingFang SC", sans-serif;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--muted);
+  margin-left: 10px;
 }
-.fleet-panel small {
-  font-size: 10px;
-  color: #b8c8c0;
-  display: block;
+.icon-button {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  color: #9aadb4;
+}
+.icon-button:hover {
+  color: #f6e6bd;
+  background: #b89c6720;
 }
 .fleet-state {
   display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-}
-.fleet-state b {
-  color: #e9ca89;
-  font-weight: 500;
-}
-.fleet-panel dl {
-  margin: 18px 0;
-}
-.fleet-panel dl div {
-  display: flex;
-  justify-content: space-between;
-  margin: 12px 0;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0 18px;
   font-size: 11px;
 }
-.fleet-panel dt {
-  color: #aebeb6;
+.fleet-state > span:last-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #d0d9d6;
 }
-.fleet-panel dd {
+.status {
+  border: 1px solid #72988b60;
+  color: #b1ccae;
+  padding: 3px 6px;
+  font-size: 10px;
+}
+.status.sailing {
+  color: #d5bd86;
+  border-color: #bca16570;
+}
+.fleet-stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+  margin: 0 0 13px;
+}
+.fleet-stats dt {
+  font-size: 9px;
+  color: var(--muted);
+  margin-bottom: 7px;
+}
+.fleet-stats dd {
   margin: 0;
+  font:
+    22px Georgia,
+    serif;
   font-variant-numeric: tabular-nums;
 }
-.target-port {
-  border-top: 1px solid #baa16955;
-  margin-top: 20px;
-  padding-top: 18px;
+.fleet-stats dd small {
+  display: block;
+  font:
+    8px "PingFang SC",
+    sans-serif;
+  color: #96a8ae;
+  margin-top: 5px;
 }
-.target-port > span {
+.text-button {
+  display: flex;
+  gap: 7px;
+  align-items: center;
   font-size: 10px;
-  letter-spacing: 2px;
-  color: #c5b38d;
+  color: #ccb688;
+  padding: 0;
 }
-.target-port h3 {
-  font-size: 18px;
-  font-weight: 400;
-  margin: 12px 0;
+.text-button:hover {
+  color: #ffdda0;
 }
-.sail-button,
-.fleet-select {
+.port-panel {
+  right: 28px;
+  width: 320px;
+}
+.port-card-art {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  padding: 21px 20px;
+  background: linear-gradient(120deg, #37535a88, transparent);
+  border-bottom: 1px solid var(--line);
+}
+.port-card-art > svg {
+  color: #c7af78;
+}
+.port-card-art > .icon-button {
+  margin-left: auto;
+  align-self: flex-start;
+}
+.port-card-content {
+  padding: 17px 20px;
+}
+.port-card-content p {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #b2c0c1;
+  margin: 0 0 15px;
+}
+.primary-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #bea36f;
+  color: #142b38;
   width: 100%;
-  background: #d2b57c;
-  border: 1px solid #dfc68e;
-  color: #173136;
-  font-size: 12px;
   padding: 10px;
-  cursor: pointer;
-  margin: 8px 0;
+  font-size: 12px;
 }
-.sail-button:hover,
-.fleet-select:hover {
-  background: #eed8aa;
+.primary-button svg:last-child {
+  margin-left: auto;
 }
-button:disabled {
-  opacity: 0.5;
-  cursor: default;
+.primary-button:hover:not(:disabled) {
+  background: #dfc28a;
 }
-.fleet-panel button:focus-visible {
-  outline: 2px solid #f1deb2;
-  outline-offset: 3px;
-}
-.command-message {
-  min-height: 20px;
-}
-.world-count {
+.port-card-content small {
   display: block;
   font-size: 10px;
-  color: #c1cfbf;
-  margin-top: 12px;
+  color: #bbc4bb;
+  margin-top: 10px;
 }
-@media (max-width: 1000px) {
-  .fleet-panel {
-    left: 18px;
-    width: 225px;
-    padding: 14px;
+.developer-hud {
+  position: absolute;
+  right: 28px;
+  top: 164px;
+  width: 280px;
+  background: #071923f5;
+  padding: 17px;
+  border: 1px solid #63828170;
+  font-family: monospace;
+  color: #c7d3cf;
+}
+.developer-hud h2 {
+  font:
+    12px "PingFang SC",
+    sans-serif;
+  margin: 0 0 15px;
+}
+.developer-hud h2 small {
+  float: right;
+  color: #87a39e;
+}
+.developer-hud dl {
+  font-size: 10px;
+}
+.developer-hud dl div {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+.developer-hud dd {
+  margin: 0;
+}
+.developer-hud p,
+.developer-hud > small {
+  font-size: 9px;
+  color: #9aafa6;
+}
+.game-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 59px;
+  background: #102735f0;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  gap: 20px;
+}
+.camera-help {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 9px;
+  color: #91a6af;
+}
+.camera-help i {
+  height: 3px;
+  width: 3px;
+  border-radius: 50%;
+  background: #7e938e;
+}
+.quick-actions {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.quick-actions button {
+  height: 35px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 13px;
+  font-size: 11px;
+  color: #c6d0ce;
+}
+.quick-actions button:hover,
+.quick-actions button[aria-pressed="true"] {
+  background: #b69d6525;
+  color: #dec48a;
+}
+.quick-actions svg {
+  color: #baa67c;
+}
+kbd {
+  font:
+    9px Georgia,
+    serif;
+  border: 1px solid #71858160;
+  padding: 2px 4px;
+  color: #91a4aa;
+}
+.build-caption {
+  font:
+    8px Georgia,
+    serif;
+  letter-spacing: 1.8px;
+  color: #748d98;
+}
+.notice {
+  position: absolute;
+  bottom: 77px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: #ece2bf;
+  background: #152d38bb;
+  padding: 8px 14px;
+  pointer-events: none;
+}
+.notice:empty {
+  display: none;
+}
+.loading-screen {
+  position: absolute;
+  inset: 78px 0 59px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #173642e8;
+  color: #d5c297;
+  z-index: 5;
+}
+.loading-screen h2 {
+  font:
+    30px "Songti SC",
+    serif;
+  letter-spacing: 5px;
+  font-weight: 400;
+}
+.loading-screen p {
+  font-size: 12px;
+  color: #b2c3c3;
+}
+.error {
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  top: 40%;
+  padding: 25px;
+  background: #593b30;
+  z-index: 10;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 1450px) {
+  .game-header {
+    gap: 18px;
+    padding: 0 24px;
   }
-  .hud {
-    right: 18px;
+  .game-footer {
+    padding: 0 20px;
+  }
+  .build-caption {
+    display: none;
+  }
+  .scene-caption {
+    top: 165px;
+  }
+  .fleet-panel {
+    width: 430px;
+  }
+  .object-content {
+    padding: 17px;
+  }
+  .object-illustration {
+    width: 86px;
+  }
+}
+@media (max-width: 1050px) {
+  .funds {
+    display: none;
+  }
+  .time-controls {
+    margin-left: auto;
+  }
+  .world-caption span {
+    display: none;
+  }
+  .camera-help {
+    display: none;
+  }
+  .quick-actions {
+    margin: auto;
+  }
+  .fleet-panel {
+    width: 390px;
+    left: 16px;
+  }
+  .port-panel {
+    width: 285px;
+    right: 16px;
+  }
+  .object-panel h2 span {
+    display: none;
+  }
+  .fleet-stats {
+    gap: 8px;
+  }
+  .scene-caption {
+    display: none;
+  }
+}
+@media (max-width: 750px) {
+  .game-header {
+    padding: 0 12px;
+    gap: 10px;
+  }
+  .brand {
+    min-width: 120px;
+    gap: 8px;
+  }
+  .brand h1 {
+    font-size: 22px;
+  }
+  .brand span {
+    font-size: 7px;
+  }
+  .world-caption,
+  .header-divider {
+    display: none;
+  }
+  .time-controls {
+    padding-left: 8px;
+    gap: 6px;
+  }
+  .speed-controls button {
+    width: 29px;
+  }
+  .fleet-panel {
+    width: 320px;
+    bottom: 72px;
+  }
+  .port-panel {
     width: 270px;
-    padding: 16px;
+    bottom: 340px;
   }
-}
-@media (max-width: 700px) {
-  .fleet-panel {
-    top: 90px;
-    width: 190px;
-    font-size: 10px;
-    max-height: 48vh;
-    overflow: auto;
+  .object-illustration {
+    display: none;
   }
-  .fleet-panel dl div {
+  .quick-actions button {
+    padding: 0 8px;
     font-size: 10px;
   }
-  .hud {
-    width: 230px;
-    bottom: 46px;
-    padding: 12px;
+  .quick-actions kbd {
+    display: none;
   }
-  .time {
-    font-size: 28px;
-    margin: 10px 0;
+  .developer-hud {
+    top: 153px;
+    right: 14px;
   }
-  .metrics {
-    margin-top: 10px;
-    padding-top: 10px;
-  }
-  .world-count,
-  .asset-status {
-    font-size: 9px;
-  }
-  .masthead {
-    pointer-events: none;
+  .scene-caption {
+    display: none;
   }
 }

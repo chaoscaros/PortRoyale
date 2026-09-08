@@ -16,3 +16,7 @@
 | 存档/多人/战斗 | Planned | 未实现 |
 
 执行顺序：宿主 elapsed → Clock fixed ticks → FleetNavigationSystem → Snapshot → Renderer/UI。新增系统需明确顺序，未来随机数必须种子化。
+
+## Phase 1.5 Rendering
+
+已接入模块化哈瓦那、新sloop、阴影海面天空和尾流。VisualAssetLibrary管理15个GLB容器及实例；舰队映射仍按ID读快照。F3调试默认隐藏，正式UI只派生可用状态。旧船保留加载校准后释放。岛屿/建筑/尾流不是Simulation系统，没有碰撞、风力或浮力计算。

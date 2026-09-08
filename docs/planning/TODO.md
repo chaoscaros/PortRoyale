@@ -1,15 +1,20 @@
 # 待办
 
-## 本轮 Phase 1
-- [x] 四港 Data Definitions、稳定 PortId、PortRegistry 和只读 projection。
-- [x] 一个权威 Fleet、初始哈瓦那、固定可配置 speed。
-- [x] MoveFleetCommand 校验、no-op、集中导航、抵达、改道。
-- [x] 客户端选择、确认前往、船/港快照渲染、选中圈、航线、中文信息。
-- [x] typecheck、2文件30测试、build通过，架构与接力文档更新；lint未配置。
-- [ ] Runtime Validation Pending：用户启动服务后，在指定 Chrome 补验四港/选船/前往/抵达/改道/倍率/暂停。
-- [ ] Phase 0 延续：4×稳定TPS、相机旋转对照、右键平移、滚轮和极限。
+## Task 03 · Phase 1.5
 
-## NOW 候选 · Economy Foundation（未授权实施）
+- [x] 哈瓦那模块化港口、地形层次、植被和道具。
+- [x] 15 个自制 Blender 源文件及分类 GLB，3 张 1024 纹理，清单登记。
+- [x] 新单桅帆船替换运行船，保留旧校准船；水线、船首和渲染摆动。
+- [x] 暖阳、阴影、天空、渐变海面、波纹高光、浅水与尾流、FXAA/ACES。
+- [x] 中文正式 HUD、SVG 图标、关闭面板、镜头聚焦、F3 调试分离。
+- [x] 3 文件32测试、typecheck、build；用户指定 Chrome 航行回归及三档桌面布局检查。
+- [x] 接力、美术、资产、性能与验收文档。
 
-Goods + Market + Fleet Cargo + Buy/Sell Foundation。
-后续提示词再细化 Goods、Port Market、Stock、Dynamic Price、Fleet Cargo、Buy、Sell。本轮停止在航行，不自动开始经济。
+## 下一轮候选 · Visual Polish 02（尚未实施）
+
+- [ ] 植被轮廓和材质进一步去除几何块感，海岸增加岩礁/沙纹细节。
+- [ ] 抑制远处海面波纹重复感；多角度校准暖阳、阴影与帆布层次。
+- [ ] 更多港口/船型资产 pass；保持单独可编辑模块，先小范围验收。
+- [ ] 资源去重/按需加载、真实 LOD 和低配设备专项性能验证。
+
+经济、贸易、货舱、自动贸易、生产、战斗、存档均延后，需用户明确恢复对应范围。

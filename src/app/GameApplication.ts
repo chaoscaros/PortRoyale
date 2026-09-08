@@ -30,7 +30,7 @@ export class GameApplication {
   private fps = 0;
   private tps = 0;
   private disposed = false;
-  private assetStatus = "正在加载测试船…";
+  private assetStatus = "正在加载港口与帆船…";
   private readonly resizeObserver: ResizeObserver;
   constructor(
     canvas: HTMLCanvasElement,
@@ -49,7 +49,7 @@ export class GameApplication {
     this.renderer.ready
       .then(() => {
         if (!this.disposed) {
-          this.assetStatus = "GLB 方向与尺度已验证";
+          this.assetStatus = "视觉资产就绪 · GLB 校准通过";
           this.emit();
         }
       })
@@ -82,6 +82,24 @@ export class GameApplication {
         : { ...this.selection, selectedPortId: target.id };
     this.commandMessage = "";
     this.emit();
+  }
+  clearSelection(kind: "fleet" | "port") {
+    this.selection =
+      kind === "fleet"
+        ? { ...this.selection, selectedFleetId: null }
+        : { ...this.selection, selectedPortId: null };
+    this.commandMessage = "";
+    this.emit();
+  }
+  focusView(mode: "fleet" | "havana" | "world") {
+    const world = this.simulation.snapshot();
+    if (mode === "world") this.renderer.focus({ x: 0, z: 15 }, 430);
+    else if (mode === "fleet")
+      this.renderer.focus(world.fleets[0].position, 100);
+    else {
+      const p = world.ports[0].position;
+      this.renderer.focus({ x: p.x - 25, z: p.z + 35 }, 205);
+    }
   }
   dispatch(command: Command) {
     const result = this.simulation.dispatch(command);

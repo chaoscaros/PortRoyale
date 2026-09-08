@@ -1,13 +1,13 @@
 import {
-  Color3,
   Matrix,
-  MeshBuilder,
-  StandardMaterial,
   TransformNode,
   Vector3,
   type Scene,
+  type ShadowGenerator,
 } from "@babylonjs/core";
 import type { PortId, PortSnapshot } from "../../simulation/world/types";
+import { createPortVisual } from "./createPortVisual";
+import type { VisualAssetLibrary } from "../assets/VisualAssetLibrary";
 import type { PickTarget, SelectionState } from "../../input/SelectionState";
 export class PortRenderer {
   private readonly entries = new Map<
@@ -15,74 +15,42 @@ export class PortRenderer {
     {
       root: TransformNode;
       button: HTMLButtonElement;
-      material: StandardMaterial;
     }
   >();
   constructor(
     private readonly scene: Scene,
     private readonly labels: HTMLElement,
     private readonly onPick: (target: PickTarget) => void,
+    private readonly assets: VisualAssetLibrary,
+    private readonly shadows: ShadowGenerator,
   ) {}
   update(ports: readonly PortSnapshot[], selection: SelectionState) {
     for (const port of ports) {
       if (this.entries.has(port.id)) continue;
       const root = new TransformNode(`port:${port.id}`, this.scene);
       root.position.set(port.position.x, 0, port.position.z);
-      const material = new StandardMaterial(
-        `port-marker:${port.id}`,
-        this.scene,
-      );
-      material.diffuseColor = Color3.FromHexString("#d8b574");
-      material.emissiveColor = Color3.FromHexString("#58401d");
-      const ring = MeshBuilder.CreateTorus(
-        `port-ring:${port.id}`,
-        { diameter: 14, thickness: 0.8, tessellation: 32 },
-        this.scene,
-      );
-      ring.parent = root;
-      ring.position.set(0, 1, 17);
-      ring.material = material;
-      const beacon = MeshBuilder.CreateCylinder(
-        `port-beacon:${port.id}`,
-        { height: 9, diameterBottom: 3, diameterTop: 1.8, tessellation: 6 },
-        this.scene,
-      );
-      beacon.parent = root;
-      beacon.position.set(0, 5, 20);
-      beacon.material = material;
-      for (const mesh of [ring, beacon])
-        mesh.metadata = {
-          pickTarget: { kind: "port", id: port.id } satisfies PickTarget,
-        };
-      const island = MeshBuilder.CreateSphere(
-        `port-island:${port.id}`,
-        { diameter: 2, segments: 8 },
-        this.scene,
-      );
-      island.parent = root;
-      island.position.set(0, -2, 39);
-      island.scaling.set(22, 6, 15);
-      island.isPickable = false;
-      const land = new StandardMaterial(`land:${port.id}`, this.scene);
-      land.diffuseColor = Color3.FromHexString("#8f9972");
-      land.specularColor = Color3.Black();
-      island.material = land;
-      const pier = MeshBuilder.CreateBox(
-        `pier:${port.id}`,
-        { width: 6, height: 1, depth: 15 },
-        this.scene,
-      );
-      pier.parent = root;
-      pier.position.set(0, 1, 25);
-      pier.material = material;
-      pier.metadata = beacon.metadata;
+      createPortVisual(this.scene, port, root, this.assets, this.shadows);
+      for (const mesh of root.getChildMeshes()) {
+        if (mesh.name.includes("pier") || mesh.name.includes("lighthouse")) {
+          mesh.isPickable = true;
+          mesh.metadata = {
+            pickTarget: { kind: "port", id: port.id } satisfies PickTarget,
+          };
+        }
+      }
       const button = document.createElement("button");
       button.className = "port-label";
-      button.textContent = port.displayName;
+      const emblem = document.createElement("span");
+      emblem.className = "port-emblem";
+      emblem.innerHTML =
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 20h12M8 20l2-11h4l2 11M9 9h6V5H9zM12 2v3M7 13l-3 2m13-2 3 2"/></svg>';
+      const name = document.createElement("span");
+      name.textContent = port.displayName;
+      button.append(emblem, name);
       button.setAttribute("aria-label", `选择港口 ${port.displayName}`);
       button.onclick = () => this.onPick({ kind: "port", id: port.id });
       this.labels.append(button);
-      this.entries.set(port.id, { root, button, material });
+      this.entries.set(port.id, { root, button });
     }
     const camera = this.scene.activeCamera;
     if (!camera) return;
@@ -93,7 +61,7 @@ export class PortRenderer {
       );
     for (const port of ports) {
       const entry = this.entries.get(port.id)!;
-      const anchor = new Vector3(port.position.x, 11, port.position.z + 20);
+      const anchor = new Vector3(port.position.x + 17, 4, port.position.z + 14);
       const screen = Vector3.Project(
         anchor,
         Matrix.Identity(),
@@ -119,9 +87,6 @@ export class PortRenderer {
       );
       const selected = selection.selectedPortId === port.id;
       entry.button.setAttribute("aria-pressed", String(selected));
-      entry.material.emissiveColor = Color3.FromHexString(
-        selected ? "#a98534" : "#58401d",
-      );
     }
   }
   dispose() {

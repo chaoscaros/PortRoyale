@@ -35,8 +35,9 @@ Blender 是正式船只、建筑、码头、环境建模工具，流程 .blend �
 ## 阶段规划
 
 Phase 0：工程、Clock、测试场景、策略相机、Blender 管线、接力文档。
-Phase 1：World Map + Ports + Fleet Navigation Foundation 已实现四港、单舰队、选择确认、直线航行、抵达和改道；运行验收当前待用户启动服务。没有贸易。
-Phase 2 推荐：Goods + Market + Fleet Cargo + Buy/Sell Foundation。后续细化 Inventory / Stock / Dynamic Price，先完成可验证的经济闭环，尚未实施。
+Phase 1：World Map + Ports + Fleet Navigation Foundation 已实现四港、单舰队、选择确认、直线航行、抵达和改道；已在用户指定 Chrome 完成航行回归。没有贸易。
+Phase 1.5：Visual Foundation。Task 03 已接入哈瓦那视觉港口、15 个自制模块 GLB、单桅帆船、海面/光照/阴影/天空、正式 HUD 和 F3 开发面板。后续先做 Visual Polish 02 或 More Ship/Port Asset Pass，视觉验收由用户决定。
+Phase 2 延后：Goods + Market + Fleet Cargo + Buy/Sell Foundation。后续细化 Inventory / Stock / Dynamic Price，先完成可验证的经济闭环，尚未实施。
 之后：自动贸易 → 生产与城市 → 国家关系与任务 → 海战；每阶段单独细化、验收。
 
 未来联机：Browser Command → WebSocket → Server Authoritative Simulation → Snapshot → Browser。当前只保留边界，不实现服务器、同步或预测。未来存档保存带 saveVersion 的 Simulation State，不保存 Mesh、Material、DOM 或相机运行对象。
@@ -45,7 +46,9 @@ Phase 2 推荐：Goods + Market + Fleet Cargo + Buy/Sell Foundation。后续细�
 
 结合 AI_HANDOFF 的实际进度，指定目标、禁止范围、涉及模块、命令/数据边界、测试、浏览器验收和文档更新要求。要求提交与推送结果如实报告。不要一次启动多个阶段，不要求本轮完成完整游戏。
 
-优先级：玩法正确 > 架构稳定 > Simulation 可测试 > 资产管线稳定 > UI > 视觉精细度。
+当前优先级：画面质量 > 港口表现 > 船只表现 > UI 品质 > 新玩法。架构边界和已有航行正确性必须保持。经济、贸易、货舱暂缓，只有用户明确决定恢复后才制定对应开发任务。
+
+视觉目标：17 世纪加勒比殖民港口，半写实策略视角，暖阳、青蓝海水、红瓦灰泥、木船布帆；略风格化，但不以手游玩具低模为终点。当前完成的是视觉基础切片，植被、海岸细节和其他三港仍需下一轮美术精修。
 
 
 ## 用户指定的运行与测试方式

@@ -1,0 +1,994 @@
+{
+  "assets": {
+    "sloop": {
+      "url": "/assets/models/ships/sloop.glb",
+      "source": "assets-source/blender/ships/sloop.blend",
+      "triangles": 6222,
+      "materials": [
+        "aged_brass",
+        "aged_iron",
+        "dark_oak",
+        "dark_window",
+        "ivory_canvas_PBR",
+        "paint_navy",
+        "sunlit_deck",
+        "timber_PBR",
+        "warm_sand"
+      ],
+      "bounds": {
+        "min": [
+          -3.444999933242798,
+          -2.0,
+          -12.0
+        ],
+        "max": [
+          3.444999933242798,
+          22.019573211669922,
+          16.025495529174805
+        ]
+      },
+      "lod": "LOD0 only",
+      "author": "Self-created"
+    },
+    "building_house_a": {
+      "url": "/assets/models/buildings/building_house_a.glb",
+      "source": "assets-source/blender/buildings/building_house_a.blend",
+      "triangles": 714,
+      "materials": [
+        "dark_oak",
+        "dark_window",
+        "lime_plaster_PBR",
+        "paint_navy",
+        "sunlit_terracotta",
+        "terracotta",
+        "warm_limestone"
+      ],
+      "bounds": {
+        "min": [
+          -4.132757663726807,
+          0.0,
+          -4.099999904632568
+        ],
+        "max": [
+          4.132757663726807,
+          7.721048355102539,
+          4.099999904632568
+        ]
+      },
+      "lod": "LOD0 only",
+      "author": "Self-created"
+    },
+    "building_house_b": {
+      "url": "/assets/models/buildings/building_house_b.glb",
+      "source": "assets-source/blender/buildings/building_house_b.blend",
+      "triangles": 1206,
+      "materials": [
+        "dark_oak",
+        "dark_window",
+        "ochre_plaster",
+        "paint_navy",
+        "sunlit_terracotta",
+        "terracotta",
+        "timber_PBR",
+        "warm_limestone"
+      ],
+      "bounds": {
+        "min": [
+          -4.629891872406006,
+          0.0,
+          -5.849999904632568
+        ],
+        "max": [
+          4.629891872406006,
+          10.722501754760742,
+          4.599999904632568
+        ]
+      },
+      "lod": "LOD0 only",
+      "author": "Self-created"
+    },
+    "building_warehouse": {
+      "url": "/assets/models/buildings/building_warehouse.glb",
+      "source": "assets-source/blender/buildings/building_warehouse.blend",
+      "triangles": 978,
+      "materials": [
+        "dark_oak",
+        "dark_window",
+        "lime_plaster_PBR",
+        "paint_navy",
+        "sunlit_terracotta",
+        "terracotta",
+        "warm_limestone"
+      ],
+      "bounds": {
+        "min": [
+          -7.619264125823975,
+          0.0,
+          -5.599999904632568
+        ],
+        "max": [
+          7.619264125823975,
+          8.726550102233887,
+          5.599999904632568
+        ]
+      },
+      "lod": "LOD0 only",
+      "author": "Self-created"
+    },
+    "building_governor": {
+      "url": "/assets/models/buildings/building_governor.glb",
+      "source": "assets-source/blender/buildings/building_governor.blend",
+      "triangles": 1630,
+      "materials": [
+        "dark_oak",
+        "dark_window",
+        "lime_plaster_PBR",
+        "paint_navy",
+        "sunlit_terracotta",
+        "terracotta",
+        "timber_PBR",
+        "warm_limestone"
+      ],
+      "bounds": {
+        "min": [
+          -7.1205058097839355,
+          0.0,
+          -7.349999904632568
+        ],
+        "max": [
+          7.1205058097839355,
+          11.726178169250488,
+          6.099999904632568
+        ]
+      },
+      "lod": "LOD0 only",
+      "author": "Self-created"
+    },
+    "building_church": {
+      "url": "/assets/models/buildings/building_church.glb",
+      "source": "assets-source/blender/buildings/building_church.blend",
+      "triangles": 502,
+      "materials": [
+        "aged_brass",
+        "dark_oak",
+        "dark_window",
+        "lime_plaster_PBR",
+        "ochre_plaster",
+        "terracotta",
+        "warm_limestone"
+      ],
+      "bounds": {
+        "min": [
+          -6.5,
+          0.0,
+          -8.5
+        ],
+        "max": [
+          5.599999904632568,
+          19.0,
+          8.0
+        ]
+      },
+      "lod": "LOD0 only",
+      "author": "Self-created"
+    },
+    "port_lighthouse": {
+      "url": "/assets/models/ports/port_lighthouse.glb",
+      "source": "assets-source/blender/ports/port_lighthouse.blend",
+      "triangles": 676,
+      "materials": [
+        "aged_iron",
+        "dark_window",
+        "lime_plaster_PBR",
+        "terracotta",
+        "warm_limestone"
+      ],
+      "bounds": {
+        "min": [
+          -3.0,
+          0.0,
+          -3.0
+        ],
+        "max": [
+          3.0,
+          13.0,
+          3.0
+        ]
+      },
+      "lod": "LOD0 only",
+      "author": "Self-created"
+    },
+    "port_pier": {
+      "url": "/assets/models/ports/port_pier.glb",
+      "source": "assets-source/blender/ports/port_pier.blend",
+      "triangles": 4704,
+      "materials": [
+        "dark_oak",
+        "timber_PBR"
+      ],
+      "bounds": {
+        "min": [
+          -4.0,
+          -3.0,
+          -11.5
+        ],
+        "max": [
+          4.0,
+          2.3000001907348633,
+          11.5
+        ]
+      },
+      "lod": "LOD0 only",
+      "author": "Self-created"
+    },
+    "prop_barrel": {
+      "url": "/assets/models/props/prop_barrel.glb",
+      "source": "assets-source/blender/props/prop_barrel.blend",
+      "triangles": 1692,
+      "materials": [
+        "aged_iron",
+        "timber_PBR"
+      ],
+      "bounds": {
+        "min": [
+          -0.6000000238418579,
+          0.0,
+          -0.6000000238418579
+        ],
+        "max": [
+          0.6000000238418579,
+          1.2999999523162842,
+          0.6000000238418579
+        ]
+      },
+      "lod": "LOD0 only",
+      "author": "Self-created"
+    },
+    "prop_crate": {
+      "url": "/assets/models/props/prop_crate.glb",
+      "source": "assets-source/blender/props/prop_crate.blend",
+      "triangles": 156,
+      "materials": [
+        "sunlit_deck",
+        "timber_PBR"
+      ],
+      "bounds": {
+        "min": [
+          -0.6499999761581421,
+          -0.050000011920928955,
+          -0.7200000286102295
+        ],
+        "max": [
+          0.6499999761581421,
+          1.3499999046325684,
+          0.7199999690055847
+        ]
+      },
+      "lod": "LOD0 only",
+      "author": "Self-created"
+    },
+    "prop_skiff": {
+      "url": "/assets/models/props/prop_skiff.glb",
+      "source": "assets-source/blender/props/prop_skiff.blend",
+      "triangles": 308,
+      "materials": [
+        "dark_oak",
+        "sunlit_deck",
+        "timber_PBR"
+      ],
+      "bounds": {
+        "min": [
+          -1.0499998331069946,
+          -0.2499999701976776,
+          -3.0
+        ],
+        "max": [
+          1.8425649404525757,
+          1.059999942779541,
+          3.0
+        ]
+      },
+      "lod": "LOD0 only",
+      "author": "Self-created"
+    },
+    "prop_palm": {
+      "url": "/assets/models/environment/prop_palm.glb",
+      "source": "assets-source/blender/environment/prop_palm.blend",
+      "triangles": 356,
+      "materials": [
+        "palm_leaf",
+        "sunlit_leaf",
+        "timber_PBR"
+      ],
+      "bounds": {
+        "min": [
+          -5.0,
+          -0.013825813308358192,
+          -5.406339168548584
+        ],
+        "max": [
+          7.0,
+          9.755819320678711,
+          6.006339073181152
+        ]
+      },
+      "lod": "LOD0 only",
+      "author": "Self-created"
+    },
+    "prop_tropical_tree": {
+      "url": "/assets/models/environment/prop_tropical_tree.glb",
+      "source": "assets-source/blender/environment/prop_tropical_tree.blend",
+      "triangles": 708,
+      "materials": [
+        "palm_leaf",
+        "sunlit_leaf",
+        "timber_PBR"
+      ],
+      "bounds": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          10.5,
+          4.0
+        ]
+      },
+      "lod": "LOD0 only",
+      "author": "Self-created"
+    },
+    "prop_bush": {
+      "url": "/assets/models/environment/prop_bush.glb",
+      "source": "assets-source/blender/environment/prop_bush.blend",
+      "triangles": 360,
+      "materials": [
+        "palm_leaf"
+      ],
+      "bounds": {
+        "min": [
+          -1.9000000953674316,
+          -0.30000001192092896,
+          -1.100000023841858
+        ],
+        "max": [
+          1.8999998569488525,
+          2.299999952316284,
+          1.3000000715255737
+        ]
+      },
+      "lod": "LOD0 only",
+      "author": "Self-created"
+    },
+    "island_visual_test": {
+      "url": "/assets/models/environment/island_visual_test.glb",
+      "source": "assets-source/blender/environment/island_visual_test.blend",
+      "triangles": 13110,
+      "materials": [
+        "terrain_vertex_PBR"
+      ],
+      "bounds": {
+        "min": [
+          -120.0,
+          -3.0,
+          7.0
+        ],
+        "max": [
+          42.0,
+          30.96416664123535,
+          122.0
+        ]
+      },
+      "lod": "LOD0 only",
+      "author": "Self-created"
+    }
+  },
+  "havana": [
+    {
+      "asset": "port_pier",
+      "x": -12,
+      "y": 0,
+      "z": 15,
+      "heading": 0,
+      "shadow": true
+    },
+    {
+      "asset": "port_pier",
+      "x": -31,
+      "y": 0,
+      "z": 15,
+      "heading": 0,
+      "shadow": true
+    },
+    {
+      "asset": "building_warehouse",
+      "x": -9,
+      "y": 3.1,
+      "z": 37,
+      "heading": 0,
+      "shadow": true
+    },
+    {
+      "asset": "building_warehouse",
+      "x": -30,
+      "y": 3.1,
+      "z": 35,
+      "heading": 0,
+      "shadow": true
+    },
+    {
+      "asset": "building_governor",
+      "x": -35,
+      "y": 3.1,
+      "z": 58,
+      "heading": 0,
+      "shadow": true
+    },
+    {
+      "asset": "building_church",
+      "x": -62,
+      "y": 3.1,
+      "z": 59,
+      "heading": 0,
+      "shadow": true
+    },
+    {
+      "asset": "building_house_a",
+      "x": -49,
+      "y": 3.1,
+      "z": 35,
+      "heading": 0,
+      "shadow": true
+    },
+    {
+      "asset": "building_house_b",
+      "x": -65,
+      "y": 3.1,
+      "z": 36,
+      "heading": 0,
+      "shadow": true
+    },
+    {
+      "asset": "building_house_a",
+      "x": -81,
+      "y": 3.1,
+      "z": 45,
+      "heading": 0,
+      "shadow": true
+    },
+    {
+      "asset": "building_house_b",
+      "x": -11,
+      "y": 3.1,
+      "z": 57,
+      "heading": 0,
+      "shadow": true
+    },
+    {
+      "asset": "building_house_a",
+      "x": 8,
+      "y": 3.1,
+      "z": 49,
+      "heading": 0,
+      "shadow": true
+    },
+    {
+      "asset": "building_house_a",
+      "x": -78,
+      "y": 3.1,
+      "z": 65,
+      "heading": 0,
+      "shadow": true
+    },
+    {
+      "asset": "port_lighthouse",
+      "x": -83,
+      "y": 3.1,
+      "z": 34,
+      "heading": 0,
+      "shadow": true
+    },
+    {
+      "asset": "prop_palm",
+      "x": -90,
+      "y": 3.319092729772012,
+      "z": 60,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_palm",
+      "x": -81,
+      "y": 16.441580183525048,
+      "z": 78,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_palm",
+      "x": -55,
+      "y": 26.94649151862452,
+      "z": 78,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_palm",
+      "x": -45,
+      "y": 16.200253807363833,
+      "z": 78,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_palm",
+      "x": -18,
+      "y": 7.524730282207175,
+      "z": 77,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_palm",
+      "x": -3,
+      "y": 3.1,
+      "z": 69,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_palm",
+      "x": 10,
+      "y": 3.1,
+      "z": 60,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_palm",
+      "x": -46,
+      "y": 3.1004605033720534,
+      "z": 25,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_palm",
+      "x": -28,
+      "y": 3.100028460014886,
+      "z": 24,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_palm",
+      "x": -5,
+      "y": 1.499212535666679,
+      "z": 24,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_palm",
+      "x": 9,
+      "y": 3.1,
+      "z": 37,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": -93,
+      "y": 4.843140741306849,
+      "z": 70,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": -70,
+      "y": 22.411057762626726,
+      "z": 90,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": -58,
+      "y": 17.077764874898932,
+      "z": 95,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": -38,
+      "y": 8.026695156443768,
+      "z": 91,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": -25,
+      "y": 7.155187908969072,
+      "z": 94,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": -6,
+      "y": 8.640273813774758,
+      "z": 87,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": -82,
+      "y": 13.89444094984769,
+      "z": 86,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": -45,
+      "y": 8.774327851578235,
+      "z": 96,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -65.5966722946542,
+      "y": 7.822079306457992,
+      "z": 103.11623137216017,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -64.87367675282623,
+      "y": 20.804576479719383,
+      "z": 93.0545012674466,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -38.182893661344416,
+      "y": 9.004704657124032,
+      "z": 88.2403154680723,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -67.10329460984694,
+      "y": 3.1,
+      "z": 67.07497811788188,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -40.78780281096627,
+      "y": 7.110625153006289,
+      "z": 95.79906572442445,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -73.46970455875984,
+      "y": 24.4261323357832,
+      "z": 77.69308291277444,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -9.47408455435085,
+      "y": 4.722064839199412,
+      "z": 103.69257209286064,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -3.653472283382841,
+      "y": 3.1,
+      "z": 60.61701576941158,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -71.33188175465871,
+      "y": 25.08559329333784,
+      "z": 85.99644193482621,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -30.5191209501524,
+      "y": 3.1,
+      "z": 57.760678895240005,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -60.4323528319234,
+      "y": 22.826499996370234,
+      "z": 74.06593044297642,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -44.992952918504265,
+      "y": 3.1,
+      "z": 68.75557221269737,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -27.63481511368342,
+      "y": 6.974912372541713,
+      "z": 78.38185679396622,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -20.589602548040308,
+      "y": 3.1,
+      "z": 58.32205267693079,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -77.64588931020536,
+      "y": 20.29662581746688,
+      "z": 78.62274049178401,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -7.379381583238029,
+      "y": 6.568317065203647,
+      "z": 75.29239260650694,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": 12.50817114284453,
+      "y": 3.1,
+      "z": 69.41998514258366,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -73.80204002628265,
+      "y": 24.316723944996507,
+      "z": 82.8920683657536,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -25.99741153640356,
+      "y": 3.1,
+      "z": 62.88891071367905,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -85.04885236421065,
+      "y": 12.109926216938264,
+      "z": 77.17697381187517,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": 8.512015578506583,
+      "y": 3.1,
+      "z": 60.465205166751055,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": 1.4774134074483065,
+      "y": 3.763805608993358,
+      "z": 72.388078195163,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -22.57225718807299,
+      "y": 3.1,
+      "z": 62.23821638444969,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -46.58237282606346,
+      "y": 17.944490582467953,
+      "z": 77.87538217257227,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -45.935531069942144,
+      "y": 3.1,
+      "z": 64.79835029487151,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -76.71491122885536,
+      "y": 17.286602263803964,
+      "z": 89.05827300007668,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -65.5663795925451,
+      "y": 29.810697380986348,
+      "z": 83.97476228982843,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": 2.151653740688383,
+      "y": 4.541176721039086,
+      "z": 95.97154999228617,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": 8.396152726632922,
+      "y": 3.127993883733863,
+      "z": 70.31822825196701,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_crate",
+      "x": -32,
+      "y": 3.100216407156379,
+      "z": 28,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_barrel",
+      "x": -30,
+      "y": 3.1001557652445513,
+      "z": 28,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_crate",
+      "x": -28,
+      "y": 3.1001101408856186,
+      "z": 28,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_barrel",
+      "x": -26,
+      "y": 3.100076797326678,
+      "z": 28,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_crate",
+      "x": -24,
+      "y": 3.1000531044922424,
+      "z": 28,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_barrel",
+      "x": -22,
+      "y": 3.1000367116627308,
+      "z": 28,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_crate",
+      "x": -20,
+      "y": 3.100025638142852,
+      "z": 28,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_barrel",
+      "x": -18,
+      "y": 3.1000182984407028,
+      "z": 28,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_crate",
+      "x": -16,
+      "y": 3.100013481661263,
+      "z": 28,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_barrel",
+      "x": -14,
+      "y": 3.1000103038200444,
+      "z": 28,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_crate",
+      "x": -12,
+      "y": 3.100008148335777,
+      "z": 28,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_barrel",
+      "x": -10,
+      "y": 3.100006605599748,
+      "z": 28,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_skiff",
+      "x": 9,
+      "y": 0,
+      "z": 10,
+      "heading": 0.3,
+      "shadow": false
+    },
+    {
+      "asset": "prop_skiff",
+      "x": -27,
+      "y": 0,
+      "z": 11,
+      "heading": -0.2,
+      "shadow": false
+    }
+  ],
+  "textures": [
+    "/assets/textures/timber.png",
+    "/assets/textures/sail_canvas.png",
+    "/assets/textures/lime_plaster.png"
+  ]
+}

@@ -2,63 +2,59 @@
 
 ## 当前阶段
 
-Phase 1 - Port World + Fleet Navigation。Task 02 功能实现已完成，运行验收待用户服务恢复。长期目标依然是高度参考《海商王3》的 Web 航海贸易游戏；当前只有航行基础，没有经济。请与 GPT_PLANNING_BRIEF.md 一起上传给 ChatGPT 网页版制定下一轮提示词。
+Phase 1.5 — Visual Foundation。Task 03 视觉基础切片已实现并在用户指定 Chrome 验收。当前优先画面、港口、船只、UI；经济暂缓。与 GPT_PLANNING_BRIEF.md 一起交给 ChatGPT 网页版制定后续提示词，不默认恢复经济开发。
 
 ## 当前可运行状态
 
-仓库 /Users/fenglian1/projects/AI/PortRoyale。npm ci 后由用户执行 npm run dev。默认 9999，占用自动顺延；Codex 不启动/重启服务，不新开 Playwright 或替代测试标签，只使用用户指定 Chrome http://localhost:9999/。本轮检查该页面显示 ERR_CONNECTION_REFUSED，Runtime Validation Pending。
+仓库 /Users/fenglian1/projects/AI/PortRoyale，分支 main。npm ci 后由用户运行 npm run dev，9999占用自动顺延。Codex不启动/重启服务、不另开Playwright或替代浏览器；只操作用户指定 http://localhost:9999/ Chrome。Task03期间页面可运行，已复用验收，窗口尺寸模拟已清除并刷新回初始状态。
 
-进入页面预期看到四港和停泊哈瓦那的一艘船。点击船或“选择测试舰队”，点击港口名/金色标记，再确认“前往”；仅点击港口不会移动。HUD 保留 Clock 调试及派生舰队状态。运行不需要 Blender 或 private local-assets。
+默认展示哈瓦那、海面和新帆船；点击船→港口名称（或左上港口目录）→确认前往。顶部暂停/1×/2×/4×，底部舰队/哈瓦那/海图全览，F3隐藏/显示开发信息。面板可关闭，资金明确未启用。GLB随仓库交付，运行不需要Blender。
 
 ## 已实现
 
-- React/TypeScript/Vite/Babylon WebGL/Vitest 基础保持；10TPS Clock、pause、1/2/4。
-- Data 四港：哈瓦那(-90,-30)、圣胡安(120,-20)、圣多明各(35,-50)、拿骚(-60,45)。PortId branded，PortRegistry 校验并复制冻结。
-- Map<FleetId,FleetState>，初始 fleet-player-001 停泊哈瓦那，speed=8 世界单位/模拟秒。
-- MoveFleetCommand 校验 Fleet/Port/状态；同停泊港/同目标 no-op；中途改道从当前位置开始。
-- 集中 FleetNavigationSystem fixed tick，直线 min(speed*dt,remaining)，精确到港无 overshoot，更新 currentPort/status/destination。
-- WorldSnapshot 深冻结 ports/fleets/position；heading 派生，docked默认+Z；Simulation不依赖DOM或Babylon。
-- SelectionState 属于客户端，不在世界快照。点击船高亮，点击港提示，确认前往才发送命令。
-- FleetSnapshot → FleetRenderer → 现有 GLB，移除旧静态假船。PortSnapshot → PortRenderer → marker、程序岛/码头、HTML名称标签。
-- 选中舰队的目的港航线；UI 状态、海上/港口、距离、speed、派生模拟秒 ETA、命令反馈。
-- 相机只调整默认距离330、最大距离520、平移±180覆盖四港，保留原旋转/平移/缩放输入和俯角限制。
+- 保留Phase1四港、一个权威Fleet、MoveFleetCommand、固定10TPS、精确抵达和改道、深冻结快照；Simulation本轮未改动。
+- VisualAssetLibrary加载15个分类GLB，实例共享几何与材质；Blender4.5.13自制源文件及复现脚本齐备，3张1024纹理。
+- 哈瓦那：两类民居、仓库、总督府、教堂、灯塔、两座码头、桶/箱/小艇、棕榈/树/灌木、沙滩草地丘陵及道路广场；模块独立编辑。其他三港仍是简化岛屿与少量共享建筑。
+- 新sloop取代可见测试船，6222三角面、9材质；约6.89米宽、28.03米含艏斜桅长、24.02米总高，水下船底2米。船体/甲板/桅杆/曲面帆/索具/舵齐备，旧ship_test仅执行三轴校准后释放。
+- 暖色方向光、冷天光、2048PCF阴影、渐变天空/雾、青蓝海面多频波纹/Fresnel/高光/浅水/泡沫、渲染尾流及轻摆动、FXAA/ACES。
+- 正式中文HUD、统一SVG图标、舰队/港口独立面板、细选择圈与方向箭头、虚线航线、稳定港名标签、F3默认隐藏调试。
+- 平滑镜头聚焦；修复手动RAF缺beginFrame/endFrame导致deltaTime不更新，以及实例receiveShadows设置位置、海图全览天空边界/过浓雾效。
 
 ## 部分完成
 
-Runtime Validation PENDING。本轮未在运行页面观察新功能，不把单元测试当作浏览器通过。Phase 0 历史已观测海面/船/GLB、暂停、1× TPS10和2× TPS20；4×及相机完整验收仍需补。
+Runtime Validation：PASS（本轮4港1船桌面功能与画面加载）。半写实方向已建立，最终美术精修仍属PARTIAL：植被有几何块感、远海波纹重复、其他三港简化；低配和长期压力测试PENDING。不能把基础切片描述为最终高精度美术。
 
-最终静态检查：2 个测试文件、30 项测试通过；typecheck（含无DOM核心编译）通过；build 通过，仍有大 chunk 警告。lint: Not configured。
+静态：typecheck通过（含无DOM核心编译）、3文件32测试通过、build通过；lint未配置。构建主chunk约6MB，存在体积警告。
 
 ## 尚未实现
 
-Goods、Market、Inventory、Price、Trade、Automatic Trade、Cargo、Crew、Production、Combat、Nation、Mission、Save Game、Server、Multiplayer。没有 A*、NavMesh、海路/海岸避障、碰撞、风或浮力。没有正式港口模型和新增船型。
+Goods、Market、Inventory、Price、Trade、Cargo、Crew、Production、Combat、Nation、Mission、Save、Server、Multiplayer；无A*/NavMesh/海岸避障/碰撞/风力/浮力。无真实LOD1/2，未扩充到多艘可玩船或四座精修城市。
 
 ## 最近工作
 
-2026-09-08 Task 02：实现数据四港、权威舰队、移动命令、导航系统、选择与快照渲染，新增20项导航/模型测试，更新架构、设计、接力文档。Git 提交推送以仓库日志和最终回复为准。
+2026-09-08 Task03：完成视觉资产、环境和UI重构，保持Command→Snapshot→Rendering。浏览器实测：选中3D船与港口后确认航行，1/2/4倍约10/20/40TPS；4倍抵达圣胡安(120,-20)，距离/ETA归零；暂停于(119.20,-20.04)、模拟293.2秒时改道拿骚，坐标不变；尾流/船首/虚线随新目标更新。三档1366×768、1440×900、1920×1080查看双面板，关闭/F3/聚焦/鼠标相机可用。详情见DEVLOG。
 
 ## 重要文件
 
-- src/data/ports/portDefinitions.ts、src/data/worldDefinition.ts。
-- src/simulation/world/types.ts、PortRegistry.ts、systems/FleetNavigationSystem.ts、Simulation.ts。
-- src/input/SelectionState.ts、src/app/GameApplication.ts。
-- src/rendering/ports/PortRenderer.ts、fleets/FleetRenderer.ts、GameRenderer.ts、assets/loadTestShip.ts。
-- src/ui/FleetPanel.tsx、Game.tsx、game.css。
-- tests/navigation.test.ts、tests/simulation.test.ts。
-- docs/architecture/DATA_MODEL.md（Owner/Mutable/Snapshot/Save矩阵）、ARCHITECTURE.md、SYSTEMS.md。
+- assets-source/blender/visual/build_visual_assets.py、manifest.json，分类.blend与public/assets/models分类GLB。
+- src/rendering/assets/VisualAssetLibrary.ts、environment/createEnvironment.ts、ocean/createOcean.ts、effects/ShipWake.ts。
+- src/rendering/ports/createPortVisual.ts、PortRenderer.ts、fleets/FleetRenderer.ts、GameRenderer.ts。
+- src/ui/Game.tsx、FleetPanel.tsx、PortPanel.tsx、DeveloperHUD.tsx、Icon.tsx、game.css。
+- src/app/GameApplication.ts、src/input/StrategyCamera.ts；Simulation、world、FleetNavigationSystem保持原边界。
+- tests/assets.test.ts、navigation.test.ts、simulation.test.ts；docs/art三份规范及PERFORMANCE。
 
 ## 已知问题
 
-直线可能穿过视觉岛屿；尚无海上航路/岛屿避障。只有4港/1舰队，不能声称大规模性能。原有 Babylon 构建体积较大；没有触控专项验收。暂停只冻结模拟，镜头仍可操作。位置暂按10TPS直接投影，无渲染插值；停泊船使用默认+Z朝向。港口定义本轮静态，动态增删港口不在范围。
+直线航行可能穿视觉岛屿，缩放/平移相机没有地形碰撞。植被与背面墙细节简化，海面远处有程序纹理重复感。仅哈瓦那达到本轮港口切片范围。主chunk较大，独立GLB重复嵌入图片，首轮加载仍有优化空间。当前4港1船短时59～60FPS、交互曾51FPS，不代表所有设备60FPS。
 
 ## 技术债
 
-恢复用户服务后补运行验收。后续评估渲染插值、资源拆分、大量舰队加载与性能；FleetRenderer集中维护ID映射，但当前只实际配置一舰队。将来扩展深层数据需继续冻结快照并增加业务测试。
+下一轮评估材质/植被/海岸细节、图片去重与按需加载、LOD、低配测试。地形生成与海面浅水使用近似海岸轮廓，需未来美术pass统一。继续保留核心无DOM测试和不可变快照，严禁为视觉效果添加业务状态。
 
 ## 无明确理由不要修改
 
-Simulation权威位置、Command/Snapshot边界、固定模拟时间、港口Data单一来源、右手+Y上/+Z船首、GLB米制、不任意缩放、npm、9999自动顺延、用户控制服务/指定Chrome验收、唯一当前状态文件AI_HANDOFF。
+Simulation权威位置、Command/Snapshot边界、固定模拟时间、港口Data单一来源、右手+Y上/+Z船首、米制GLB与水线pivot、npm、9999自动顺延、用户控制服务/指定Chrome验收、唯一当前状态文件AI_HANDOFF。
 
 ## 推荐下一任务
 
-Goods + Market + Fleet Cargo + Buy/Sell Foundation
+Visual Polish 02。优先自然植被、海岸与材质细节、远海波纹和资源优化；或 More Ship / Port Asset Pass。只有用户明确认为画面足够后，才重新推荐 Goods + Market + Trade。

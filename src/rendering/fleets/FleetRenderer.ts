@@ -5,9 +5,12 @@ import {
   Vector3,
   type LinesMesh,
   type Scene,
-  type TransformNode,
+  type ShadowGenerator,
 } from "@babylonjs/core";
 import { loadTestShip } from "../assets/loadTestShip";
+import { VisualAssetLibrary } from "../assets/VisualAssetLibrary";
+import { ShipWake } from "../effects/ShipWake";
+import { TransformNode } from "@babylonjs/core";
 import type {
   FleetId,
   FleetSnapshot,
@@ -18,67 +21,111 @@ export class FleetRenderer {
   private readonly roots = new Map<FleetId, TransformNode>();
   private disposed = false;
   private readonly selectionRing;
+  private readonly wakes = new Map<FleetId, ShipWake>();
+  private readonly direction;
   private route: LinesMesh;
-  constructor(private readonly scene: Scene) {
+  constructor(
+    private readonly scene: Scene,
+    private readonly assets: VisualAssetLibrary,
+    private readonly shadows: ShadowGenerator,
+  ) {
     this.selectionRing = MeshBuilder.CreateTorus(
       "fleet-selection",
-      { diameter: 25, thickness: 0.5, tessellation: 48 },
+      { diameter: 25, thickness: 0.19, tessellation: 48 },
       scene,
     );
     const material = new StandardMaterial("fleet-selection-gold", scene);
-    material.emissiveColor = Color3.FromHexString("#f1d18d");
+    material.disableLighting = true;
+    material.emissiveColor = Color3.FromHexString("#8b784e");
     this.selectionRing.material = material;
     this.selectionRing.isPickable = false;
     this.selectionRing.setEnabled(false);
-    this.route = MeshBuilder.CreateLines(
-      "fleet-route",
-      { points: [Vector3.Zero(), Vector3.Zero()], updatable: true },
+    this.direction = MeshBuilder.CreateLines(
+      "fleet-direction",
+      {
+        points: [
+          new Vector3(-1.5, 0, 11),
+          new Vector3(0, 0, 14),
+          new Vector3(1.5, 0, 11),
+        ],
+      },
       scene,
     );
-    this.route.color = Color3.FromHexString("#e6c17b");
+    this.direction.color = Color3.FromHexString("#c4b08b");
+    this.direction.isPickable = false;
+    this.direction.setEnabled(false);
+    this.route = MeshBuilder.CreateDashedLines(
+      "fleet-route",
+      {
+        points: [Vector3.Zero(), new Vector3(0, 0, 1)],
+        dashSize: 2,
+        gapSize: 3,
+        dashNb: 60,
+        updatable: true,
+      },
+      scene,
+    );
+    this.route.color = Color3.FromHexString("#b5b698");
     this.route.isPickable = false;
+    this.route.alwaysSelectAsActiveMesh = true;
     this.route.setEnabled(false);
   }
   async initialize(fleets: readonly FleetSnapshot[]) {
+    const calibration = await loadTestShip(this.scene);
+    calibration.dispose(false, true);
+    if (this.disposed) return;
     for (const fleet of fleets) {
-      const root = await loadTestShip(this.scene);
+      const parent = new TransformNode(`fleet-anchor:${fleet.id}`, this.scene);
+      const root = this.assets.place("sloop", parent, 0, 0, 0, 0, this.shadows);
+      this.wakes.set(fleet.id, new ShipWake(this.scene));
       if (this.disposed) {
         root.dispose();
         return;
       }
       root.name = `fleet:${fleet.id}`;
-      for (const mesh of root.getChildMeshes())
+      for (const mesh of root.getChildMeshes()) {
+        mesh.isPickable = true;
         mesh.metadata = {
           pickTarget: { kind: "fleet", id: fleet.id } satisfies PickTarget,
         };
+      }
       this.roots.set(fleet.id, root);
-      root.position.set(fleet.position.x, 0.6, fleet.position.z);
-      root.rotation.y = fleet.heading;
+      root.position.set(fleet.position.x, 0.02, fleet.position.z);
+      root.rotation.y = fleet.status === "docked" ? 0.8 : fleet.heading;
     }
   }
   update(
     fleets: readonly FleetSnapshot[],
     ports: readonly PortSnapshot[],
     selection: SelectionState,
+    time: number,
   ) {
     this.selectionRing.setEnabled(false);
+    this.direction.setEnabled(false);
     this.route.setEnabled(false);
     for (const fleet of fleets) {
       const root = this.roots.get(fleet.id);
       if (!root) continue;
-      root.position.set(fleet.position.x, 0.6, fleet.position.z);
-      root.rotation.y = fleet.heading;
+      root.position.set(fleet.position.x, 0.02, fleet.position.z);
+      root.rotation.y = fleet.status === "docked" ? 0.8 : fleet.heading;
+      root.position.y = 0.02 + Math.sin(time * 1.1) * 0.06;
+      root.rotation.z = Math.sin(time * 0.8) * 0.012;
+      root.rotation.x = Math.cos(time * 0.7) * 0.007;
+      this.wakes.get(fleet.id)?.update(fleet, time);
       if (selection.selectedFleetId !== fleet.id) continue;
       this.selectionRing.setEnabled(true);
-      this.selectionRing.position.set(fleet.position.x, 0.9, fleet.position.z);
+      this.selectionRing.position.set(fleet.position.x, 0.12, fleet.position.z);
+      this.direction.setEnabled(true);
+      this.direction.position.copyFrom(this.selectionRing.position);
+      this.direction.rotation.y = fleet.heading;
       const target = ports.find((port) => port.id === fleet.destinationPortId);
       if (target) {
-        this.route = MeshBuilder.CreateLines(
+        this.route = MeshBuilder.CreateDashedLines(
           "fleet-route",
           {
             points: [
-              new Vector3(fleet.position.x, 1, fleet.position.z),
-              new Vector3(target.position.x, 1, target.position.z),
+              new Vector3(fleet.position.x, 0.15, fleet.position.z),
+              new Vector3(target.position.x, 0.15, target.position.z),
             ],
             instance: this.route,
           },
@@ -92,6 +139,9 @@ export class FleetRenderer {
     this.disposed = true;
     for (const root of this.roots.values()) root.dispose(false, true);
     this.roots.clear();
+    for (const wake of this.wakes.values()) wake.dispose();
+    this.wakes.clear();
+    this.direction.dispose();
     this.route.dispose();
     this.selectionRing.dispose(false, true);
   }

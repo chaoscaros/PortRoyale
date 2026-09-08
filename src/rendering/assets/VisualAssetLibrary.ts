@@ -1,0 +1,65 @@
+import {
+  LoadAssetContainerAsync,
+  TransformNode,
+  type AssetContainer,
+  type Scene,
+  type ShadowGenerator,
+} from "@babylonjs/core";
+import "@babylonjs/loaders/glTF";
+import manifest from "../../../assets-source/blender/visual/manifest.json";
+export { manifest as visualManifest };
+export type VisualAssetId = keyof typeof manifest.assets;
+/** One container per reusable module; repeated props/buildings share GPU geometry. */
+export class VisualAssetLibrary {
+  private readonly containers = new Map<VisualAssetId, AssetContainer>();
+  private disposed = false;
+  constructor(private readonly scene: Scene) {}
+  async load() {
+    await Promise.all(
+      (Object.keys(manifest.assets) as VisualAssetId[]).map(async (id) => {
+        const container = await LoadAssetContainerAsync(
+          manifest.assets[id].url,
+          this.scene,
+        );
+        if (this.disposed) {
+          container.dispose();
+          return;
+        }
+        for (const mesh of container.meshes) mesh.receiveShadows = true;
+        this.containers.set(id, container);
+      }),
+    );
+  }
+  place(
+    id: VisualAssetId,
+    parent: TransformNode,
+    x = 0,
+    y = 0,
+    z = 0,
+    heading = 0,
+    shadows?: ShadowGenerator,
+  ) {
+    const container = this.containers.get(id);
+    if (!container) throw new Error(`Asset not ready: ${id}`);
+    const root = new TransformNode(`${id}:placement`, this.scene);
+    root.parent = parent;
+    root.position.set(x, y, z);
+    root.rotation.y = heading;
+    const entries = container.instantiateModelsToScene(
+      (name) => `${id}:${name}`,
+      false,
+      { doNotInstantiate: false },
+    );
+    for (const node of entries.rootNodes) node.parent = root;
+    for (const mesh of root.getChildMeshes()) {
+      mesh.isPickable = false;
+      if (shadows) shadows.addShadowCaster(mesh, false);
+    }
+    return root;
+  }
+  dispose() {
+    this.disposed = true;
+    for (const c of this.containers.values()) c.dispose();
+    this.containers.clear();
+  }
+}
