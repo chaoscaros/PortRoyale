@@ -2,13 +2,13 @@
 
 ## 可复现流程
 
-Blender 4.5.13 LTS。Task06 当前完整构建入口：
+Blender 4.5.13 LTS。Task07 当前完整构建入口：
 
 ```sh
 /Applications/Blender.app/Contents/MacOS/Blender --background --python assets-source/blender/visual/build_high_end_assets.py
 ```
 
-脚本复用build_visual_assets.py的基础建模函数，重制英雄船、建筑、码头、环境并输出36套基础资产并制作4套LOD1。末尾调用scripts/optimize_visual_glb.py，把重复嵌入图片按内容散列合并到public/assets/textures/shared；请等待完整构建结束再刷新游戏，避免读取生成中的文件。此前build_visual_assets.py是Task03重现入口，会覆盖现行资产，不应用它单独更新Task05；build_hero_assets.py 仅用于重现 Task04。
+脚本复用build_visual_assets.py的基础建模函数，重制英雄船、建筑、码头、环境并输出36套基础资产并制作11套LOD1。末尾调用scripts/optimize_visual_glb.py，把重复嵌入图片按内容散列合并到public/assets/textures/shared；请等待完整构建结束再刷新游戏，避免读取生成中的文件。此前build_visual_assets.py是Task03重现入口，会覆盖现行资产，不应用它单独更新Task05；build_hero_assets.py 仅用于重现 Task04。
 
 ## 坐标与命名
 
@@ -28,7 +28,7 @@ GLB保留几何二进制，图片URI使用../../textures/shared/内容散列.png
 
 ## 预算与LOD
 
-建议：Hero Ship LOD0 30k—80k tris，Hero Building 8k—25k，Secondary 3k—10k，Props 500—5k，Palm 2k—8k（实例化）。当前部分地标/棕榈高于参考，面数详见ASSET_CATALOG；需以性能观测判断，下一轮可制作LOD1/2，当前交付4套LOD1，其余资产仍仅LOD0。
+建议：Hero Ship LOD0 30k—80k tris，Hero Building 8k—25k，Secondary 3k—10k，Props 500—5k，Palm 2k—8k（实例化）。部分地标高于参考，面数详见ASSET_CATALOG；需以性能观测判断。Task07交付11套LOD1，其余资产仍仅LOD0。下文Task05/06为历史流程，当前切换规则以Task07段落为准。
 
 当前颜色/法线/粗糙度配对族均为1K，连续地表为2K；1254颜色图集仅属于Task05历史输入，确有近景收益才提高分辨率，不无差别4K。共享贴图去重，避免重复纹理造成网络/GPU浪费。首次生成图片和大规模UV会耗时，勿为减等待省略可编辑源。
 
@@ -48,7 +48,7 @@ GLB保留几何二进制，图片URI使用../../textures/shared/内容散列.png
 
 所有 35 套源和 GLB、原始纹理、共享纹理、manifest、脚本同时提交。几何自制，AI 辅助颜色素材不声称纯手绘或原作授权资产；没有原作资源、私人素材和启动依赖。当前仅 LOD0，新增植物实例仍需真实低配评估。
 
-## Task06 · 当前生产规范
+## Task06 [historical] · 当前生产规范
 
 build_high_end_assets.py 调用 art06_materials.py、art06_vegetation.py、art06_site.py、art06_civilworks.py、art06_quay.py、art06_terrain.py、art06_layout.py，最后自动执行 build_lod1.py 和共享纹理优化。只新增一个必要的场地土建模块 port_civilworks；其余为既有资产的第二轮精修。LOD1属于同资产层级，不是新增城市内容。
 
@@ -61,3 +61,15 @@ HarborTerrain的2K颜色/法线/粗糙度均由Blender Cycles EMIT烘焙到同�
 build_lod1.py为总督府、教堂、棕榈A/B删除非轮廓细节并保守简化，保存独立*_lod1.blend/GLB，保留原LOD0。Babylon用原生mesh LOD，棕榈175米、地标240米；其他模块不声称已有LOD。Hero Ship不优先压缩。源、运行、shared PNG、manifest和脚本一起交付；旧材质图保留历史编辑来源，但运行仅请求当前实际引用文件。
 
 资产测试增加地形导出顶点与台地标高一致性、配对材质UV、LOD面数和标签保护区；浏览器仍必须检查真实接地、帆装、冠层与LOD切换，静态检查不证明美术达标。
+
+## Task07 · 立面组合、群落与自然场地
+
+继续维护既有art06_*制作模块，文件名是历史来源，不另复制整套生成器。36个基础资产不增加；11个LOD1包含地标/棕榈4套和住宅A/B/C、仓库A/B、热带树A/B新增7套。所有几何修改保存.blend并重导GLB。
+
+住宅主体和两组可选外廊/浅阳台遮棚同存一个源文件。源对象facadeOption=0/1；导出按(材质,可选组)合并，节点命名base__材质与facade_0/1__材质。manifest.havana.facade确定实例启用哪组，运行只启用/隐藏正式导出部件，不修改顶点。LOD必须保留同名可选组。Runtime按整个模块切换LOD0/1，阈值含8米迟滞；近远两个层级仍用普通实例共享几何。实际验收发现逐Mesh原生LOD路径出现主体缺失，最终采用同步切换，避免主体和立面各自切换。三种住宅主体、百叶不对称、墙色、新/旧/暗/混瓦四档顶点色和选择性烟囱/小老虎窗组合变化，不复制材质图片。
+
+群落由三棵高低不同的树与林下灌草构成，平面布局交替镜像、旋转，再按坡度/道路/海拔排除不合理成员；镜像的是群落位置，不对模型施加负缩放。树枝朝向、冠幅与枝高也从源头打散。山脊保留露岩，住宅与道路不种满。
+
+场地保留结构基底标高，外围回填宽度随位置变化；只在下坡侧做有缺口的半埋挡墙，嵌岩与道路来自同一高程。主轴保留石路；次路弯曲、变宽，住宅小路采用泥土地面和间断边石。连续DirtMask由离路距离与侵蚀方向混合，不以矩形in_town布尔值画硬色块。地表三通道重新烘焙，同一水深图同步输出。
+
+船尾使用弧形艉板、收分侧廊、弯曲阳台与舵连杆；帆鼓度偏向一侧、帆脚随高度变化，补角片与主受力索连接帆角。继续共享既有PBR族；不新增帆布图片。最终材质尺度、接地与可见索具以浏览器多角度核查为准。

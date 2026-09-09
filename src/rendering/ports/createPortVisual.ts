@@ -32,6 +32,7 @@ export function createPortVisual(
         p.z,
         p.heading,
         p.shadow ? shadows : undefined,
+        "facade" in p ? Number(p.facade) : 0,
       );
     // Hero architecture and vegetation are static render placements.
     // Fleet roots remain dynamic and never pass through this freeze boundary.

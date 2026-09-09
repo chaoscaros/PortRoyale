@@ -75,3 +75,12 @@ button:disabled { filter: saturate(.25); opacity: .42; }
 .port-card-content { padding: 16px 20px 20px; }
 .object-panel h2 { font-size: 27px; }
 @media(max-width:1450px) { .object-panel { width: 280px; right: 12px; } .object-illustration { height: 112px; } }
+
+/* Task07: simple wide-desktop side placement, keeping the selected subject visible. */
+[data-panel-side="left"] .object-panel { left: 16px; right: auto; }
+[data-panel-side="left"]:has(.object-panel) .scene-caption { opacity: 0; pointer-events: none; }
+[data-panel-side="left"]:has(.object-panel) .port-navigation { top: 102px; }
+.port-label { transition: opacity .2s, background .2s, border-color .2s; }
+.port-label.secondary-label { opacity: .55; font-size: 10px; }
+.port-label.far .port-emblem { display: none; }
+@media (prefers-reduced-motion: reduce) { .port-label { transition: none; } }

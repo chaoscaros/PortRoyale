@@ -119,6 +119,7 @@ export class GameRenderer {
         selection,
         snapshot.clock.simulationTime,
       );
+    this.assets.updateDetail(this.camera.position);
     this.scene.render();
     this.engine.endFrame();
     if (this.assetsReady) this.ports.update(snapshot.ports, selection, snapshot.fleets);

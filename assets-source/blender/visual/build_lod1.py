@@ -2,7 +2,7 @@
 import bpy,json,runpy
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[3];path=ROOT/'assets-source/blender/visual/manifest.json';manifest=json.loads(path.read_text())
-for asset in ['building_governor','building_church','prop_palm','prop_palm_b']:
+for asset in ['building_governor','building_church','prop_palm','prop_palm_b','building_house_a','building_house_b','building_house_c','building_warehouse','building_warehouse_b','prop_tropical_tree','prop_tropical_tree_b']:
  a=manifest['assets'][asset];bpy.ops.wm.open_mainfile(filepath=str(ROOT/a['source']))
  for ob in list(bpy.context.scene.objects):
   if ob.type!='MESH':continue
@@ -26,15 +26,18 @@ for asset in ['building_governor','building_church','prop_palm','prop_palm_b']:
  bpy.data.libraries.write(str(ROOT/source),{bpy.context.scene},fake_user=True,compress=True)
  groups={}
  for ob in bpy.context.scene.objects:
-  if ob.type=='MESH':groups.setdefault(ob.data.materials[0].name,[]).append(ob)
- for group in groups.values():
+  if ob.type=='MESH':groups.setdefault((ob.data.materials[0].name,ob.get('facadeOption',-1)),[]).append(ob)
+ for (material_name,option),group in groups.items():
   bpy.ops.object.select_all(action='DESELECT')
   for ob in group:ob.select_set(True)
   bpy.context.view_layer.objects.active=group[0]
   if len(group)>1:bpy.ops.object.join()
+  bpy.context.object.name=('facade_'+str(option) if option>=0 else 'base')+'__'+material_name
  tris=0
  for ob in bpy.context.scene.objects:
   if ob.type=='MESH':ob.data.calc_loop_triangles();tris+=len(ob.data.loop_triangles)
  bpy.ops.export_scene.gltf(filepath=str(ROOT/('public'+url)),export_format='GLB',export_yup=True,export_vertex_color='ACTIVE')
- manifest['assets'][asset+'_lod1']={**a,'source':source,'url':url,'triangles':tris,'lod':'LOD1','lodOf':asset,'status':'Task06 LOD1'}
+ manifest['assets'][asset+'_lod1']={**a,'source':source,'url':url,'triangles':tris,'lod':'LOD1','lodOf':asset,'status':'Task07 LOD1'}
+for asset in list(manifest['assets'].values()):
+ if 'lodOf' in asset:manifest['assets'][asset['lodOf']]['lod']='LOD0 + LOD1'
 path.write_text(json.dumps(manifest,ensure_ascii=False,indent=2));runpy.run_path(str(ROOT/'scripts/optimize_visual_glb.py'))

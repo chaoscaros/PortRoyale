@@ -15,7 +15,12 @@ for name in ['BeachMask','RockMask','DirtMask']:
    elif name=='RockMask':
     slope=math.hypot(terrain_height(x+.5,z)-terrain_height(x-.5,z),terrain_height(x,z+.5)-terrain_height(x,z-.5))
     f=max(smooth(.8,1.7,slope),smooth(18,27,h)*.65)*smooth(103,120,z)
-   else:f=.82 if in_town(x,z,4) else .14+.13*math.sin(x*.13+z*.08)
+   else:
+    nearest=min(road_sample(x,z,a,b)[0]-w/2 for a,b,w in ROADS)
+    irregular=.8*math.sin(x*.39+z*.21)+.55*math.sin(z*.61-x*.14)
+    traffic=1-smooth(-1,4.5,nearest+irregular)
+    runoff=.5+.5*math.sin(x*.24+z*.06+math.sin(z*.17)*1.8)
+    f=clamp(.12+.58*traffic+.16*runoff*smooth(95,125,z))
    ca.data[li].color=(f,f,f,1)
 m=bpy.data.materials.new('art06_terrain_bake');m.use_nodes=True;n=m.node_tree.nodes;l=m.node_tree.links;n.clear()
 out=n.new('ShaderNodeOutputMaterial');em=n.new('ShaderNodeEmission');l.new(em.outputs[0],out.inputs['Surface'])

@@ -3,11 +3,12 @@
     "building_house_a": {
       "url": "/assets/models/buildings/building_house_a.glb",
       "source": "assets-source/blender/buildings/building_house_a.blend",
-      "triangles": 12266,
+      "triangles": 11848,
       "materials": [
         "aged_iron",
         "art06_Plaster",
         "art06_RoofTile",
+        "art06_SailCloth",
         "art06_Stone",
         "art06_WoodDeck",
         "art06_WoodStructural",
@@ -27,13 +28,14 @@
           5.199999809265137
         ]
       },
-      "lod": "LOD0 only",
+      "lod": "LOD0 + LOD1",
       "author": "Self-created",
       "textureUris": [
         "/assets/textures/shared/0777709d3116440f9b43.png",
         "/assets/textures/shared/0c24373438850f621fed.png",
         "/assets/textures/shared/19b874f0111e100e71df.png",
         "/assets/textures/shared/2ad706831ec81247c538.png",
+        "/assets/textures/shared/3358ce7945458c349a19.png",
         "/assets/textures/shared/341e7bcc6277b39c923b.png",
         "/assets/textures/shared/3c0ad8fd8167aefee7a3.png",
         "/assets/textures/shared/60074a35270b2628ca7f.png",
@@ -41,7 +43,9 @@
         "/assets/textures/shared/7b64951e60dd7b221774.png",
         "/assets/textures/shared/7f18d26c662b40cb387a.png",
         "/assets/textures/shared/83541461875af40aee33.png",
+        "/assets/textures/shared/85b7e22e896ff92a8785.png",
         "/assets/textures/shared/9f031942a20fcaaf490c.png",
+        "/assets/textures/shared/a912cf60f728a1bd177c.png",
         "/assets/textures/shared/d338f02cb121ed643869.png",
         "/assets/textures/shared/efba3f49f8113cfb865d.png",
         "/assets/textures/shared/f56daccf40a35d749ff9.png"
@@ -49,16 +53,17 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "buildings",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "building_house_b": {
       "url": "/assets/models/buildings/building_house_b.glb",
       "source": "assets-source/blender/buildings/building_house_b.blend",
-      "triangles": 16606,
+      "triangles": 16056,
       "materials": [
         "aged_iron",
         "art06_Plaster",
         "art06_RoofTile",
+        "art06_SailCloth",
         "art06_Stone",
         "art06_WoodDeck",
         "art06_WoodStructural",
@@ -78,13 +83,14 @@
           4.699999809265137
         ]
       },
-      "lod": "LOD0 only",
+      "lod": "LOD0 + LOD1",
       "author": "Self-created",
       "textureUris": [
         "/assets/textures/shared/0777709d3116440f9b43.png",
         "/assets/textures/shared/0c24373438850f621fed.png",
         "/assets/textures/shared/19b874f0111e100e71df.png",
         "/assets/textures/shared/2ad706831ec81247c538.png",
+        "/assets/textures/shared/3358ce7945458c349a19.png",
         "/assets/textures/shared/341e7bcc6277b39c923b.png",
         "/assets/textures/shared/3c0ad8fd8167aefee7a3.png",
         "/assets/textures/shared/60074a35270b2628ca7f.png",
@@ -92,7 +98,9 @@
         "/assets/textures/shared/7b64951e60dd7b221774.png",
         "/assets/textures/shared/7f18d26c662b40cb387a.png",
         "/assets/textures/shared/83541461875af40aee33.png",
+        "/assets/textures/shared/85b7e22e896ff92a8785.png",
         "/assets/textures/shared/9f031942a20fcaaf490c.png",
+        "/assets/textures/shared/a912cf60f728a1bd177c.png",
         "/assets/textures/shared/d338f02cb121ed643869.png",
         "/assets/textures/shared/efba3f49f8113cfb865d.png",
         "/assets/textures/shared/f56daccf40a35d749ff9.png"
@@ -100,16 +108,17 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "buildings",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "building_house_c": {
       "url": "/assets/models/buildings/building_house_c.glb",
       "source": "assets-source/blender/buildings/building_house_c.blend",
-      "triangles": 11306,
+      "triangles": 11356,
       "materials": [
         "aged_iron",
         "art06_Plaster",
         "art06_RoofTile",
+        "art06_SailCloth",
         "art06_Stone",
         "art06_WoodDeck",
         "art06_WoodStructural",
@@ -129,13 +138,14 @@
           6.699999809265137
         ]
       },
-      "lod": "LOD0 only",
+      "lod": "LOD0 + LOD1",
       "author": "Self-created",
       "textureUris": [
         "/assets/textures/shared/0777709d3116440f9b43.png",
         "/assets/textures/shared/0c24373438850f621fed.png",
         "/assets/textures/shared/19b874f0111e100e71df.png",
         "/assets/textures/shared/2ad706831ec81247c538.png",
+        "/assets/textures/shared/3358ce7945458c349a19.png",
         "/assets/textures/shared/341e7bcc6277b39c923b.png",
         "/assets/textures/shared/3c0ad8fd8167aefee7a3.png",
         "/assets/textures/shared/60074a35270b2628ca7f.png",
@@ -143,7 +153,9 @@
         "/assets/textures/shared/7b64951e60dd7b221774.png",
         "/assets/textures/shared/7f18d26c662b40cb387a.png",
         "/assets/textures/shared/83541461875af40aee33.png",
+        "/assets/textures/shared/85b7e22e896ff92a8785.png",
         "/assets/textures/shared/9f031942a20fcaaf490c.png",
+        "/assets/textures/shared/a912cf60f728a1bd177c.png",
         "/assets/textures/shared/d338f02cb121ed643869.png",
         "/assets/textures/shared/efba3f49f8113cfb865d.png",
         "/assets/textures/shared/f56daccf40a35d749ff9.png"
@@ -151,12 +163,12 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "buildings",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "building_warehouse": {
       "url": "/assets/models/buildings/building_warehouse.glb",
       "source": "assets-source/blender/buildings/building_warehouse.blend",
-      "triangles": 19966,
+      "triangles": 19710,
       "materials": [
         "aged_iron",
         "art06_Plaster",
@@ -181,7 +193,7 @@
           6.699999809265137
         ]
       },
-      "lod": "LOD0 only",
+      "lod": "LOD0 + LOD1",
       "author": "Self-created",
       "textureUris": [
         "/assets/textures/shared/0777709d3116440f9b43.png",
@@ -206,12 +218,12 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "buildings",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "building_warehouse_b": {
       "url": "/assets/models/buildings/building_warehouse_b.glb",
       "source": "assets-source/blender/buildings/building_warehouse_b.blend",
-      "triangles": 17874,
+      "triangles": 17534,
       "materials": [
         "aged_iron",
         "art06_Plaster",
@@ -236,7 +248,7 @@
           8.199999809265137
         ]
       },
-      "lod": "LOD0 only",
+      "lod": "LOD0 + LOD1",
       "author": "Self-created",
       "textureUris": [
         "/assets/textures/shared/0777709d3116440f9b43.png",
@@ -261,12 +273,12 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "buildings",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "building_governor": {
       "url": "/assets/models/buildings/building_governor.glb",
       "source": "assets-source/blender/buildings/building_governor.blend",
-      "triangles": 32586,
+      "triangles": 31050,
       "materials": [
         "aged_iron",
         "art06_Plaster",
@@ -290,7 +302,7 @@
           7.699999809265137
         ]
       },
-      "lod": "LOD0 only",
+      "lod": "LOD0 + LOD1",
       "author": "Self-created",
       "textureUris": [
         "/assets/textures/shared/0777709d3116440f9b43.png",
@@ -312,12 +324,12 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "buildings",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "building_church": {
       "url": "/assets/models/buildings/building_church.glb",
       "source": "assets-source/blender/buildings/building_church.blend",
-      "triangles": 26446,
+      "triangles": 25206,
       "materials": [
         "aged_brass",
         "aged_iron",
@@ -342,7 +354,7 @@
           10.699999809265137
         ]
       },
-      "lod": "LOD0 only",
+      "lod": "LOD0 + LOD1",
       "author": "Self-created",
       "textureUris": [
         "/assets/textures/shared/0777709d3116440f9b43.png",
@@ -364,12 +376,12 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "buildings",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "building_merchant_a": {
       "url": "/assets/models/buildings/building_merchant_a.glb",
       "source": "assets-source/blender/buildings/building_merchant_a.blend",
-      "triangles": 19204,
+      "triangles": 18308,
       "materials": [
         "aged_iron",
         "art06_Plaster",
@@ -419,12 +431,12 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "buildings",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "building_merchant_b": {
       "url": "/assets/models/buildings/building_merchant_b.glb",
       "source": "assets-source/blender/buildings/building_merchant_b.blend",
-      "triangles": 15980,
+      "triangles": 15596,
       "materials": [
         "aged_iron",
         "art06_Plaster",
@@ -474,12 +486,12 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "buildings",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "building_harbor_office": {
       "url": "/assets/models/buildings/building_harbor_office.glb",
       "source": "assets-source/blender/buildings/building_harbor_office.blend",
-      "triangles": 23868,
+      "triangles": 22500,
       "materials": [
         "aged_iron",
         "art06_Plaster",
@@ -529,12 +541,12 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "buildings",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "sloop": {
       "url": "/assets/models/ships/sloop.glb",
       "source": "assets-source/blender/ships/sloop.blend",
-      "triangles": 67636,
+      "triangles": 65747,
       "materials": [
         "aged_brass",
         "aged_iron",
@@ -574,7 +586,7 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "ships",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "port_pier": {
       "url": "/assets/models/ports/port_pier.glb",
@@ -607,7 +619,7 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "ports",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "port_lighthouse": {
       "url": "/assets/models/ports/port_lighthouse.glb",
@@ -646,7 +658,7 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "ports",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "prop_stone_wall": {
       "url": "/assets/models/props/prop_stone_wall.glb",
@@ -677,7 +689,7 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "props",
       "role": "Secondary",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "port_quay": {
       "url": "/assets/models/ports/port_quay.glb",
@@ -708,7 +720,7 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "ports",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "port_street": {
       "url": "/assets/models/ports/port_street.glb",
@@ -739,7 +751,7 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "ports",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "prop_barrel": {
       "url": "/assets/models/props/prop_barrel.glb",
@@ -771,7 +783,7 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "props",
       "role": "Secondary",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "prop_crate": {
       "url": "/assets/models/props/prop_crate.glb",
@@ -806,7 +818,7 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "props",
       "role": "Secondary",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "prop_skiff": {
       "url": "/assets/models/props/prop_skiff.glb",
@@ -842,7 +854,7 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "props",
       "role": "Secondary",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "prop_cart": {
       "url": "/assets/models/props/prop_cart.glb",
@@ -874,7 +886,7 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "props",
       "role": "Secondary",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "prop_market_awning": {
       "url": "/assets/models/props/prop_market_awning.glb",
@@ -909,7 +921,7 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "props",
       "role": "Secondary",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "prop_palm": {
       "url": "/assets/models/environment/prop_palm.glb",
@@ -931,13 +943,13 @@
           5.015182018280029
         ]
       },
-      "lod": "LOD0 only",
+      "lod": "LOD0 + LOD1",
       "author": "Self-created",
       "textureUris": [],
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "environment",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "prop_palm_b": {
       "url": "/assets/models/environment/prop_palm_b.glb",
@@ -959,13 +971,13 @@
           7.473430633544922
         ]
       },
-      "lod": "LOD0 only",
+      "lod": "LOD0 + LOD1",
       "author": "Self-created",
       "textureUris": [],
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "environment",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "prop_tropical_tree": {
       "url": "/assets/models/environment/prop_tropical_tree.glb",
@@ -977,23 +989,23 @@
       ],
       "bounds": {
         "min": [
-          -5.9491658210754395,
+          -6.884861469268799,
           -0.03603711724281311,
-          -7.499834060668945
+          -7.823337554931641
         ],
         "max": [
-          8.029997825622559,
-          10.749577522277832,
-          6.778828144073486
+          8.109441757202148,
+          10.683131217956543,
+          6.3937249183654785
         ]
       },
-      "lod": "LOD0 only",
+      "lod": "LOD0 + LOD1",
       "author": "Self-created",
       "textureUris": [],
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "environment",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "prop_tropical_tree_b": {
       "url": "/assets/models/environment/prop_tropical_tree_b.glb",
@@ -1005,23 +1017,23 @@
       ],
       "bounds": {
         "min": [
-          -8.974774360656738,
+          -9.6964693069458,
           -0.03655501455068588,
-          -8.617901802062988
+          -8.726570129394531
         ],
         "max": [
-          6.829135417938232,
-          15.098281860351562,
-          7.401560306549072
+          6.462065696716309,
+          14.566877365112305,
+          9.087535858154297
         ]
       },
-      "lod": "LOD0 only",
+      "lod": "LOD0 + LOD1",
       "author": "Self-created",
       "textureUris": [],
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "environment",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "prop_bush": {
       "url": "/assets/models/environment/prop_bush.glb",
@@ -1033,14 +1045,14 @@
       ],
       "bounds": {
         "min": [
-          -0.6800323128700256,
+          -0.40060144662857056,
           -0.027537746354937553,
-          -1.3812716007232666
+          -1.3610411882400513
         ],
         "max": [
-          2.026731491088867,
-          2.293118953704834,
-          1.3013315200805664
+          2.2170066833496094,
+          2.329402446746826,
+          1.0060676336288452
         ]
       },
       "lod": "LOD0 only",
@@ -1049,7 +1061,7 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "environment",
       "role": "Secondary",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "prop_rock": {
       "url": "/assets/models/environment/prop_rock.glb",
@@ -1080,7 +1092,7 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "environment",
       "role": "Secondary",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "prop_cargo_stack": {
       "url": "/assets/models/props/prop_cargo_stack.glb",
@@ -1116,7 +1128,7 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "props",
       "role": "Secondary",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "prop_sacks": {
       "url": "/assets/models/props/prop_sacks.glb",
@@ -1148,7 +1160,7 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "props",
       "role": "Secondary",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "prop_mooring": {
       "url": "/assets/models/props/prop_mooring.glb",
@@ -1176,7 +1188,7 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "props",
       "role": "Secondary",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "port_crane": {
       "url": "/assets/models/ports/port_crane.glb",
@@ -1213,7 +1225,7 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "ports",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "port_plaza": {
       "url": "/assets/models/ports/port_plaza.glb",
@@ -1249,7 +1261,7 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "ports",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "prop_grass": {
       "url": "/assets/models/environment/prop_grass.glb",
@@ -1276,7 +1288,7 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "environment",
       "role": "Secondary",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "port_pier_small": {
       "url": "/assets/models/ports/port_pier_small.glb",
@@ -1307,37 +1319,45 @@
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "ports",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "port_civilworks": {
       "url": "/assets/models/ports/port_civilworks.glb",
       "source": "assets-source/blender/ports/port_civilworks.blend",
-      "triangles": 15676,
+      "triangles": 16112,
       "materials": [
         "art06_Stone",
+        "art06_TerrainDirt",
+        "art06_TerrainRock",
         "art06_WoodStructural"
       ],
       "bounds": {
         "min": [
-          -116.11000061035156,
+          -115.4000015258789,
           0.0,
           29.933149337768555
         ],
         "max": [
-          22.110000610351562,
-          17.299999237060547,
-          137.61000061035156
+          23.200958251953125,
+          17.36338996887207,
+          135.4449920654297
         ]
       },
       "lod": "LOD0 only",
       "author": "Self-created",
       "textureUris": [
+        "/assets/textures/shared/0480537b559a41cb4117.png",
+        "/assets/textures/shared/2a7dd29c6c0af2b9890f.png",
+        "/assets/textures/shared/34ad52af09a2a39b6c55.png",
         "/assets/textures/shared/60074a35270b2628ca7f.png",
         "/assets/textures/shared/79a39f6a71737a6fc36c.png",
         "/assets/textures/shared/7b64951e60dd7b221774.png",
         "/assets/textures/shared/7f18d26c662b40cb387a.png",
         "/assets/textures/shared/9f031942a20fcaaf490c.png",
-        "/assets/textures/shared/d338f02cb121ed643869.png"
+        "/assets/textures/shared/aa28f66d1965393c3ce9.png",
+        "/assets/textures/shared/cf4af9ca3fdd5943c135.png",
+        "/assets/textures/shared/d338f02cb121ed643869.png",
+        "/assets/textures/shared/e2d1c378cecf0c52da3c.png"
       ],
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "ports",
@@ -1359,26 +1379,26 @@
         ],
         "max": [
           68.0,
-          29.41838264465332,
+          21.06983184814453,
           164.0
         ]
       },
       "lod": "LOD0 only",
       "author": "Self-created",
       "textureUris": [
-        "/assets/textures/shared/0bf2498144e2df030202.png",
-        "/assets/textures/shared/42073774263d93396d95.png",
-        "/assets/textures/shared/46c3e2569fe61d73632d.png"
+        "/assets/textures/shared/305e6ac3aff963365a06.png",
+        "/assets/textures/shared/c4b01ba6eb46f14a0f65.png",
+        "/assets/textures/shared/ebb57d71e6c13a4b0619.png"
       ],
       "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
       "category": "environment",
       "role": "Hero",
-      "status": "Task06 Second Pass"
+      "status": "Task07 Third Pass"
     },
     "building_governor_lod1": {
       "url": "/assets/models/buildings/building_governor_lod1.glb",
       "source": "assets-source/blender/buildings/building_governor_lod1.blend",
-      "triangles": 12272,
+      "triangles": 11936,
       "materials": [
         "aged_iron",
         "art06_Plaster",
@@ -1430,7 +1450,7 @@
     "building_church_lod1": {
       "url": "/assets/models/buildings/building_church_lod1.glb",
       "source": "assets-source/blender/buildings/building_church_lod1.blend",
-      "triangles": 9176,
+      "triangles": 8868,
       "materials": [
         "aged_brass",
         "aged_iron",
@@ -1537,6 +1557,344 @@
       "role": "Hero",
       "status": "Task06 LOD1",
       "lodOf": "prop_palm_b"
+    },
+    "building_house_a_lod1": {
+      "url": "/assets/models/buildings/building_house_a_lod1.glb",
+      "source": "assets-source/blender/buildings/building_house_a_lod1.blend",
+      "triangles": 5226,
+      "materials": [
+        "aged_iron",
+        "art06_Plaster",
+        "art06_RoofTile",
+        "art06_SailCloth",
+        "art06_Stone",
+        "art06_WoodDeck",
+        "art06_WoodStructural",
+        "dark_oak",
+        "paint_navy",
+        "recessed_glazing"
+      ],
+      "bounds": {
+        "min": [
+          -5.214375019073486,
+          0.05000000447034836,
+          -7.349999904632568
+        ],
+        "max": [
+          5.214375019073486,
+          11.860000610351562,
+          5.199999809265137
+        ]
+      },
+      "lod": "LOD1",
+      "author": "Self-created",
+      "textureUris": [
+        "/assets/textures/shared/0777709d3116440f9b43.png",
+        "/assets/textures/shared/0c24373438850f621fed.png",
+        "/assets/textures/shared/19b874f0111e100e71df.png",
+        "/assets/textures/shared/2ad706831ec81247c538.png",
+        "/assets/textures/shared/3358ce7945458c349a19.png",
+        "/assets/textures/shared/341e7bcc6277b39c923b.png",
+        "/assets/textures/shared/3c0ad8fd8167aefee7a3.png",
+        "/assets/textures/shared/60074a35270b2628ca7f.png",
+        "/assets/textures/shared/79a39f6a71737a6fc36c.png",
+        "/assets/textures/shared/7b64951e60dd7b221774.png",
+        "/assets/textures/shared/7f18d26c662b40cb387a.png",
+        "/assets/textures/shared/83541461875af40aee33.png",
+        "/assets/textures/shared/85b7e22e896ff92a8785.png",
+        "/assets/textures/shared/9f031942a20fcaaf490c.png",
+        "/assets/textures/shared/a912cf60f728a1bd177c.png",
+        "/assets/textures/shared/d338f02cb121ed643869.png",
+        "/assets/textures/shared/efba3f49f8113cfb865d.png",
+        "/assets/textures/shared/f56daccf40a35d749ff9.png"
+      ],
+      "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
+      "category": "buildings",
+      "role": "Hero",
+      "status": "Task06 LOD1",
+      "lodOf": "building_house_a"
+    },
+    "building_house_b_lod1": {
+      "url": "/assets/models/buildings/building_house_b_lod1.glb",
+      "source": "assets-source/blender/buildings/building_house_b_lod1.blend",
+      "triangles": 7334,
+      "materials": [
+        "aged_iron",
+        "art06_Plaster",
+        "art06_RoofTile",
+        "art06_SailCloth",
+        "art06_Stone",
+        "art06_WoodDeck",
+        "art06_WoodStructural",
+        "dark_oak",
+        "paint_navy",
+        "recessed_glazing"
+      ],
+      "bounds": {
+        "min": [
+          -6.21150016784668,
+          0.05000000447034836,
+          -6.849999904632568
+        ],
+        "max": [
+          6.21150016784668,
+          12.859999656677246,
+          4.699999809265137
+        ]
+      },
+      "lod": "LOD1",
+      "author": "Self-created",
+      "textureUris": [
+        "/assets/textures/shared/0777709d3116440f9b43.png",
+        "/assets/textures/shared/0c24373438850f621fed.png",
+        "/assets/textures/shared/19b874f0111e100e71df.png",
+        "/assets/textures/shared/2ad706831ec81247c538.png",
+        "/assets/textures/shared/3358ce7945458c349a19.png",
+        "/assets/textures/shared/341e7bcc6277b39c923b.png",
+        "/assets/textures/shared/3c0ad8fd8167aefee7a3.png",
+        "/assets/textures/shared/60074a35270b2628ca7f.png",
+        "/assets/textures/shared/79a39f6a71737a6fc36c.png",
+        "/assets/textures/shared/7b64951e60dd7b221774.png",
+        "/assets/textures/shared/7f18d26c662b40cb387a.png",
+        "/assets/textures/shared/83541461875af40aee33.png",
+        "/assets/textures/shared/85b7e22e896ff92a8785.png",
+        "/assets/textures/shared/9f031942a20fcaaf490c.png",
+        "/assets/textures/shared/a912cf60f728a1bd177c.png",
+        "/assets/textures/shared/d338f02cb121ed643869.png",
+        "/assets/textures/shared/efba3f49f8113cfb865d.png",
+        "/assets/textures/shared/f56daccf40a35d749ff9.png"
+      ],
+      "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
+      "category": "buildings",
+      "role": "Hero",
+      "status": "Task06 LOD1",
+      "lodOf": "building_house_b"
+    },
+    "building_house_c_lod1": {
+      "url": "/assets/models/buildings/building_house_c_lod1.glb",
+      "source": "assets-source/blender/buildings/building_house_c_lod1.blend",
+      "triangles": 4294,
+      "materials": [
+        "aged_iron",
+        "art06_Plaster",
+        "art06_RoofTile",
+        "art06_SailCloth",
+        "art06_Stone",
+        "art06_WoodDeck",
+        "art06_WoodStructural",
+        "dark_oak",
+        "paint_navy",
+        "recessed_glazing"
+      ],
+      "bounds": {
+        "min": [
+          -4.708125114440918,
+          0.05000000447034836,
+          -8.850000381469727
+        ],
+        "max": [
+          4.708125114440918,
+          9.859999656677246,
+          6.699999809265137
+        ]
+      },
+      "lod": "LOD1",
+      "author": "Self-created",
+      "textureUris": [
+        "/assets/textures/shared/0777709d3116440f9b43.png",
+        "/assets/textures/shared/0c24373438850f621fed.png",
+        "/assets/textures/shared/19b874f0111e100e71df.png",
+        "/assets/textures/shared/2ad706831ec81247c538.png",
+        "/assets/textures/shared/3358ce7945458c349a19.png",
+        "/assets/textures/shared/341e7bcc6277b39c923b.png",
+        "/assets/textures/shared/3c0ad8fd8167aefee7a3.png",
+        "/assets/textures/shared/60074a35270b2628ca7f.png",
+        "/assets/textures/shared/79a39f6a71737a6fc36c.png",
+        "/assets/textures/shared/7b64951e60dd7b221774.png",
+        "/assets/textures/shared/7f18d26c662b40cb387a.png",
+        "/assets/textures/shared/83541461875af40aee33.png",
+        "/assets/textures/shared/85b7e22e896ff92a8785.png",
+        "/assets/textures/shared/9f031942a20fcaaf490c.png",
+        "/assets/textures/shared/a912cf60f728a1bd177c.png",
+        "/assets/textures/shared/d338f02cb121ed643869.png",
+        "/assets/textures/shared/efba3f49f8113cfb865d.png",
+        "/assets/textures/shared/f56daccf40a35d749ff9.png"
+      ],
+      "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
+      "category": "buildings",
+      "role": "Hero",
+      "status": "Task06 LOD1",
+      "lodOf": "building_house_c"
+    },
+    "building_warehouse_lod1": {
+      "url": "/assets/models/buildings/building_warehouse_lod1.glb",
+      "source": "assets-source/blender/buildings/building_warehouse_lod1.blend",
+      "triangles": 5628,
+      "materials": [
+        "aged_iron",
+        "art06_Plaster",
+        "art06_RoofTile",
+        "art06_SailCloth",
+        "art06_Stone",
+        "art06_WoodDeck",
+        "art06_WoodStructural",
+        "dark_oak",
+        "paint_navy",
+        "recessed_glazing"
+      ],
+      "bounds": {
+        "min": [
+          -10.2134370803833,
+          0.05000000447034836,
+          -8.056282043457031
+        ],
+        "max": [
+          10.2134370803833,
+          10.859999656677246,
+          6.699999809265137
+        ]
+      },
+      "lod": "LOD1",
+      "author": "Self-created",
+      "textureUris": [
+        "/assets/textures/shared/0777709d3116440f9b43.png",
+        "/assets/textures/shared/0c24373438850f621fed.png",
+        "/assets/textures/shared/19b874f0111e100e71df.png",
+        "/assets/textures/shared/2ad706831ec81247c538.png",
+        "/assets/textures/shared/3358ce7945458c349a19.png",
+        "/assets/textures/shared/341e7bcc6277b39c923b.png",
+        "/assets/textures/shared/3c0ad8fd8167aefee7a3.png",
+        "/assets/textures/shared/60074a35270b2628ca7f.png",
+        "/assets/textures/shared/79a39f6a71737a6fc36c.png",
+        "/assets/textures/shared/7b64951e60dd7b221774.png",
+        "/assets/textures/shared/7f18d26c662b40cb387a.png",
+        "/assets/textures/shared/83541461875af40aee33.png",
+        "/assets/textures/shared/85b7e22e896ff92a8785.png",
+        "/assets/textures/shared/9f031942a20fcaaf490c.png",
+        "/assets/textures/shared/a912cf60f728a1bd177c.png",
+        "/assets/textures/shared/d338f02cb121ed643869.png",
+        "/assets/textures/shared/efba3f49f8113cfb865d.png",
+        "/assets/textures/shared/f56daccf40a35d749ff9.png"
+      ],
+      "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
+      "category": "buildings",
+      "role": "Hero",
+      "status": "Task06 LOD1",
+      "lodOf": "building_warehouse"
+    },
+    "building_warehouse_b_lod1": {
+      "url": "/assets/models/buildings/building_warehouse_b_lod1.glb",
+      "source": "assets-source/blender/buildings/building_warehouse_b_lod1.blend",
+      "triangles": 5412,
+      "materials": [
+        "aged_iron",
+        "art06_Plaster",
+        "art06_RoofTile",
+        "art06_SailCloth",
+        "art06_Stone",
+        "art06_WoodDeck",
+        "art06_WoodStructural",
+        "dark_oak",
+        "paint_navy",
+        "recessed_glazing"
+      ],
+      "bounds": {
+        "min": [
+          -6.71045446395874,
+          0.05000000447034836,
+          -9.556282043457031
+        ],
+        "max": [
+          6.71045446395874,
+          11.860000610351562,
+          8.199999809265137
+        ]
+      },
+      "lod": "LOD1",
+      "author": "Self-created",
+      "textureUris": [
+        "/assets/textures/shared/0777709d3116440f9b43.png",
+        "/assets/textures/shared/0c24373438850f621fed.png",
+        "/assets/textures/shared/19b874f0111e100e71df.png",
+        "/assets/textures/shared/2ad706831ec81247c538.png",
+        "/assets/textures/shared/3358ce7945458c349a19.png",
+        "/assets/textures/shared/341e7bcc6277b39c923b.png",
+        "/assets/textures/shared/3c0ad8fd8167aefee7a3.png",
+        "/assets/textures/shared/60074a35270b2628ca7f.png",
+        "/assets/textures/shared/79a39f6a71737a6fc36c.png",
+        "/assets/textures/shared/7b64951e60dd7b221774.png",
+        "/assets/textures/shared/7f18d26c662b40cb387a.png",
+        "/assets/textures/shared/83541461875af40aee33.png",
+        "/assets/textures/shared/85b7e22e896ff92a8785.png",
+        "/assets/textures/shared/9f031942a20fcaaf490c.png",
+        "/assets/textures/shared/a912cf60f728a1bd177c.png",
+        "/assets/textures/shared/d338f02cb121ed643869.png",
+        "/assets/textures/shared/efba3f49f8113cfb865d.png",
+        "/assets/textures/shared/f56daccf40a35d749ff9.png"
+      ],
+      "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
+      "category": "buildings",
+      "role": "Hero",
+      "status": "Task06 LOD1",
+      "lodOf": "building_warehouse_b"
+    },
+    "prop_tropical_tree_lod1": {
+      "url": "/assets/models/environment/prop_tropical_tree_lod1.glb",
+      "source": "assets-source/blender/environment/prop_tropical_tree_lod1.blend",
+      "triangles": 4388,
+      "materials": [
+        "art06_canopy_prop_tropical_tree",
+        "art06_weathered_bark"
+      ],
+      "bounds": {
+        "min": [
+          -6.884861469268799,
+          -0.03603711724281311,
+          -7.823337554931641
+        ],
+        "max": [
+          8.109441757202148,
+          10.683131217956543,
+          6.3937249183654785
+        ]
+      },
+      "lod": "LOD1",
+      "author": "Self-created",
+      "textureUris": [],
+      "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
+      "category": "environment",
+      "role": "Hero",
+      "status": "Task06 LOD1",
+      "lodOf": "prop_tropical_tree"
+    },
+    "prop_tropical_tree_b_lod1": {
+      "url": "/assets/models/environment/prop_tropical_tree_b_lod1.glb",
+      "source": "assets-source/blender/environment/prop_tropical_tree_b_lod1.blend",
+      "triangles": 1850,
+      "materials": [
+        "art06_canopy_prop_tropical_tree_b",
+        "art06_weathered_bark"
+      ],
+      "bounds": {
+        "min": [
+          -9.6964693069458,
+          -0.03655501455068588,
+          -8.726570129394531
+        ],
+        "max": [
+          6.462065696716309,
+          14.566877365112305,
+          9.087535858154297
+        ]
+      },
+      "lod": "LOD1",
+      "author": "Self-created",
+      "textureUris": [],
+      "provenance": "Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source",
+      "category": "environment",
+      "role": "Hero",
+      "status": "Task06 LOD1",
+      "lodOf": "prop_tropical_tree_b"
     }
   },
   "havana": [
@@ -1553,7 +1911,7 @@
       "x": -23,
       "y": 4.3100000000000005,
       "z": 53,
-      "heading": 0,
+      "heading": 0.035,
       "shadow": true
     },
     {
@@ -1577,7 +1935,7 @@
       "x": -24,
       "y": 6.510000000000001,
       "z": 78,
-      "heading": 0,
+      "heading": -0.055,
       "shadow": true
     },
     {
@@ -1610,7 +1968,8 @@
       "y": 4.3100000000000005,
       "z": 72,
       "heading": 0.1,
-      "shadow": true
+      "shadow": true,
+      "facade": 1
     },
     {
       "asset": "building_house_c",
@@ -1618,7 +1977,8 @@
       "y": 12.61,
       "z": 111,
       "heading": -0.08,
-      "shadow": true
+      "shadow": true,
+      "facade": 0
     },
     {
       "asset": "building_house_b",
@@ -1626,7 +1986,8 @@
       "y": 15.11,
       "z": 124,
       "heading": 0.12,
-      "shadow": true
+      "shadow": true,
+      "facade": 1
     },
     {
       "asset": "building_house_a",
@@ -1634,7 +1995,8 @@
       "y": 16.509999999999998,
       "z": 129,
       "heading": -0.06,
-      "shadow": true
+      "shadow": true,
+      "facade": 0
     },
     {
       "asset": "building_house_c",
@@ -1642,7 +2004,8 @@
       "y": 11.91,
       "z": 107,
       "heading": 0.05,
-      "shadow": true
+      "shadow": true,
+      "facade": 1
     },
     {
       "asset": "building_house_b",
@@ -1650,7 +2013,8 @@
       "y": 8.11,
       "z": 93,
       "heading": -0.08,
-      "shadow": true
+      "shadow": true,
+      "facade": 0
     },
     {
       "asset": "building_house_a",
@@ -1658,7 +2022,8 @@
       "y": 14.309999999999999,
       "z": 119,
       "heading": 0.1,
-      "shadow": true
+      "shadow": true,
+      "facade": 1
     },
     {
       "asset": "building_merchant_b",
@@ -2175,7 +2540,7 @@
     {
       "asset": "prop_palm_b",
       "x": -108,
-      "y": 1.6999999999999997,
+      "y": 2.758721330116929,
       "z": 34,
       "heading": 0.0,
       "shadow": true
@@ -2183,7 +2548,7 @@
     {
       "asset": "prop_palm",
       "x": -95,
-      "y": 1.6999999999999997,
+      "y": 1.5,
       "z": 34,
       "heading": 0.77,
       "shadow": true
@@ -2237,691 +2602,675 @@
       "shadow": true
     },
     {
-      "asset": "prop_tropical_tree",
-      "x": -26.433738089347752,
-      "y": 20.838155356226757,
-      "z": 128.9428082991352,
-      "heading": 2.399,
+      "asset": "prop_bush",
+      "x": -121.0,
+      "y": 4.197929398399918,
+      "z": 108.0,
+      "heading": 2.84,
+      "shadow": false
+    },
+    {
+      "asset": "prop_grass",
+      "x": -84.47597395975998,
+      "y": 6.17545683160516,
+      "z": 135.76545487219875,
+      "heading": 8.347999999999999,
       "shadow": false
     },
     {
       "asset": "prop_tropical_tree",
-      "x": -62.36251058251569,
-      "y": 28.924196198444182,
-      "z": 128.2680891803408,
+      "x": -59.0,
+      "y": 8.57242275427324,
+      "z": 144.0,
       "heading": 7.197,
       "shadow": false
     },
     {
+      "asset": "prop_tropical_tree",
+      "x": -62.84548712600761,
+      "y": 11.933375513605794,
+      "z": 140.65153337127128,
+      "heading": 7.907,
+      "shadow": false
+    },
+    {
       "asset": "prop_tropical_tree_b",
-      "x": 11.735781653309594,
-      "y": 6.234930101398486,
-      "z": 134.3174377901317,
+      "x": -58.93259941552754,
+      "y": 4.191027963744696,
+      "z": 148.99954569548203,
+      "heading": 8.617,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -57.05410218938516,
+      "y": 13.324867390437113,
+      "z": 139.97340320982542,
+      "heading": 9.327,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -54.79229354565841,
+      "y": 8.333916657594527,
+      "z": 144.543328992501,
+      "heading": 10.036999999999999,
+      "shadow": false
+    },
+    {
+      "asset": "prop_grass",
+      "x": -60.28885973841933,
+      "y": 15.6466537227089,
+      "z": 137.41677582223713,
+      "heading": 10.747,
+      "shadow": false
+    },
+    {
+      "asset": "prop_grass",
+      "x": -56.127461779299814,
+      "y": 4.064576272195225,
+      "z": 149.361765023816,
+      "heading": 11.457,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": -30.0,
+      "y": 5.761155166552752,
+      "z": 148.0,
       "heading": 9.596,
       "shadow": false
     },
     {
       "asset": "prop_tropical_tree",
-      "x": -46.69610587753195,
-      "y": 6.7336818457953145,
-      "z": 145.97451142635808,
+      "x": -34.75649977214522,
+      "y": 6.554953422502517,
+      "z": 146.1626894879791,
+      "heading": 10.306000000000001,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree_b",
+      "x": -25.547330928659008,
+      "y": 9.79618917259074,
+      "z": 145.72541473206138,
+      "heading": 11.016,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -27.55502808637065,
+      "y": 2.44457863249659,
+      "z": 151.4672917877738,
+      "heading": 12.436,
+      "shadow": false
+    },
+    {
+      "asset": "prop_grass",
+      "x": -36.42342363847538,
+      "y": 2.6501275099608943,
+      "z": 149.93381197655714,
+      "heading": 13.146,
+      "shadow": false
+    },
+    {
+      "asset": "prop_grass",
+      "x": -23.91734965290611,
+      "y": 7.432676955962288,
+      "z": 148.03694259057724,
+      "heading": 13.856,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": 0.0,
+      "y": 3.8837957482623446,
+      "z": 144.0,
+      "heading": 11.995000000000001,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": -3.6650173227765244,
+      "y": 2.2406822788713128,
+      "z": 147.5450878725002,
+      "heading": 12.705000000000002,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -3.8454629666024447,
+      "y": 10.9000840144631,
+      "z": 141.71692869745837,
+      "heading": 14.125,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": 0.9011252823067324,
+      "y": 8.644238111944599,
+      "z": 139.8541619392953,
+      "heading": 14.835,
+      "shadow": false
+    },
+    {
+      "asset": "prop_grass",
+      "x": -6.669319732210399,
+      "y": 8.267361033491383,
+      "z": 144.72123110689225,
+      "heading": 15.545000000000002,
+      "shadow": false
+    },
+    {
+      "asset": "prop_grass",
+      "x": 5.587748806077747,
+      "y": 2.4531955476150547,
+      "z": 141.5964477787706,
+      "heading": 16.255000000000003,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": 23.0,
+      "y": 5.635057161425104,
+      "z": 124.0,
+      "heading": 14.394,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": 20.7627068723562,
+      "y": 4.681412900013666,
+      "z": 128.5819776801069,
+      "heading": 15.104,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree_b",
+      "x": 21.11447720184282,
+      "y": 6.84234106327842,
+      "z": 119.36914653895963,
+      "heading": 15.814,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": 26.360759622941885,
+      "y": 3.950673459680399,
+      "z": 126.95047364956942,
+      "heading": 16.524,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": 26.663654171495047,
+      "y": 5.397573406307418,
+      "z": 121.86045843422313,
+      "heading": 17.234,
+      "shadow": false
+    },
+    {
+      "asset": "prop_grass",
+      "x": 24.377485262917787,
+      "y": 2.9545455282110495,
+      "z": 130.565252040131,
+      "heading": 17.944,
+      "shadow": false
+    },
+    {
+      "asset": "prop_grass",
+      "x": 23.556913316172853,
+      "y": 6.113270435298642,
+      "z": 117.94278549510838,
+      "heading": 18.654,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": 27.0,
+      "y": 4.207429763478513,
+      "z": 104.0,
       "heading": 16.793,
       "shadow": false
     },
     {
       "asset": "prop_tropical_tree",
-      "x": -85.09613025559449,
-      "y": 6.36123302981416,
-      "z": 135.88988313155613,
+      "x": 30.218721661141515,
+      "y": 4.861145987588884,
+      "z": 107.95472260317945,
+      "heading": 17.503,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree_b",
+      "x": 27.785440816192448,
+      "y": 4.279385480011372,
+      "z": 99.06207708401003,
+      "heading": 18.213,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": 24.39647818065005,
+      "y": 5.160636232206002,
+      "z": 107.636162006315,
+      "heading": 18.923,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": 22.946397648511514,
+      "y": 4.277296904813014,
+      "z": 102.74767896447955,
+      "heading": 19.633,
+      "shadow": false
+    },
+    {
+      "asset": "prop_grass",
+      "x": 27.148319622463564,
+      "y": 5.424234729811939,
+      "z": 110.70656404499296,
+      "heading": 20.343,
+      "shadow": false
+    },
+    {
+      "asset": "prop_grass",
+      "x": 25.083039248533456,
+      "y": 4.301015869351227,
+      "z": 98.22719639366305,
+      "heading": 21.052999999999997,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": -119.0,
+      "y": 4.1999999999145,
+      "z": 90.0,
+      "heading": 19.192,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": -114.62610635047116,
+      "y": 4.206465306125606,
+      "z": 92.6208880828092,
+      "heading": 19.902,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree_b",
+      "x": -123.77511790828328,
+      "y": 2.4459829300761706,
+      "z": 91.4826493051266,
+      "heading": 20.612000000000002,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -115.77296539542402,
+      "y": 4.19999999963042,
+      "z": 86.90383339258541,
+      "heading": 21.322,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -120.81843956530034,
+      "y": 3.6184057712994577,
+      "z": 86.16681887365723,
+      "heading": 22.032,
+      "shadow": false
+    },
+    {
+      "asset": "prop_grass",
+      "x": -112.3410085278357,
+      "y": 4.199999999397902,
+      "z": 89.18893121522088,
+      "heading": 22.742,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree_b",
+      "x": -92.8526780581241,
+      "y": 5.208847027211771,
+      "z": 131.795211361192,
+      "heading": 23.011000000000003,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -84.59977300902392,
+      "y": 5.860476266155985,
+      "z": 135.90490213429604,
+      "heading": 23.721,
+      "shadow": false
+    },
+    {
+      "asset": "prop_grass",
+      "x": -93.91557394050652,
+      "y": 2.2958374317670702,
+      "z": 134.41632798263686,
+      "heading": 25.851,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": -74.0,
+      "y": 13.135662485304497,
+      "z": 137.0,
       "heading": 23.990000000000002,
       "shadow": false
     },
     {
-      "asset": "prop_tropical_tree",
-      "x": -25.699122566578232,
-      "y": 10.896770696485344,
-      "z": 145.53284508006533,
-      "heading": 62.374,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -66.64008681313877,
-      "y": 13.38282420438782,
-      "z": 140.212741383442,
-      "heading": 71.97,
-      "shadow": false
-    },
-    {
       "asset": "prop_tropical_tree_b",
-      "x": -61.93425854791346,
-      "y": 4.953023053604123,
-      "z": 147.17243851744516,
-      "heading": 76.768,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -62.11736141864525,
-      "y": 13.073782837378554,
-      "z": 141.30731882428813,
-      "heading": 79.167,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": 17.32833184430703,
-      "y": 5.947724007596736,
-      "z": 114.66790759010165,
-      "heading": 81.566,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree_b",
-      "x": -92.16190801851282,
-      "y": 9.964204973188128,
-      "z": 129.02095146181927,
-      "heading": 86.364,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -38.0537835524226,
-      "y": 13.422771323605486,
-      "z": 139.92860729445752,
-      "heading": 88.763,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -18.860653859433516,
-      "y": 22.991015918354826,
-      "z": 131.74530211630807,
-      "heading": 127.147,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -75.16870693749942,
-      "y": 5.595878258948372,
-      "z": 99.9901548668926,
-      "heading": 129.546,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -74.6451702194107,
-      "y": 6.963229874964657,
-      "z": 103.13448378873713,
-      "heading": 131.945,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree_b",
-      "x": 21.604106239918828,
-      "y": 4.199448706745002,
-      "z": 102.73191593211467,
-      "heading": 134.344,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": 20.72844286859491,
-      "y": 7.2947065042606205,
-      "z": 120.61301397361066,
-      "heading": 136.743,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": 25.54125611203978,
-      "y": 3.5018283689196337,
-      "z": 129.2039381762016,
-      "heading": 141.541,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -24.109328626669637,
-      "y": 5.5219411561771325,
-      "z": 149.55395288055817,
-      "heading": 146.339,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -74.29004367792973,
-      "y": 6.732101914800669,
-      "z": 102.63947399451133,
-      "heading": 148.738,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -72.16137625586734,
-      "y": 6.1138504443808666,
-      "z": 101.30880624313244,
-      "heading": 151.137,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree_b",
-      "x": -21.86500307707847,
-      "y": 20.88975823200092,
-      "z": 124.49058102081736,
-      "heading": 153.536,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -111.23260103716545,
-      "y": 4.682097110173401,
-      "z": 97.70459600586284,
-      "heading": 165.531,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree_b",
-      "x": -9.851521034564104,
-      "y": 24.099593352395125,
-      "z": 126.59641781472897,
-      "heading": 172.728,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -0.983099692129084,
-      "y": 15.216989152909278,
-      "z": 138.5161567907406,
-      "heading": 187.122,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -30.184296110736145,
-      "y": 17.218741584025082,
-      "z": 119.07426507206473,
-      "heading": 189.52100000000002,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -50.37281589936109,
-      "y": 3.453388417148928,
-      "z": 149.5575265744553,
-      "heading": 194.319,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -67.67880032764285,
-      "y": 11.790329363336655,
-      "z": 140.7491253542026,
-      "heading": 208.713,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree_b",
-      "x": 15.881441622387387,
-      "y": 4.654051563536742,
-      "z": 133.3081860060348,
-      "heading": 211.112,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": 22.118903912199833,
-      "y": 4.199094533533034,
-      "z": 100.4780226872309,
-      "heading": 227.905,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree_b",
-      "x": -92.31208919303202,
-      "y": 10.879332767787771,
-      "z": 128.0341683218515,
-      "heading": 230.304,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -14.739892031348214,
-      "y": 21.407644884302663,
-      "z": 124.15709894008909,
-      "heading": 237.501,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree_b",
-      "x": -71.8195687518767,
-      "y": 5.204309223373465,
-      "z": 99.28821286154991,
-      "heading": 249.496,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": 25.091797513039225,
-      "y": 5.324832603404902,
-      "z": 109.77146371273757,
-      "heading": 263.89,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -2.156181520800878,
-      "y": 4.9636859063416505,
-      "z": 144.98358048773085,
-      "heading": 266.289,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree_b",
-      "x": -69.88847963527041,
-      "y": 19.980390944397655,
-      "z": 135.9275160959357,
-      "heading": 268.688,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": 30.922769638184725,
-      "y": 4.509066104072333,
-      "z": 122.41494863135154,
-      "heading": 271.087,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -25.478684714095905,
-      "y": 16.23722617217711,
-      "z": 119.53330870619563,
-      "heading": 273.486,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree_b",
-      "x": -59.39343563672308,
-      "y": 4.930572929032776,
-      "z": 147.79051543384307,
-      "heading": 287.88,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -26.680814834747657,
-      "y": 20.846929782870617,
-      "z": 125.40807414803773,
-      "heading": 290.279,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -53.63829740370403,
-      "y": 10.21791607529829,
-      "z": 143.8039455014886,
-      "heading": 295.077,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -73.84084271272961,
-      "y": 5.1284605784438115,
-      "z": 142.00531673522343,
-      "heading": 304.673,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": 9.996511517854065,
-      "y": 4.512242983965389,
-      "z": 137.04800888572763,
-      "heading": 311.87,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": 28.81948065189003,
-      "y": 4.900436143412712,
-      "z": 108.40002248606079,
-      "heading": 321.466,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree_b",
-      "x": -5.639593805061799,
-      "y": 21.157444991275412,
-      "z": 137.50309468265712,
-      "heading": 326.264,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -69.65096019822921,
-      "y": 14.311623880248845,
-      "z": 110.1117581726939,
-      "heading": 328.663,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -28.173836293266717,
-      "y": 12.338992130047133,
-      "z": 142.92539844885152,
-      "heading": 331.062,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -10.131461547866499,
-      "y": 24.89609975501856,
-      "z": 129.5726980116236,
-      "heading": 338.259,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -72.64847213750384,
-      "y": 7.054395060221221,
-      "z": 103.29369692567623,
-      "heading": 340.658,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": -76.47596212029919,
-      "y": 4.729551463880675,
-      "z": 97.43808887876186,
-      "heading": 343.057,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree_b",
-      "x": -44.713115112493455,
-      "y": 8.55657093833428,
-      "z": 144.45393183836194,
-      "heading": 345.456,
-      "shadow": false
-    },
-    {
-      "asset": "prop_tropical_tree",
-      "x": 27.454570296998575,
-      "y": 3.444428384569873,
-      "z": 128.09297238083107,
-      "heading": 357.451,
-      "shadow": false
-    },
-    {
-      "asset": "prop_grass",
-      "x": -14.269481789400066,
-      "y": 23.972630786195815,
-      "z": 129.05575934101557,
-      "heading": 4.29,
+      "x": -72.93108425495991,
+      "y": 5.53226574041609,
+      "z": 141.8844057089891,
+      "heading": 25.410000000000004,
       "shadow": false
     },
     {
       "asset": "prop_bush",
-      "x": -7.403554759775314,
-      "y": 20.141752646926154,
-      "z": 139.84467001221248,
-      "heading": 7.1499999999999995,
+      "x": -77.97463090614605,
+      "y": 7.1672443907445915,
+      "z": 138.48401791091237,
+      "heading": 26.830000000000002,
       "shadow": false
     },
     {
       "asset": "prop_grass",
-      "x": -31.99887781375,
-      "y": 9.594257675373738,
-      "z": 144.6572669169059,
-      "heading": 12.87,
+      "x": -75.5808381923906,
+      "y": 2.8192356131837935,
+      "z": 142.8737509829307,
+      "heading": 28.25,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": -14.0,
+      "y": 13.940989135856281,
+      "z": 143.0,
+      "heading": 26.389,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": -16.4978232880214,
+      "y": 18.492586529158338,
+      "z": 138.55467899676324,
+      "heading": 27.099,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree_b",
+      "x": -15.615311660197492,
+      "y": 8.191756739055496,
+      "z": 147.73188844336278,
+      "heading": 27.808999999999997,
       "shadow": false
     },
     {
       "asset": "prop_bush",
-      "x": -75.29318806254709,
-      "y": 4.430546758666279,
-      "z": 95.96371028757137,
-      "heading": 14.299999999999999,
+      "x": -10.814995294496903,
+      "y": 17.154594592273174,
+      "z": 139.8606139093888,
+      "heading": 28.519,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -10.219051106798982,
+      "y": 10.354277423634484,
+      "z": 144.92468840776942,
+      "heading": 29.229,
       "shadow": false
     },
     {
       "asset": "prop_grass",
-      "x": 34.326419616216384,
-      "y": 4.0196920443825395,
-      "z": 66.98859912643364,
+      "x": -13.003441834946372,
+      "y": 19.501850517356896,
+      "z": 136.36623245631375,
+      "heading": 29.939,
+      "shadow": false
+    },
+    {
+      "asset": "prop_grass",
+      "x": -13.094679064730148,
+      "y": 5.484298442855728,
+      "z": 149.01501404854238,
+      "heading": 30.649,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": -37.0,
+      "y": 19.03230320764351,
+      "z": 129.0,
+      "heading": 28.788,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": -40.86337111382382,
+      "y": 19.032560034812338,
+      "z": 125.67218335287659,
+      "heading": 29.498,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree_b",
+      "x": -32.04208364498655,
+      "y": 17.445908753417868,
+      "z": 128.35264737840177,
+      "heading": 30.208,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -40.70739203537146,
+      "y": 19.53209345030749,
+      "z": 131.50104863928397,
+      "heading": 30.918,
+      "shadow": false
+    },
+    {
+      "asset": "prop_bush",
+      "x": -35.86127383525586,
+      "y": 18.109256656296083,
+      "z": 133.0869674236195,
+      "heading": 31.628,
+      "shadow": false
+    },
+    {
+      "asset": "prop_grass",
+      "x": -31.28293286849045,
+      "y": 17.71412996171533,
+      "z": 131.07729232748142,
+      "heading": 33.048,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": -91.0,
+      "y": 10.809158342957485,
+      "z": 127.0,
+      "heading": 31.187,
+      "shadow": false
+    },
+    {
+      "asset": "prop_tropical_tree",
+      "x": -95.64262060181797,
+      "y": 5.766233191711761,
+      "z": 129.10857154196282,
+      "heading": 31.897000000000002,
+      "shadow": false
+    },
+    {
+      "asset": "prop_grass",
+      "x": 19.336071585938363,
+      "y": 6.2158816003004675,
+      "z": 115.0008305219666,
+      "heading": 5.72,
+      "shadow": false
+    },
+    {
+      "asset": "prop_grass",
+      "x": -46.015381573555466,
+      "y": 10.92900490606074,
+      "z": 141.5530538044823,
+      "heading": 10.01,
+      "shadow": false
+    },
+    {
+      "asset": "prop_grass",
+      "x": -70.92088709301132,
+      "y": 4.5293838521265135,
+      "z": 96.25628232148813,
+      "heading": 15.729999999999999,
+      "shadow": false
+    },
+    {
+      "asset": "prop_grass",
+      "x": -119.08966027828575,
+      "y": 4.2399999999230555,
+      "z": 90.41852665027967,
       "heading": 18.59,
       "shadow": false
     },
     {
       "asset": "prop_bush",
-      "x": -26.232869427124598,
-      "y": 21.329531722668985,
-      "z": 130.29748233757496,
-      "heading": 21.45,
+      "x": 28.24373959341741,
+      "y": 4.082684457128382,
+      "z": 125.63066768653833,
+      "heading": 35.75,
       "shadow": false
     },
     {
       "asset": "prop_grass",
-      "x": 2.6766788708753935,
-      "y": 14.329647419820962,
-      "z": 135.03677019853313,
-      "heading": 22.88,
+      "x": -22.531913396830916,
+      "y": 14.814830199241225,
+      "z": 140.54703601570438,
+      "heading": 37.18,
       "shadow": false
     },
     {
       "asset": "prop_grass",
-      "x": -78.82958460002004,
-      "y": 6.833969174465532,
-      "z": 138.7312523831999,
-      "heading": 24.31,
+      "x": -122.5946693818305,
+      "y": 3.6952240438353026,
+      "z": 101.93981934651215,
+      "heading": 38.61,
       "shadow": false
     },
     {
       "asset": "prop_grass",
-      "x": 0.2725125902246788,
-      "y": 20.516818376794575,
-      "z": 130.6025712289279,
-      "heading": 25.74,
+      "x": -63.05805232332426,
+      "y": 7.295000332362952,
+      "z": 144.2816655119584,
+      "heading": 45.76,
       "shadow": false
     },
     {
       "asset": "prop_grass",
-      "x": -74.87317498644731,
-      "y": 4.3524546668498525,
-      "z": 95.36752548016818,
-      "heading": 27.169999999999998,
-      "shadow": false
-    },
-    {
-      "asset": "prop_grass",
-      "x": 33.99707230580863,
-      "y": 3.401474527909147,
-      "z": 55.26482423927946,
-      "heading": 30.029999999999998,
-      "shadow": false
-    },
-    {
-      "asset": "prop_grass",
-      "x": 23.879983087139056,
-      "y": 4.073048960564203,
-      "z": 68.73036994355937,
-      "heading": 32.89,
-      "shadow": false
-    },
-    {
-      "asset": "prop_bush",
-      "x": -22.690207011140487,
-      "y": 20.232292891046633,
-      "z": 123.47541773083731,
-      "heading": 42.9,
-      "shadow": false
-    },
-    {
-      "asset": "prop_grass",
-      "x": -20.369259715456348,
-      "y": 2.497394085439395,
-      "z": 152.10964514777194,
+      "x": -63.262838428747976,
+      "y": 20.5086005980138,
+      "z": 130.9222262108785,
       "heading": 47.19,
       "shadow": false
     },
     {
       "asset": "prop_grass",
-      "x": 26.307463072943136,
-      "y": 3.834485112692797,
-      "z": 64.29059278251721,
+      "x": 25.59089745744865,
+      "y": 4.074764631480366,
+      "z": 70.24356728856486,
       "heading": 48.62,
       "shadow": false
     },
     {
       "asset": "prop_grass",
-      "x": 38.17813485796615,
-      "y": 4.1832657879318855,
-      "z": 75.37950686867072,
-      "heading": 51.48,
+      "x": -36.34962634152527,
+      "y": 18.554643038474186,
+      "z": 127.78182772626437,
+      "heading": 52.91,
       "shadow": false
     },
     {
       "asset": "prop_grass",
-      "x": -68.42810385123904,
-      "y": 12.087582626933948,
-      "z": 140.41785449409588,
-      "heading": 55.769999999999996,
-      "shadow": false
-    },
-    {
-      "asset": "prop_bush",
-      "x": -36.150112011377594,
-      "y": 1.6341738620688857,
-      "z": 151.23995603148924,
-      "heading": 57.199999999999996,
+      "x": -10.581486970651511,
+      "y": 17.56305225220797,
+      "z": 123.84465310052892,
+      "heading": 54.339999999999996,
       "shadow": false
     },
     {
       "asset": "prop_grass",
-      "x": 38.880901372702645,
-      "y": 4.145730880914384,
-      "z": 71.67753026201012,
-      "heading": 58.629999999999995,
-      "shadow": false
-    },
-    {
-      "asset": "prop_bush",
-      "x": -18.57057969350511,
-      "y": 21.85210917661827,
-      "z": 125.24597489919977,
-      "heading": 64.35,
-      "shadow": false
-    },
-    {
-      "asset": "prop_grass",
-      "x": -2.0537398646664604,
-      "y": 5.587534980506437,
-      "z": 104.19650460144558,
-      "heading": 70.07,
-      "shadow": false
-    },
-    {
-      "asset": "prop_grass",
-      "x": 22.944129382367628,
-      "y": 6.655945328891764,
-      "z": 119.98397378242876,
-      "heading": 72.92999999999999,
-      "shadow": false
-    },
-    {
-      "asset": "prop_grass",
-      "x": -73.14301362861586,
-      "y": 5.618831197731506,
-      "z": 100.08777841443755,
-      "heading": 74.36,
-      "shadow": false
-    },
-    {
-      "asset": "prop_grass",
-      "x": 31.209818348395025,
-      "y": 5.176802925004131,
-      "z": 109.98467298509806,
-      "heading": 75.78999999999999,
-      "shadow": false
-    },
-    {
-      "asset": "prop_bush",
-      "x": -93.3764421269756,
-      "y": 8.171000043528279,
-      "z": 129.71841300071313,
-      "heading": 78.64999999999999,
-      "shadow": false
-    },
-    {
-      "asset": "prop_grass",
-      "x": 3.8622446264307992,
-      "y": 6.951581891288356,
-      "z": 107.86761090446599,
+      "x": 30.37301355780395,
+      "y": 1.6857365417191321,
+      "z": 43.0560307342612,
       "heading": 80.08,
       "shadow": false
     },
     {
-      "asset": "prop_bush",
-      "x": -1.943150845318203,
-      "y": 5.3853596552317375,
-      "z": 144.64625357223383,
-      "heading": 100.1,
+      "asset": "prop_grass",
+      "x": 29.39365320829694,
+      "y": 4.2193837271707935,
+      "z": 83.78519849544652,
+      "heading": 81.50999999999999,
       "shadow": false
     },
     {
       "asset": "prop_grass",
-      "x": -28.703364002263783,
-      "y": 2.4404510703574056,
-      "z": 151.26979869433157,
-      "heading": 101.53,
+      "x": 34.776404862149754,
+      "y": 4.331587417050018,
+      "z": 103.35341473468142,
+      "heading": 84.36999999999999,
       "shadow": false
     },
     {
       "asset": "prop_grass",
-      "x": 32.72279419215304,
-      "y": 4.2394746053085335,
-      "z": 101.59408005160961,
-      "heading": 111.53999999999999,
-      "shadow": false
-    },
-    {
-      "asset": "prop_bush",
-      "x": -5.331842695966636,
-      "y": 18.972846556431058,
-      "z": 139.40810518967214,
-      "heading": 114.39999999999999,
+      "x": -20.75385438509104,
+      "y": 5.623316746592661,
+      "z": 149.70622600571582,
+      "heading": 87.22999999999999,
       "shadow": false
     },
     {
       "asset": "prop_grass",
-      "x": 37.22146787352232,
-      "y": 4.080389770027755,
-      "z": 68.44834127431783,
-      "heading": 124.41,
+      "x": -121.31586964359899,
+      "y": 3.567496661468784,
+      "z": 93.00249222535261,
+      "heading": 97.24,
       "shadow": false
     },
     {
       "asset": "prop_grass",
-      "x": -117.81328514102483,
-      "y": 4.4558523800779835,
-      "z": 113.88241820286612,
+      "x": -50.127491466390694,
+      "y": 3.416487540356855,
+      "z": 149.71436608625928,
+      "heading": 115.83,
+      "shadow": false
+    },
+    {
+      "asset": "prop_grass",
+      "x": 23.972664972406946,
+      "y": 5.540396026378294,
+      "z": 112.70197923596815,
       "heading": 125.83999999999999,
       "shadow": false
     },
     {
       "asset": "prop_grass",
-      "x": 27.917616343034332,
-      "y": 4.895059439236934,
-      "z": 117.21070907623752,
+      "x": -75.66117456224093,
+      "y": 6.038396407151122,
+      "z": 100.5333661027956,
       "heading": 132.98999999999998,
       "shadow": false
     },
     {
       "asset": "prop_grass",
-      "x": -121.79212278536178,
-      "y": 4.239999999217764,
-      "z": 72.12432363375828,
-      "heading": 141.57,
+      "x": -90.81007179908903,
+      "y": 11.060359412640883,
+      "z": 114.21010290582817,
+      "heading": 140.14,
       "shadow": false
     },
     {
@@ -3047,7 +3396,7 @@
     {
       "asset": "prop_bush",
       "x": -35.7,
-      "y": 11.220548907558928,
+      "y": 11.790758887199601,
       "z": 115.4,
       "heading": 3.69,
       "shadow": false
@@ -3055,7 +3404,7 @@
     {
       "asset": "prop_bush",
       "x": -33.7,
-      "y": 15.025736470155522,
+      "y": 14.16410924891825,
       "z": 116.9,
       "heading": 6.089,
       "shadow": false
@@ -3063,7 +3412,7 @@
     {
       "asset": "prop_grass",
       "x": -32.2,
-      "y": 10.762681127066669,
+      "y": 10.786577617408172,
       "z": 114.4,
       "heading": 8.488,
       "shadow": false
@@ -3071,7 +3420,7 @@
     {
       "asset": "prop_grass",
       "x": -33.2,
-      "y": 10.706469325532666,
+      "y": 10.779815974999876,
       "z": 115.1,
       "heading": 13.286,
       "shadow": false
@@ -3079,7 +3428,7 @@
     {
       "asset": "prop_bush",
       "x": -86.7,
-      "y": 5.813468175085337,
+      "y": 5.014431033667664,
       "z": 135.4,
       "heading": 4.92,
       "shadow": false
@@ -3087,7 +3436,7 @@
     {
       "asset": "prop_bush",
       "x": -84.7,
-      "y": 4.919485897767734,
+      "y": 4.3440380059963815,
       "z": 136.9,
       "heading": 7.319,
       "shadow": false
@@ -3095,7 +3444,7 @@
     {
       "asset": "prop_grass",
       "x": -83.2,
-      "y": 11.8230177211152,
+      "y": 10.20327885723593,
       "z": 134.4,
       "heading": 9.718,
       "shadow": false
@@ -3103,7 +3452,7 @@
     {
       "asset": "prop_grass",
       "x": -85.6,
-      "y": 13.596844137614198,
+      "y": 12.453409969758152,
       "z": 133.2,
       "heading": 12.117,
       "shadow": false
@@ -3111,7 +3460,7 @@
     {
       "asset": "prop_grass",
       "x": -84.2,
-      "y": 8.839327949346638,
+      "y": 7.479016370931701,
       "z": 135.1,
       "heading": 14.516,
       "shadow": false
@@ -3119,7 +3468,7 @@
     {
       "asset": "prop_bush",
       "x": -3.7,
-      "y": 21.094942413399334,
+      "y": 16.37329366853971,
       "z": 134.4,
       "heading": 6.15,
       "shadow": false
@@ -3127,7 +3476,7 @@
     {
       "asset": "prop_bush",
       "x": -1.7,
-      "y": 18.222277674040487,
+      "y": 14.192220763459925,
       "z": 135.9,
       "heading": 8.549,
       "shadow": false
@@ -3135,7 +3484,7 @@
     {
       "asset": "prop_grass",
       "x": -0.19999999999999996,
-      "y": 18.67265524079715,
+      "y": 14.567371966573663,
       "z": 133.4,
       "heading": 10.948,
       "shadow": false
@@ -3143,7 +3492,7 @@
     {
       "asset": "prop_grass",
       "x": -2.6,
-      "y": 21.739882447038656,
+      "y": 16.52387092121089,
       "z": 132.2,
       "heading": 13.347000000000001,
       "shadow": false
@@ -3151,7 +3500,7 @@
     {
       "asset": "prop_grass",
       "x": -1.2,
-      "y": 19.03693096925495,
+      "y": 14.836400795963335,
       "z": 134.1,
       "heading": 15.746,
       "shadow": false
@@ -3175,7 +3524,7 @@
     {
       "asset": "prop_rock",
       "x": -115,
-      "y": 5.326227860109777,
+      "y": 4.362321502129287,
       "z": 122,
       "heading": -0.009999999999999953,
       "shadow": true
@@ -3183,7 +3532,7 @@
     {
       "asset": "prop_rock",
       "x": -110,
-      "y": -0.45877156147083387,
+      "y": -0.4922139447937883,
       "z": 128,
       "heading": -0.35,
       "shadow": true
@@ -3207,7 +3556,7 @@
     {
       "asset": "prop_rock",
       "x": -87,
-      "y": 0.753763439488512,
+      "y": 0.6245802408857788,
       "z": 138,
       "heading": -0.35,
       "shadow": true
@@ -3215,7 +3564,7 @@
     {
       "asset": "prop_rock",
       "x": -37,
-      "y": 13.445530402495871,
+      "y": 11.187357940583452,
       "z": 139,
       "heading": -0.17999999999999997,
       "shadow": true
@@ -3223,7 +3572,7 @@
     {
       "asset": "prop_rock",
       "x": -31,
-      "y": 10.3443688830333,
+      "y": 9.12583844780741,
       "z": 143,
       "heading": -0.009999999999999953,
       "shadow": true
@@ -3231,7 +3580,7 @@
     {
       "asset": "prop_rock",
       "x": -23,
-      "y": 11.18096793948814,
+      "y": 9.948165846567184,
       "z": 145,
       "heading": -0.35,
       "shadow": true
@@ -3239,7 +3588,7 @@
     {
       "asset": "prop_rock",
       "x": 17,
-      "y": 0.6746640294921573,
+      "y": 0.4903016099989308,
       "z": 136,
       "heading": -0.17999999999999997,
       "shadow": true
@@ -3247,7 +3596,7 @@
     {
       "asset": "prop_rock",
       "x": 28,
-      "y": 2.2445827991532314,
+      "y": 2.0855455061690704,
       "z": 128,
       "heading": -0.009999999999999953,
       "shadow": true
@@ -3275,6 +3624,70 @@
       "z": 34,
       "heading": -0.009999999999999953,
       "shadow": true
+    },
+    {
+      "asset": "prop_barrel",
+      "x": -15,
+      "y": 4.3,
+      "z": 59,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_crate",
+      "x": -13.9,
+      "y": 4.3,
+      "z": 59.6,
+      "heading": 0.13,
+      "shadow": false
+    },
+    {
+      "asset": "prop_barrel",
+      "x": -80,
+      "y": 4.3,
+      "z": 59,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_crate",
+      "x": -78.9,
+      "y": 4.3,
+      "z": 59.6,
+      "heading": 0.13,
+      "shadow": false
+    },
+    {
+      "asset": "prop_barrel",
+      "x": -30,
+      "y": 6.5,
+      "z": 82,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_crate",
+      "x": -28.9,
+      "y": 6.5,
+      "z": 82.6,
+      "heading": 0.13,
+      "shadow": false
+    },
+    {
+      "asset": "prop_barrel",
+      "x": -105,
+      "y": 4.3,
+      "z": 77,
+      "heading": 0,
+      "shadow": false
+    },
+    {
+      "asset": "prop_crate",
+      "x": -103.9,
+      "y": 4.3,
+      "z": 77.6,
+      "heading": 0.13,
+      "shadow": false
     }
   ],
   "site": {
@@ -3286,7 +3699,7 @@
         "y": 4.2,
         "width": 23,
         "depth": 19,
-        "heading": 0
+        "heading": 0.035
       },
       {
         "asset": "building_warehouse_b",
@@ -3313,7 +3726,7 @@
         "y": 6.4,
         "width": 17,
         "depth": 18,
-        "heading": 0
+        "heading": -0.055
       },
       {
         "asset": "building_merchant_b",
@@ -3624,18 +4037,19 @@
     "/assets/textures/art06/HarborTerrain_roughness.png",
     "/assets/textures/art06/HarborDepth.png"
   ],
-  "quality": "Task06 Hero Port Second Pass; generated original albedo atlas, metric UVs, modular city districts; LOD0",
+  "quality": "Task07 Hero Port Third Pass; paired PBR, irregular civil works, facade combinations and ecological clusters",
   "sharedTextures": [
+    "/assets/textures/shared/0480537b559a41cb4117.png",
     "/assets/textures/shared/0777709d3116440f9b43.png",
-    "/assets/textures/shared/0bf2498144e2df030202.png",
     "/assets/textures/shared/0c24373438850f621fed.png",
     "/assets/textures/shared/19b874f0111e100e71df.png",
+    "/assets/textures/shared/2a7dd29c6c0af2b9890f.png",
     "/assets/textures/shared/2ad706831ec81247c538.png",
+    "/assets/textures/shared/305e6ac3aff963365a06.png",
     "/assets/textures/shared/3358ce7945458c349a19.png",
     "/assets/textures/shared/341e7bcc6277b39c923b.png",
+    "/assets/textures/shared/34ad52af09a2a39b6c55.png",
     "/assets/textures/shared/3c0ad8fd8167aefee7a3.png",
-    "/assets/textures/shared/42073774263d93396d95.png",
-    "/assets/textures/shared/46c3e2569fe61d73632d.png",
     "/assets/textures/shared/60074a35270b2628ca7f.png",
     "/assets/textures/shared/79a39f6a71737a6fc36c.png",
     "/assets/textures/shared/7b64951e60dd7b221774.png",
@@ -3644,7 +4058,12 @@
     "/assets/textures/shared/85b7e22e896ff92a8785.png",
     "/assets/textures/shared/9f031942a20fcaaf490c.png",
     "/assets/textures/shared/a912cf60f728a1bd177c.png",
+    "/assets/textures/shared/aa28f66d1965393c3ce9.png",
+    "/assets/textures/shared/c4b01ba6eb46f14a0f65.png",
+    "/assets/textures/shared/cf4af9ca3fdd5943c135.png",
     "/assets/textures/shared/d338f02cb121ed643869.png",
+    "/assets/textures/shared/e2d1c378cecf0c52da3c.png",
+    "/assets/textures/shared/ebb57d71e6c13a4b0619.png",
     "/assets/textures/shared/efba3f49f8113cfb865d.png",
     "/assets/textures/shared/f56daccf40a35d749ff9.png"
   ]

@@ -67,14 +67,17 @@ def prepare_surfaces():
      pt=ob.matrix_world@data.vertices[data.loops[li].vertex_index].co
      f=.95
      if 'roof_tiles' in ob.name:
-      tile=(poly.index//4*37)%43;f=.78+tile/200
+      tile=(poly.index//4*37)%43;asset=bpy.context.collection.name
+      roof_mode=sum(map(ord,asset))%4
+      f=[.96,.78+.14*math.sin(pt.x*.7+pt.y*.19),.67,.70+tile/130][roof_mode]
      elif 'stucco' in ob.name or 'plinth' in ob.name:
       # Subtle salt/damp at the wall foot, without painting every facade into ruins.
       f=.80+.18*min(1,max(0,(pt.z-.4)/2.1));f*=.96+.025*math.sin(pt.x*.75+pt.y*.45)
      tint=(1,.985,.965)
      if 'stucco' in ob.name:
       asset=bpy.context.collection.name
-      tint=(1,.94,.79) if 'house_b' in asset else ((.88,.96,.86) if 'merchant_b' in asset else (1,.985,.965))
+      tint=(1,.86,.65) if 'house_b' in asset else ((.79,.89,.81) if 'house_c' in asset else ((.88,.96,.86) if 'merchant_b' in asset else (1,.985,.965)))
+     if 'sail' in ob.name or 'jib' in ob.name:f=.9+.07*math.sin(pt.x*.3+pt.z*.21)*math.sin(pt.y*.5)
      ca.data[li].color=(f*tint[0],f*tint[1],f*tint[2],1)
   data.uv_layers.active_index=0
 # Preserve independent source objects, export vertex color, never repack baked UVs.
@@ -82,4 +85,8 @@ finish_source=base[base.index('def finish('):].replace('bpy.ops.uv.smart_project
 finish_source=finish_source.replace("bpy.ops.object.mode_set(mode='OBJECT')","bpy.ops.object.mode_set(mode='OBJECT');prepare_surfaces()")
 finish_source=finish_source.replace('export_yup=True)',"export_yup=True,export_vertex_color='ACTIVE')")
 finish_source=finish_source.replace('bpy.ops.wm.save_as_mainfile(filepath=str(source))','bpy.data.libraries.write(str(source), {bpy.context.scene}, fake_user=True, compress=True)')
+# Keep authored optional facade groups distinct while still batching each material.
+finish_source=finish_source.replace("groups.setdefault(o.data.materials[0].name,[])","groups.setdefault((o.data.materials[0].name,o.get('facadeOption',-1)),[])")
+finish_source=finish_source.replace("for group in groups.values():","for (material_name,option),group in groups.items():")
+finish_source=finish_source.replace("if len(group)>1:bpy.ops.object.join()","if len(group)>1:bpy.ops.object.join()\n        bpy.context.object.name=('facade_'+str(option) if option>=0 else 'base')+'__'+material_name")
 exec(finish_source)

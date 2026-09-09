@@ -20,13 +20,13 @@ for name,height,dense in [('prop_tropical_tree',10.5,True),('prop_tropical_tree_
  # Dense broad, low spreading tiers versus sparse upright, windward gaps.
  branches=6 if height<3 else (9 if dense else 6)
  for branch in range(branches):
-  a=branch*2.399+.3;reach=height*(.34 if dense else .23)*(1+(branch%3)*.1)
-  y=height*(.48+branch/branches*.42)
+  a=branch*2.399+rng.uniform(-.42,.42);reach=height*(.34 if dense else .23)*rng.uniform(.65,1.35)
+  y=height*(.44+branch/branches*.43+rng.uniform(-.08,.08))
   tip=(bend*.6+math.cos(a)*reach,y,math.sin(a)*reach)
   elbow=(math.cos(a)*reach*.45,y-height*.12,math.sin(a)*reach*.35)
   line('forked_primary_branch',[(bend*.2,height*.34,0),elbow,tip],height*.012,'bark')
   for twig in range(3 if height<3 else (4 if dense else 3)):
-   ta=a+(twig-1.5)*.55;tc=(tip[0]+math.cos(ta)*height*.13,tip[1]+(twig%2)*height*.09,tip[2]+math.sin(ta)*height*.13)
+   ta=a+(twig-1.5)*.55+rng.uniform(-.25,.25);tc=(tip[0]+math.cos(ta)*height*.13,tip[1]+(twig%2)*height*.09,tip[2]+math.sin(ta)*height*.13)
    rod('twig',tip,tc,height*.003,'bark',6)
    for i in range(18 if height<3 else (36 if dense else 27)):
     t=rng.random();lateral=rng.normal(0,height*.08)

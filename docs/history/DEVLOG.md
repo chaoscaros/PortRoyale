@@ -75,3 +75,21 @@ Runtime：功能回归 PASS，高规格美术目标 PARTIAL，用户审美认可
 最终静态：typecheck通过；4文件39测试通过；build通过（主chunk约6.07MB/gzip1.31MB，保留体积警告）；git diff --check通过。lint：Not configured。Simulation/Data diff为空。最终刷新后的error/warn日志为空；验收后清除视口模拟，恢复原窗口、默认哈瓦那停泊/1×与F3隐藏。
 
 本轮仍有规则坡面、院落硬边、立面与部分树冠重复，以及船尾/帆布程序造型感；上述问题不是测试通过即可关闭的美术验收。下一轮优先Hero Port third pass，聚焦这些实际截图问题；不自动开始，不恢复经济。
+
+## 2026-09-09 · Task07 Hero Port Third Pass
+
+最终三档1366×768、1440×900、1920×1080查看完成，窄桌面舰队面板及按钮完整；浏览器error/warn为空，已恢复原窗口与默认1×停泊/F3隐藏。
+
+重做自然场地过渡和分段挡墙，分级主次路，住宅两套可选立面、屋顶磨损和附件变化，群落分枝与密疏组合；重烘焙配对地表。弧面艉廊、侧廊、栏杆舵装、变形帆面和帆角缭绳完成正式Blender→GLB交付。基础资产36套不扩张，LOD1从4增至11；223摆放。原生逐Mesh LOD出现建筑主体缺失，实际截图定位后改为整模块切换；不把静态测试当成运行验收。
+
+默认相机重新构图、宽屏信息面板换侧、次级铭牌淡化。保持模拟及数据边界，未开始新玩法。源码制作模块延用art06命名，避免复制生成器；详见BLENDER_PIPELINE。
+
+## Task07 运行记录 · 2026-09-09
+
+只使用原Chrome localhost:9999标签。实际查看Default Hero、Port Close、Ship Close、Hill/Residential、Pier/Warehouse Close、Full Map；近远切换后建筑主体和选定立面均完整，宽屏选港面板可移至左边。住宅175米阈值最终调整后再查看默认画面。
+
+2×观察20TPS。暂停位置(183.10,-46.55)、simulationTime=635.9、tick=6359；暂停选择拿骚并下令后这些数值不变，0TPS。恢复4×后精确停泊拿骚(-160,205)，距离/ETA=0，40TPS。1×为10TPS。此回归发生在住宅LOD距离最终由205调至175米之前，模拟/交互代码没有后续变化。
+
+1920×1080最终默认短时54～59FPS，333 draw calls / 762 active meshes / 70 GPU textures。此前同一轮默认出现32～51FPS，全览航行/暂停约42～48FPS、334～336/861～863/70。最终默认样本高于Task06近港48～52FPS，但绘制、纹理与资源常驻成本增加，全览也未复现Task06的60FPS，不能据此宣称全场景性能改善或稳定不退化。GPU textures包含渲染目标，不等于27张共享PNG。无低配、长时或同镜头A/B基准。
+
+最终typecheck、4文件40测试、build通过，主chunk约6.08MB/gzip1.31MB，保留体积警告；lint未配置。git diff --check通过，Simulation/Data差异为空。美术验收仍为PARTIAL。

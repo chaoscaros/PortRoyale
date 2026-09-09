@@ -1,4 +1,4 @@
-"""Task06 Hero Port Second Pass. Blender 4.5; metric source -> Y-up GLB.
+"""Task07 Hero Port Third Pass. Blender 4.5; metric source -> Y-up GLB.
 Reuse only low-level authoring helpers, not the previous low-detail assets.
 """
 from pathlib import Path
@@ -59,7 +59,7 @@ def window(x,y,z,arched=False):
     cube('mullion',(x,y,z-.11),(.065,1.8,.08),'deck')
     cube('transom',(x,y+.15,z-.11),(1.05,.065,.08),'deck')
     if arched:arch('window_arch',x,y-.8,z-.1,1,2)
-    for side in [-1,1]:
+    for side in ([-1,1] if int(abs(x)*10)%3 else [1]):
         cube('shutter',(x+side*.87,y,z),(.4,1.8,.12),'waterblue',.03)
         for dy in np.linspace(-.7,.7,7):cube('shutter_louvre',(x+side*.87,y+dy,z-.08),(.38,.065,.08),'dark')
 
@@ -102,6 +102,7 @@ def building(name,w,d,h,kind='home'):
     arch('main_portal',0,.7,-d/2-.3,1.8,3.2)
     cube('carved_double_door',(0,2,-d/2-.12),(1.7,2.6,.12),'wood',.03)
     if kind in ['hall','home']:
+        facade_start=set(bpy.context.scene.objects)
         by=4.5 if h>7 else 1.0
         cube('gallery_floor',(0,by,-d/2-1.5),(w+1,.27,2.7),'stone',.06)
         for x in np.arange(-w/2+.4,w/2,.55):rod('turned_balustrade',(float(x),by,-d/2-2.65),(float(x),by+1.05,-d/2-2.65),.055,'wood',10)
@@ -109,6 +110,16 @@ def building(name,w,d,h,kind='home'):
         for x in np.arange(-w/2+.5,w/2,2.5):
             rod('gallery_column',(float(x),.65,-d/2-2.4),(float(x),by+.05,-d/2-2.4),.2,'stone',16)
             if kind=='hall':arch('arcade',float(x)+1.2,.65,-d/2-2.4,2.1,3.65)
+    if kind=='home':
+        for ob in set(bpy.context.scene.objects)-facade_start:ob['facadeOption']=0
+        facade_start=set(bpy.context.scene.objects)
+        # Alternate shallow iron balcony and a lower shop awning, not a second full house.
+        by=4.5 if h>7 else 1.0
+        cube('compact_balcony',(w*.18,by,-d/2-.75),(w*.55,.19,1.3),'wood',.03)
+        for x in np.linspace(-w*.09,w*.45,8):rod('iron_balcony_spindle',(x,by,-d/2-1.35),(x,by+.95,-d/2-1.35),.035,'iron',8)
+        line('shaped_balcony_rail',[(-w*.09,by+1,-d/2-.9),(-w*.09,by+1,-d/2-1.4),(w*.45,by+1,-d/2-1.4),(w*.45,by+1,-d/2-.9)],.06,'iron')
+        mesh('door_shade',[(-2,3.9,-d/2),(1.4,3.9,-d/2),(1.6,3.45,-d/2-1.8),(-2.1,3.45,-d/2-1.8)],[(0,1,2,3)],'cloth')
+        for ob in set(bpy.context.scene.objects)-facade_start:ob['facadeOption']=1
     if kind=='warehouse':
         for x in [-w*.25,w*.25]:
             arch('warehouse_loading_arch',x,.7,-d/2-.35,2.8,4.1)
@@ -116,8 +127,14 @@ def building(name,w,d,h,kind='home'):
             line('awning_support',[(x-1.5,5,-d/2),(x-1.5,4,-d/2-2),(x+1.5,4,-d/2-2),(x+1.5,5,-d/2)],.08,'dark')
             mesh('loading_canvas',[(x-1.6,5,-d/2),(x+1.6,5,-d/2),(x+1.6,4,-d/2-2),(x-1.6,4,-d/2-2)],[(0,1,2,3)],'cloth')
     tiled_roof(w,d,h+.8,2.7 if kind!='hall' else 3.2)
-    cube('chimney',(w*.25,h+2.4,d*.2),(.9,2.2,.9),'stone',.05)
-    cube('chimney_cap',(w*.25,h+3.55,d*.2),(1.2,.22,1.2),'stone',.05)
+    roof_mode=sum(map(ord,name))%4
+    if roof_mode in [0,3]:
+        cube('chimney',(w*.25,h+2.4,d*.2),(.9,2.2,.9),'stone',.05)
+        cube('chimney_cap',(w*.25,h+3.55,d*.2),(1.2,.22,1.2),'stone',.05)
+    elif roof_mode==1:
+        cube('small_dormer',(w*.20,h+1.8,-d*.15),(1.6,1.5,1.9),'wall',.04)
+        cube('dormer_shutter',(w*.20,h+1.8,-d*.15-1),(1.05,.85,.1),'waterblue',.03)
+        cube('dormer_cap',(w*.20,h+2.62,-d*.15),(1.9,.18,2.1),'roof',.025)
     if kind=='church':
         tx=-w/2+1.2;tz=-d/2+1.2
         cube('bell_tower',(tx,11,tz),(4.7,22,4.7),'wall',.1)
@@ -165,21 +182,37 @@ for side in [-1,1]:
         w=float(np.interp(z,zs,widths));rod('railing_stanchion',(side*w,2.9,z),(side*w,3.7,z),.065,'wood',12)
     for z in [-10,-6,-2,2,6,10]:
         w=float(np.interp(z,zs,widths));cube('framed_hull_port',(side*(w+.03),1.8,z),(.15,.7,1),'brass',.035);cube('port_inner',(side*(w+.12),1.8,z),(.1,.5,.74),'dark',.03)
-mesh('tapered_stern_gallery',[(-3.55,2.8,-10),(3.55,2.8,-10),(3.1,2.8,-14.1),(-3.1,2.8,-14.1),(-3.1,5.45,-10.3),(3.1,5.45,-10.3),(2.7,5.45,-14.1),(-2.7,5.45,-14.1)],[(0,1,5,4),(1,2,6,5),(2,3,7,6),(3,0,4,7),(4,5,6,7)],'waterblue')
+# Bowed transom and quarter galleries follow a tapered historical stern envelope.
+vs=[];fs=[];sections=24
+for level in [0,1]:
+ for k in range(sections+1):
+  t=k/sections;x=(t*2-1)*(3.15 if level==0 else 2.7)
+  vs.append((x,3.15+level*2.3,-14.7+.095*x*x+level*.22))
+for k in range(sections):fs.append((k,k+1,k+sections+2,k+sections+1))
+mesh('bowed_transom',vs,fs,'waterblue')
 for side in [-1,1]:
-    for z in np.arange(-13.8,-10,.65):
-        cube('quarter_gallery_side_window',(side*3.22,4.5,float(z)),(.12,.85,.42),'glass',.035)
-        rod('quarter_gallery_pillar',(side*3.28,3.6,float(z)),(side*2.95,5.3,float(z)),.045,'brass',12)
-    line('headrail_scroll',[(side*1.9,3.4,13),(side*1.2,4.0,16),(side*.4,4.5,19)],.09,'brass')
-for x in [-2.5,-1.25,0,1.25,2.5]:
-    cube('stern_glazing',(x,4.5,-14.35+.055*x*x),(.8,1,.09),'glass',.025)
-    for dx in [-.5,.5]:cube('stern_gilt_frame',(x+dx,4.5,-14.45+.055*(x+dx)**2),(.08,1.25,.1),'brass',.01)
-for y in [3.65,5.2]:line('bowed_stern_moulding',[(x,y,-14.45+.055*x*x) for x in np.linspace(-3.3,3.3,19)],.055,'brass')
-for side in [-1,1]:
-    line('quarterdeck_rail',[(side*3,5.85,-10),(side*2.9,6.35,-12),(side*2.75,6.2,-14)],.065,'wood')
+ mesh('tapered_quarter_gallery',[(side*3.45,3.1,-10),(side*3.15,3.15,-13.8),(side*2.7,5.45,-13.8),(side*3.0,5.45,-10)],[(0,1,2,3)],'waterblue')
+ for z in [-13.1,-12.2,-11.3]:
+  x=side*(3.05+(z+13)*.085)
+  cube('quarter_gallery_side_window',(x,4.35,z),(.1,.9,.56),'glass',.025)
+  for dz in [-.36,.36]:rod('quarter_gallery_pillar',(x,3.75,z+dz),(x-side*.12,5,z+dz),.05,'brass',8)
+ line('headrail_scroll',[(side*1.9,3.4,13),(side*1.2,4,16),(side*.4,4.5,19)],.09,'brass')
+for x in [-2.15,-1.07,0,1.07,2.15]:
+ z=-14.62+.095*x*x
+ cube('stern_glazing',(x,4.35,z),(.76,1.1,.1),'glass',.02)
+ for dx in [-.44,.44]:rod('stern_gilt_frame',(x+dx,3.7,z-.06),(x+dx,5,z-.06),.045,'brass',8)
+ rod('window_crossbar',(x-.39,4.3,z-.07),(x+.39,4.3,z-.07),.025,'deck',6)
+for y in [3.55,5.13]:line('bowed_stern_moulding',[(x,y,-14.8+.095*x*x) for x in np.linspace(-3.2,3.2,19)],.065,'brass')
+outline=[(-3.2,5.65,-10),(3.2,5.65,-10)]+[(x,5.65,-15.3+.085*x*x) for x in np.linspace(3.2,-3.2,25)]
+mesh('curved_quarterdeck_balcony',outline,[tuple(range(len(outline)))],'deck')
+for x in np.linspace(-3.1,3.1,16):
+ z=-15.25+.085*x*x
+ rod('stern_balcony_baluster',(x,5.65,z),(x*.97,6.5,z+.1),.045,'wood',8)
+line('swept_balcony_handrail',[(x,6.5,-15.15+.085*x*x) for x in np.linspace(-3.2,3.2,25)],.085,'wood')
+for side in [-1,1]:line('quarterdeck_rail',[(side*3.2,6.1,-10),(side*3.15,6.5,-12),(side*3.1,6.5,-14.35)],.065,'wood')
 for y in [-.8,.2,1.2]:rod('rudder_gudgeon',(0,y,-14.7),(0,y,-15.4),.22,'iron',10)
-cube('raised_quarterdeck',(0,5.65,-12),(6.2,.2,4.5),'deck',.1)
 rod('rudder_stock',(0,-1.5,-15),(0,4,-15),.18,'iron',16);cube('rudder_blade',(0,-.65,-15.5),(.32,3,1.3),'wood',.05)
+line('tiller_link',[(0,3.9,-15),(0,4.2,-13.8),(.65,4.2,-12.5)],.09,'wood')
 rod('bowsprit',(0,3,14),(0,5,22),.19,'wood',20)
 # Dense curved sails with edge ropes and authentic broad-seam construction.
 def sail_point(name,corners,s,t):
@@ -187,9 +220,10 @@ def sail_point(name,corners,s,t):
     b=np.array(corners[3])*(1-s)+np.array(corners[2])*s
     p=a*(1-t)+b*t
     seed=abs(corners[0][1]*.11+corners[0][2]*.17)
-    fullness=(.65+.3*math.sin(seed))*math.sin(math.pi*s)*math.sin(math.pi*t)**.8
+    fullness=(.72+.38*math.sin(seed))*math.sin(math.pi*s)**(.8+.2*math.sin(seed))*math.sin(math.pi*t)**.75*(.82+.28*s)
     p[0 if name=='forward_jib' else 2]+=fullness
-    p[1]-=.3*math.sin(math.pi*s)*(1-t)**2
+    p[1]-=(.25+.16*math.sin(seed))*math.sin(math.pi*s)*(1-t)**2
+    p[0]+=.14*math.sin(seed)*math.sin(math.pi*t)*math.sin(math.pi*s)
     return tuple(p)
 def sail(name,corners,nu=30,nv=22):
     vs=[];fs=[]
@@ -202,7 +236,17 @@ def sail(name,corners,nu=30,nv=22):
     o=mesh(name,vs,fs,'cloth');sol=o.modifiers.new('sewn_edge_thickness','SOLIDIFY');sol.thickness=.025
     for p in o.data.polygons:p.use_smooth=True
     line('sail_bolt_rope',[sail_point(name,corners,s,0) for s in np.linspace(0,1,8)]+[sail_point(name,corners,1,t) for t in np.linspace(0,1,8)]+[sail_point(name,corners,s,1) for s in np.linspace(1,0,8)]+[sail_point(name,corners,0,t) for t in np.linspace(1,0,8)],.035,'rope')
-    for i in range(1,12):
+    # Reinforced corners lie on the same surface; load-bearing sheets meet their tips.
+    for cs,ct in [(0,0),(1,0),(0,1),(1,1)]:
+        du=.065 if cs==0 else -.065;dv=.10 if ct==0 else -.10
+        patch=[sail_point(name,corners,cs,ct),sail_point(name,corners,cs+du,ct),sail_point(name,corners,cs,ct+dv)]
+        patch=[(x,y,z-.03) for x,y,z in patch]
+        mesh('reinforced_sail_corner',patch,[(0,1,2)],'cloth')
+    for cs in [0,1]:
+        tip=sail_point(name,corners,cs,0)
+        target=(max(-4,min(4,tip[0])),3.6,tip[2]-2.8)
+        line('clew_sheet',[tip,target],.025,'rope')
+    for i in range(1,10):
         s=i/12;a=np.array(corners[0])*(1-s)+np.array(corners[1])*s;b=np.array(corners[3])*(1-s)+np.array(corners[2])*s
         pts=[]
         for t in np.linspace(0,1,15):pts.append(sail_point(name,corners,s,t))
@@ -297,7 +341,7 @@ exec(Path(__file__).with_name('art06_terrain.py').read_text())
 finish('island_visual_test','environment')
 exec(Path(__file__).with_name('art06_layout.py').read_text())
 manifest['textures']=['/assets/'+str(Path(im.filepath_raw).relative_to(OUT)) for im in textures.values()]
-manifest['quality']='Task06 Hero Port Second Pass; generated original albedo atlas, metric UVs, modular city districts; LOD0'
+manifest['quality']='Task07 Hero Port Third Pass; paired PBR, irregular civil works, facade combinations and ecological clusters'
 (SRC/'visual/manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2))
 print('HERO_ASSET_REPORT',json.dumps({k:v['triangles'] for k,v in manifest['assets'].items()}))
 

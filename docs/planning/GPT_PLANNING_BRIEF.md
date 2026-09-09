@@ -59,6 +59,6 @@ Phase 2 延后：Goods + Market + Fleet Cargo + Buy/Sell Foundation。后续细�
 
 城市与地形融合 > 材质一致性 > 地形与道路 > 非重复植被 > 港口生活密度 > Hero Ship近景可信度 > UI小修 > 性能 > 新内容。以《纪元1800》《纪元117》的美术生产和信息组织标准为参考，原创实现，不复制资产/UI。Task06 是港口第二轮精修，不等于已经达到对应商业产品品质。
 
-交给下一轮 Codex 的任务只选择 Hero Port third pass、Hero Ship third pass、Secondary Port Art Pass、Visual Performance Pass 之一；优先第一项。用户明确认可视觉之前，不建议恢复 Goods + Market + Trade。未来经济、贸易、任务计划保留在本文和设计文档中。
+Hero Port Third Pass已在Task07执行。下一轮先依据用户截图反馈与AI_HANDOFF剩余问题制定精修提示词，不自动重复已完成内容或开启Secondary Port。用户明确认可视觉之前，不恢复Goods + Market + Trade。未来经济、贸易、任务计划保留在本文和设计文档中。
 
-当前交付状态：Task06已完成实现与运行回归，39测试/typecheck/build通过；Hero Port second pass仍为PARTIAL，用户视觉认可待确认。2026-09-09接续结果见AI_HANDOFF末尾；只据现有画面制定下一轮美术提示词，不直接制定下一玩法阶段。
+当前交付状态：Task07已实现自然场地、立面组合、群落、艉廊帆装与11套LOD1，40测试/typecheck/build通过。Hero Port third pass仍为PARTIAL；最新浏览器与性能记录见AI_HANDOFF。本文前述Task06推荐是历史背景，Hero Port Third Pass本轮已执行。下一轮先按用户截图反馈制定精修任务，不自动重复Task07，不开启次级港口或玩法阶段。

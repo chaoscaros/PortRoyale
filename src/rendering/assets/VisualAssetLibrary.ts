@@ -1,7 +1,7 @@
 import {
   LoadAssetContainerAsync,
   TransformNode,
-  Mesh,
+  Vector3,
   type Material,
   type AssetContainer,
   type Scene,
@@ -15,6 +15,7 @@ export type VisualAssetId = keyof typeof manifest.assets;
 export class VisualAssetLibrary {
   private readonly containers = new Map<VisualAssetId, AssetContainer>();
   private disposed = false;
+  private readonly detailLevels: { root: TransformNode; near: TransformNode; far: TransformNode; distance: number; high: boolean }[] = [];
   constructor(private readonly scene: Scene) {}
   async load() {
     await Promise.all(
@@ -60,19 +61,8 @@ export class VisualAssetLibrary {
         else { shared.set(material.name, material); material.freeze(); }
       }
     }
-    // Native mesh LOD is sufficient for the four prepared modules; no new simulation system.
-    for (const [id, container] of this.containers) {
-      const definition = manifest.assets[id];
-      if (!("lodOf" in definition) || typeof definition.lodOf !== "string") continue;
-      const source = this.containers.get(definition.lodOf as VisualAssetId);
-      if (!source) continue;
-      for (const mesh of source.meshes) {
-        if (!(mesh instanceof Mesh) || !mesh.material) continue;
-        const lod = container.meshes.find(m => m instanceof Mesh && m.material?.name === mesh.material?.name);
-        if (lod instanceof Mesh) mesh.addLODLevel(id.includes("palm") ? 175 : 240, lod);
-      }
-    }
   }
+
   place(
     id: VisualAssetId,
     parent: TransformNode,
@@ -81,6 +71,7 @@ export class VisualAssetLibrary {
     z = 0,
     heading = 0,
     shadows?: ShadowGenerator,
+    facade = 0,
   ) {
     const container = this.containers.get(id);
     if (!container) throw new Error(`Asset not ready: ${id}`);
@@ -88,19 +79,41 @@ export class VisualAssetLibrary {
     root.parent = parent;
     root.position.set(x, y, z);
     root.rotation.y = heading;
-    const entries = container.instantiateModelsToScene(
-      (name) => `${id}:${name}`,
-      false,
-      { doNotInstantiate: false },
-    );
-    for (const node of entries.rootNodes) node.parent = root;
-    for (const mesh of root.getChildMeshes()) {
-      mesh.isPickable = false;
-      if (shadows) shadows.addShadowCaster(mesh, false);
-    }
+    const instantiate = (asset: VisualAssetId, level: TransformNode) => {
+      const entries = this.containers.get(asset)!.instantiateModelsToScene(
+        (name) => `${asset}:${name}`, false, { doNotInstantiate: false },
+      );
+      for (const node of entries.rootNodes) node.parent = level;
+      for (const mesh of level.getChildMeshes()) {
+        const option = mesh.name.match(/facade_(\d+)__/);
+        if (option && Number(option[1]) !== facade) mesh.setEnabled(false);
+        mesh.isPickable = false;
+        if (shadows) shadows.addShadowCaster(mesh, false);
+      }
+    };
+    const lodId = `${id}_lod1` as VisualAssetId;
+    if (this.containers.has(lodId)) {
+      // Switch the whole authored module together. Per-mesh native LOD can leave
+      // optional facade groups at a different level from the building body.
+      const near = new TransformNode(`${id}:near`, this.scene);
+      const far = new TransformNode(`${id}:far`, this.scene);
+      near.parent = far.parent = root;
+      instantiate(id, near); instantiate(lodId, far); far.setEnabled(false);
+      const distance = id.includes("palm") ? 175 : id.includes("tree") ? 155 : id.includes("house") ? 175 : 240;
+      this.detailLevels.push({ root, near, far, distance, high: true });
+    } else instantiate(id, root);
     return root;
   }
+  updateDetail(cameraPosition: Vector3) {
+    for (const level of this.detailLevels) {
+      const distance = Vector3.Distance(cameraPosition, level.root.getAbsolutePosition());
+      const high = distance < level.distance + (level.high ? 8 : -8);
+      if (high === level.high) continue;
+      level.near.setEnabled(high); level.far.setEnabled(!high); level.high = high;
+    }
+  }
   dispose() {
+    this.detailLevels.length = 0;
     this.disposed = true;
     for (const c of this.containers.values()) c.dispose();
     this.containers.clear();

@@ -61,6 +61,19 @@ export class PortRenderer {
         engine.getRenderWidth(),
         engine.getRenderHeight(),
       );
+    const selectedFleet = fleets.find(f => f.id === selection.selectedFleetId);
+    const selectedPort = ports.find(p => p.id === selection.selectedPortId);
+    // The Havana anchor is at the dock; use the city centre for panel avoidance.
+    const selectedPosition = selectedPort?.id === "port-havana"
+      ? { x: selectedPort.position.x - 44, z: selectedPort.position.z + 70 }
+      : selectedPort?.position ?? selectedFleet?.position;
+    if (this.labels.parentElement) {
+      const point = selectedPosition && Vector3.Project(new Vector3(selectedPosition.x, 5, selectedPosition.z), Matrix.Identity(), this.scene.getTransformMatrix(), viewport);
+      const useLeft = !!point && point.x / engine.getRenderWidth() > .62 && this.labels.clientWidth >= 1500 && this.labels.clientHeight >= 850;
+      const side = useLeft ? "left" : "right";
+      if (this.labels.parentElement.dataset.panelSide !== side)
+        this.labels.parentElement.dataset.panelSide = side;
+    }
     const projectBounds = (x: number, z: number, radius: number, height: number): ScreenRect | null => {
       const points = [-1, 1].flatMap(dx => [-1, 1].flatMap(dz => [0, height].map(y => Vector3.Project(new Vector3(x + dx * radius, y, z + dz * radius), Matrix.Identity(), this.scene.getTransformMatrix(), viewport))));
       if (points.some(p => p.z < 0 || p.z > 1)) return null;
@@ -117,6 +130,7 @@ export class PortRenderer {
         "far",
         Vector3.Distance(camera.position, anchor) > 330,
       );
+      entry.button.classList.toggle("secondary-label", port.id !== "port-havana" && camera instanceof ArcRotateCamera && camera.radius < 330);
       const selected = selection.selectedPortId === port.id;
       entry.button.setAttribute("aria-pressed", String(selected));
     }

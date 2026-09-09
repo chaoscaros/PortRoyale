@@ -1,86 +1,57 @@
 # AI 交接
 
-## 当前阶段
+## 当前阶段与验收边界
 
-Phase 1.5 — Task06 Hero Port Second Pass。目标仍是High-End Stylized Realism；本轮聚焦城市与地形融合，不以新增资产数量作为成绩。Hero Port second pass：PARTIAL，尚未获得用户视觉认可，不能写成达到Anno117品质。所有新玩法继续冻结。
+Phase 1.5 — Task07 Hero Port Third Pass。实现与静态检查完成，Hero Port third pass仍为PARTIAL，必须等待用户视觉认可。不能声称达到《纪元1800》《纪元117》商业成品质感。所有新玩法继续冻结；不自动开启Secondary Port、Economy或Trade。
 
-与GPT_PLANNING_BRIEF一起交给ChatGPT网页制定后续提示词；需要具体美术任务时再附ART_DIRECTION、BLENDER_PIPELINE、ASSET_CATALOG、PERFORMANCE。当前优先级：城市地形融合 > 材质一致性 > 地形道路 > 非重复植被 > 港口生活密度 > 船只近景 > UI小修 > 性能 > 新内容。
+把本文件与GPT_PLANNING_BRIEF.md上传ChatGPT网页版即可制定后续提示词。细化美术时再附ART_DIRECTION、BLENDER_PIPELINE、ASSET_CATALOG和PERFORMANCE。以前Task06的第三轮推荐已在本轮执行，下一轮应先依据用户截图反馈。
 
-## 当前可运行状态
+## 运行方式
 
-仓库 /Users/fenglian1/projects/AI/PortRoyale，main跟踪origin/main。npm；9999占用自动顺延。服务启动/重启由用户操作，Codex仅连接用户现有Chrome localhost:9999，不启动服务或Playwright浏览器。
+仓库/Users/fenglian1/projects/AI/PortRoyale；main跟踪origin/main；npm；默认9999占用顺延。服务启动/重启由用户执行。Codex只连接用户原有Chrome localhost:9999标签，没有启动服务、Playwright浏览器或替代页面。
 
-默认哈瓦那港湾、停泊双桅横帆船与正式HUD。底部选舰队→左侧港口列表或3D铭牌→右侧确认前往；顶部暂停/1×/2×/4×。底部镜头聚焦/全览；F3默认隐藏。右侧唯一对象面板缩窄贴边，未重设计UI架构。资金仍明确显示经济未启用。
+底部舰队按钮选船，港口列表/铭牌选港，对象面板确认前往；顶部暂停/1×/2×/4×，底部聚焦/全览，F3调试。宽屏对象面板根据投影换侧，窄屏沿用右侧。经济未启用。
 
-## 已实现
+## 本轮实现
 
-- Simulation、Navigation、Command、Snapshot及Data本轮无改动。保持固定10TPS、权威位置、精确抵达与原地改道，Mesh从不作为权威状态。
-- 场地统一：art06_site.py定义15个建筑台地和13段有高程的路网；同一函数用于岛屿、土建、摆放与水深图。主码头→仓储门前→商业坡道→喷泉广场→地标前台阶→住宅坡地形成连续动线。
-- 正式Blender土建模块保留独立台基、挡土边、入口踏步、道路边石、坡道与码头连接。既有护岸模块重做中央阶梯开口，三座主码头对齐开口；货堆/绞盘/仓库形成装卸链。
-- 后山改为斜向石灰岩脊、鞍部、沟槽和岩层，建筑台地切入地形；岸线补稀疏岩群，移除整圈等距岩石。水深PNG由同一地形导出，图边缘平滑回到深海。
-- 10族配对PBR：Plaster/Stone/RoofTile/WoodStructural/WoodDeck/SailCloth/TerrainGrass/TerrainDirt/TerrainRock/Sand；1K、4米MetricUV，颜色/法线/粗糙度共同生成。当前不再运行Task05颜色图集，旧图保留历史编辑来源。
-- 墙脚克制湿痕/盐渍、灰泥细裂纹、部分立面色差，陶瓦轻微厚度/色差。地表2K匹配颜色/法线/粗糙度采用Blender原生烘焙；世界空间草地斑块减少铺贴重复，弱化远距离微法线混叠。
-- Tall Palm/Wide Palm/Dense Tropical/Sparse Tropical四种植被结构；从树干、分叉、叶簇与冠幅区别，按核心城镇/住宅/背风坡/裸岩布置，不仅随机scale。实例共享几何。
-- Hero Ship为67636三角面，接近原预算；艉窗与饰条略弯、补艉甲板栏杆/舵铰；帆脚松弛与不同张力，帆缘/布缝贴合曲面。深木船体、暖甲板、象牙帆、少量蓝漆/黄铜。停泊表现角度改为0.25弧度以兼顾帆面与船体；航行朝向仍来自Snapshot。
-- 36套基础资产（原35套精修、1套必要土建）和4套LOD1。总督府、教堂、棕榈A/B使用Babylon原生LOD：地标240米、棕榈175米。远景瓦面使用连续屋顶包络和原材质，避免对独立瓦片直接减面产生孔洞。不是全场景LOD系统。
-- 规范材质名共享并冻结、静态港区世界矩阵缓存；动态舰队不冻结。F3增加draw call、active mesh、GPU内部纹理计数。未启用重型AO、4096阴影或重海洋模拟。
-- 港名屏幕候选位置避让帆装、地标及对象面板，无安全位置时隐藏该铭牌但保留左侧选择入口。右面板298/280px贴边；默认相机alpha=-1.05、beta=1.03、radius225、目标(-86,0,39)，港口中右、海湾留白。
+- Simulation、Navigation、Command、Snapshot、Data无修改，固定模拟时间与权威位置保持。Mesh仅用于表现。
+- art06_site.py仍是岛屿、土建、摆放、水深的唯一高程来源。15个建筑场地、13段路网保持；自然地形过渡宽度扰动，结构基础按实际建筑收紧，挡墙分段、不同高度并半埋。后山降低并加宽，减少鼓包。
+- 港口装卸、商贸、住宅、公共地标、后山五区沿既有动线精修。主路石铺、次路土铺，侧路轻微弯曲变宽，零散路缘及门前踏步，四处小型工作货堆。
+- 住宅A/B/C保留三种主体，两套可选长外廊/浅阳台加门棚；源对象facadeOption与导出节点facade_0/1对应，manifest逐实例选一套。墙色、百叶、屋顶新/旧/暗/混瓦、烟囱或小老虎窗组合变化，不复制20栋房屋。
+- 密冠/疏冠树分枝角度、冠幅和高度扰动，树/灌/草组局部镜像旋转后按坡度过滤；核心商业区不填森林。223个模块摆放，基础资产仍36套。
+- 船尾弧面舷窗、两侧艉廊、栏杆、甲板阳台及舵装；不同帆腹与帆脚松弛、帆角补强、实际帆角到甲板的缭绳。65,747三角面，低于Task06的67,636；停泊表现朝向0.95弧度，航行朝向仍来自Snapshot。
+- 继续10族1K配对PBR、4米MetricUV；屋瓦/墙/帆变化通过顶点色。地面2K颜色/法线/粗糙度由Blender原生重新烘焙，交通磨损与草土混合连续变化，水深256。没有新增另一套材质方案。
+- LOD1由4套扩大到11套：地标2、棕榈2、住宅3、仓库2、热带树2。棕榈175米、树155米、住宅175米、其他240米，8米迟滞。近远各自普通实例共享几何和材质，同步切换完整模块。
+- 实际浏览器发现逐Mesh原生LOD会出现建筑主体缺失而附件可见，最终改为模块整体切换，近远景已检查主体完整。增加禁用层级/TransformNode的内存成本，未声称全场景LOD或零开销。
+- 默认相机alpha=-1.85、beta=1.03、radius225、target(-86,0,39)，船左前/城中右。宽屏选哈瓦那时按城市中心投影换侧，次级远标签淡化；非全局UI布局系统。
+- 保持2048PCF、ACES/FXAA及原微量Bloom，无SSAO、重海洋或运行时顶点修补。静态矩阵缓存、材质共享冻结保留。
 
-## 部分完成
+## 资产与重现
 
-Hero Port second pass：PARTIAL。施工基础和城市主轴更可解释，材质通道一致性、植被结构和性能有改善，但部分坡面仍较规则，院落与边缘绿地过渡不够自然，重复立面和少量道具仍有模块感。船只近景继续需要更精细的艉廊与帆布手工美术调整。用户尚未确认达到目标审美，不能按测试通过自动变为PASS。
+assets-source/blender/visual/build_high_end_assets.py为完整入口；art06_*.py名称沿用历史，不是旧效果。自动生成基础资产、build_lod1.py层级及共享纹理优化；正式修改全部.blend→GLB。源/GLB/manifest同时提交。
 
-功能/静态/性能与主观美术验收分别记录，最终数值见末尾“Task06验证记录”。
+47个正式GLB共30,303,940 bytes；27张当前共享PNG共44,056,875 bytes；47个可编辑源共479,046,576 bytes，源不下载到浏览器。清理无当前GLB引用的共享PNG。资产表见ASSET_CATALOG；住宅面数包含两个可选组，运行只启用一组。
 
-## 尚未实现
+## 验证
 
-Goods、Market、Inventory、Price、Trade、Cargo、Crew、Production、Nation、Mission、Combat、Save、Server、Multiplayer。无岸线避障、碰撞、物理风力或浮力；直线航行仍可能穿视觉岛屿。无全场景LOD、KTX2、几何压缩和真实低配/长时基准。
+typecheck通过；4文件40项测试通过，包含实际导出高程、配对UV、11套LOD面数和住宅两组导出节点；build通过，主chunk6.08MB/gzip1.31MB，体积警告保留。lint：Not configured。浏览器结果与最终Git校验在下方单独记录；静态通过不代表美术通过。
 
-## 最近工作
+## 已知限制与下一轮输入
 
-完整重建基础资产与LOD1，并对实际截图发现的问题做针对性重导出：修复浅水图矩形边界、补密冠生态群落、提亮结构木材、护岸真正开出阶梯、远景屋顶改连续包络、减弱地表微法线重复。保留原始可编辑源，未用运行Mesh补造权威地形。
+坡面仍有规则台地感，土路边缘偏硬，院落空地较大；近景冠层仍有薄片与程序生成感。门窗尺度和立面语言仍容易识别重复。船艉与帆面虽更完整，仍需手工塑形/材质精修。程序PBR不是扫描级材质；小艇和部分棚货仍次级简化。地面2K宏观图不具备近景铺贴图同等像素密度。
 
-热更新期间曾因旧DebugSnapshot缺少新rendering字段报错；DeveloperHUD已用可选链兼容旧状态，最终刷新后的日志单独检查。基线纹理初版计数只覆盖scene对象，不可作为对比；最终改用Engine GPU内部纹理缓存，包含渲染目标与材质纹理。
+LOD直接切换，无交叉渐变，近远两层级常驻；没有KTX2、全场景LOD、低配或长时基准。面板换侧仅用于宽屏，铭牌无安全位置时隐藏，列表可继续选港。直线航行没有岛屿避障、碰撞或物理风力，现存限制未改变。
 
-## 重要文件
+没有Goods/Market/Inventory/Price/Trade/Cargo/Crew/Production/Nation/Mission/Combat/Save/Server/Multiplayer。不要为了消除构建警告或视觉问题改Simulation边界。下一步仅等待用户截图确认精修优先级，不自动开展新阶段。
 
-- assets-source/blender/visual/build_high_end_assets.py：当前完整入口；art06_site/materials/vegetation/civilworks/quay/terrain/layout.py为制作分层；build_lod1.py自动生成4套LOD1。
-- assets-source/blender/visual/manifest.json：全部资产、实际纹理、场地台地/路网与摆放；scripts/optimize_visual_glb.py负责共享PNG去重。
-- assets-source/blender/ports/port_civilworks.blend、port_quay.blend；environment/island_visual_test.blend；ships/sloop.blend；完整源/GLB路径见ASSET_CATALOG。
-- src/rendering/assets/VisualAssetLibrary.ts：同源图片限制、规范材质共享、原生LOD。
-- src/rendering/ports/labelPlacement.ts、PortRenderer.ts；ocean/createOcean.ts、environment/createEnvironment.ts、fleets/FleetRenderer.ts。
-- src/ui/art-hud.css、DeveloperHUD.tsx；tests/assets.test.ts、labelPlacement.test.ts。
+## Task07 运行记录 · 2026-09-09
 
-## 已知问题
+只使用原Chrome localhost:9999标签。实际查看Default Hero、Port Close、Ship Close、Hill/Residential、Pier/Warehouse Close、Full Map；近远切换后建筑主体和选定立面均完整，宽屏选港面板可移至左边。住宅175米阈值最终调整后再查看默认画面。
 
-部分坡面、院落边界仍规则，草地细节和重复立面需继续精修；地表2K宏观图不具备建筑铺贴图同等像素密度。程序材质虽通道一致，但不是扫描级PBR或手工高规格成品。小艇、单箱、棚架仍是次级简化模型。船尾与帆布仍有进一步美术空间。
+2×观察20TPS。暂停位置(183.10,-46.55)、simulationTime=635.9、tick=6359；暂停选择拿骚并下令后这些数值不变，0TPS。恢复4×后精确停泊拿骚(-160,205)，距离/ETA=0，40TPS。1×为10TPS。此回归发生在住宅LOD距离最终由205调至175米之前，模拟/交互代码没有后续变化。
 
-铭牌是局部候选避让，不是全局标签布局；视角极端或空间不足时可能隐藏，港口列表仍可用。右面板仍覆盖少量海图。LOD只有四套，切换是直接切换而非渐变。水深256图为近岸视觉近似，不支持真实折射/水下物理。直线航行无避障。
+1920×1080最终默认短时54～59FPS，333 draw calls / 762 active meshes / 70 GPU textures。此前同一轮默认出现32～51FPS，全览航行/暂停约42～48FPS、334～336/861～863/70。最终默认样本高于Task06近港48～52FPS，但绘制、纹理与资源常驻成本增加，全览也未复现Task06的60FPS，不能据此宣称全场景性能改善或稳定不退化。GPU textures包含渲染目标，不等于27张共享PNG。无低配、长时或同镜头A/B基准。
 
-## 技术债
+最终typecheck、4文件40测试、build通过，主chunk约6.08MB/gzip1.31MB，保留体积警告；lint未配置。git diff --check通过，Simulation/Data差异为空。美术验收仍为PARTIAL。
 
-继续按截图精修坡面/建筑平台过渡、院落小路与非重复立面，再完善近景艉廊/帆面。基于实际GPU数据推进更多LOD和KTX2，而非无依据降画质。构建主chunk约6MB仍有警告；自制环境为低频LDR立方体，非预过滤HDRI；跨系统字体有fallback差异。
-
-## 无明确理由不要修改
-
-Simulation权威位置、Command/Snapshot边界、固定模拟时间、Data单一来源、右手+Y上/+Z船首、米制与水线pivot、npm、9999顺延、用户控制服务/现有Chrome验收。场地高程保持一个制作来源，源/运行文件同步提交，不得覆盖成低模占位体。
-
-## 推荐下一任务
-
-优先Hero Port third pass，以剩余坡面/院落/立面重复为验收对象；另外只允许按用户选择Hero Ship third pass、Secondary Port Art Pass或Visual Performance Pass。不自动开始下一轮，不恢复经济。
-
-## Task06 验证记录 · 2026-09-09
-
-功能回归 PASS；Hero Port second pass: PARTIAL。用户视觉认可、低配和长时基准未完成，不能写成达到Anno117品质。
-
-接续完成：六处空置庭院/背坡的小型非等距植被组（总摆放217）；铭牌增加远侧候选，保护灯塔、总督府、教堂、帆装及左侧说明/导航、右面板。没有新增玩法、资产种类或权威状态。
-
-指定Chrome现有localhost:9999标签实测：默认英雄港、放大港口、船只聚焦及旋转后帆面、港船组合与海图全览已查看；1366×768、1440×900、1920×1080桌面布局均检查，scrollWidth等于对应宽度，面板按钮可用。海图全览可见4港与4套LOD1对应的远景；没有使用新浏览器或启动服务。
-
-2×航行观察20TPS；暂停在(43.36,-38.08)，simulationTime=83.9、tick=839。暂停改道拿骚后位置/时间/tick不变，目的港更新，距离316.9、ETA39.6；暂停稳定0TPS。恢复4×精确抵达拿骚(-160,205)，已停泊、距离/ETA=0，40TPS。1×观察10TPS。此前最终资产4×抵达圣胡安亦通过。
-
-今日1920×1080近港约48～52FPS，311 draw calls / 743 active meshes / 64 GPU内部纹理；选船会增加约2个绘制与网格。航行/暂停操作期间有42～57FPS样本；全览抵达后60FPS、308/838/64。短时观察并非稳定60FPS承诺。GPU纹理包含渲染目标，不等同于21张共享PNG。昨日64FPS样本是不同窗口/负载，不替代今日数据。
-
-最终静态：typecheck通过；4文件39测试通过；build通过（主chunk约6.07MB/gzip1.31MB，保留体积警告）；git diff --check通过。lint：Not configured。Simulation/Data diff为空。最终刷新后的error/warn日志为空；验收后清除视口模拟，恢复原窗口、默认哈瓦那停泊/1×与F3隐藏。
-
-本轮仍有规则坡面、院落硬边、立面与部分树冠重复，以及船尾/帆布程序造型感；上述问题不是测试通过即可关闭的美术验收。下一轮优先Hero Port third pass，聚焦这些实际截图问题；不自动开始，不恢复经济。
+1366×768、1440×900、1920×1080均实际查看，窄桌面舰队面板内容和聚焦按钮完整；1366默认53FPS短时样本。浏览器error/warn日志为空。验收后清除尺寸模拟并刷新，恢复原窗口、默认哈瓦那停泊、1×及F3隐藏。没有启动或重启用户服务。

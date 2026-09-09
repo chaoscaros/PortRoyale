@@ -38,7 +38,7 @@ for a in m['assets'].values():
     a['category']=Path(a['source']).parent.name
     a['role']='Secondary' if a['category']=='props' or name in {'prop_bush','prop_grass','prop_rock'} else 'Hero'
     new={'building_merchant_a','building_merchant_b','building_harbor_office','prop_tropical_tree_b','prop_cargo_stack','prop_sacks','prop_mooring','port_crane','port_plaza','prop_grass','port_pier_small'}
-    a['status']='Task06 LOD1' if name.endswith('_lod1') else ('Task06 地形与道路连接' if name=='port_civilworks' else 'Task06 Second Pass')
+    a['status']='Task06 LOD1' if name.endswith('_lod1') else ('Task06 地形与道路连接' if name=='port_civilworks' else 'Task07 Third Pass')
 m['sharedTextures']=sorted({u for a in m['assets'].values() for u in a.get('textureUris',[])})
 manifest_path.write_text(json.dumps(m,ensure_ascii=False,indent=2))
 print('Shared textures:',len(m['sharedTextures']),'GLB bytes:',sum((ROOT/('public'+a['url'])).stat().st_size for a in m['assets'].values()))

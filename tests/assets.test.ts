@@ -82,6 +82,18 @@ describe("visual asset delivery", () => {
     }
   });
 
+  it("preserves optional house facade groups in both detail levels", () => {
+    for (const house of ["building_house_a", "building_house_b", "building_house_c"] as const) {
+      for (const suffix of ["", "_lod1"]) {
+        const b = readFileSync(`public/assets/models/buildings/${house}${suffix}.glb`);
+        const gltf = JSON.parse(b.toString("utf8", 20, 20 + b.readUInt32LE(12)));
+        const names = gltf.nodes.map((n: { name: string }) => n.name);
+        expect(names.some((n: string) => n.startsWith("facade_0__"))).toBe(true);
+        expect(names.some((n: string) => n.startsWith("facade_1__"))).toBe(true);
+        expect(names.some((n: string) => n.startsWith("base__"))).toBe(true);
+      }
+    }
+  });
   it("exports terrain at the surveyed building datums", () => {
     const b = readFileSync("public/assets/models/environment/island_visual_test.glb");
     const jsonLength = b.readUInt32LE(12);
@@ -107,8 +119,8 @@ describe("visual asset delivery", () => {
       expect(placement?.y).toBeCloseTo(plot.y + .11);
     }
   });
-  it("ships conservative LOD1 geometry for the four designated modules", () => {
-    for (const id of ["building_governor", "building_church", "prop_palm", "prop_palm_b"] as const) {
+  it("ships conservative LOD1 geometry for all designated repeated modules", () => {
+    for (const id of ["building_governor", "building_church", "prop_palm", "prop_palm_b", "building_house_a", "building_house_b", "building_house_c", "building_warehouse", "building_warehouse_b", "prop_tropical_tree", "prop_tropical_tree_b"] as const) {
       const base = manifest.assets[id];
       const lod = manifest.assets[`${id}_lod1`];
       expect(lod.triangles).toBeLessThan(base.triangles * .75);
