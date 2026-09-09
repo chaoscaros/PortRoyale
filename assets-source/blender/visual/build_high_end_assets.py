@@ -1,4 +1,4 @@
-"""Task05 High-End Art Pass. Blender 4.5; metric source -> Y-up GLB.
+"""Task06 Hero Port Second Pass. Blender 4.5; metric source -> Y-up GLB.
 Reuse only low-level authoring helpers, not the previous low-detail assets.
 """
 from pathlib import Path
@@ -36,7 +36,7 @@ M['ochre']=mat('ochre_limewash',(.55,.39,.23));M['leaf']=mat('leaf_deep',(.075,.
 oldfinish=finish
 exec(base[base.index('def finish('):].replace('bpy.ops.wm.save_as_mainfile(filepath=str(source))','bpy.data.libraries.write(str(source), {bpy.context.scene}, fake_user=True, compress=True)'))
 
-exec(Path(__file__).with_name('art05_surfaces.py').read_text())
+exec(Path(__file__).with_name('art06_materials.py').read_text())
 
 def arch(name,x,y,z,w,h,material='stone',depth=.3):
     # Solid masonry voussoir arch with open center; vertical jambs.
@@ -75,7 +75,7 @@ def tiled_roof(w,d,y,rise):
                     t=(row+end*1.1)/courses
                     for j in range(5):
                         a=math.pi*j/4
-                        vs.append((side*((w/2+.65)*t),y+rise*(1-t)+math.sin(a)*.10+.05,z+math.cos(a)*.20))
+                        vs.append((side*((w/2+.65)*t),y+rise*(1-t)+math.sin(a)*.14+.05+(.018*math.sin(col*13+row*7)),z+math.cos(a)*.20))
                 a0=len(vs)-10
                 for j in range(4):fs.append((a0+j,a0+j+1,a0+j+6,a0+j+5))
     mesh('individual_barrel_roof_tiles',vs,fs,'roof')
@@ -172,28 +172,40 @@ for side in [-1,1]:
         rod('quarter_gallery_pillar',(side*3.28,3.6,float(z)),(side*2.95,5.3,float(z)),.045,'brass',12)
     line('headrail_scroll',[(side*1.9,3.4,13),(side*1.2,4.0,16),(side*.4,4.5,19)],.09,'brass')
 for x in [-2.5,-1.25,0,1.25,2.5]:
-    cube('stern_glazing',(x,4.5,-14.1),(.8,1,.09),'glass',.025)
-    for dx in [-.5,.5]:cube('stern_gilt_frame',(x+dx,4.5,-14.2),(.08,1.25,.1),'brass',.01)
-for y in [3.65,5.2]:cube('stern_moulding',(0,y,-14.2),(7,.11,.15),'brass',.025)
+    cube('stern_glazing',(x,4.5,-14.35+.055*x*x),(.8,1,.09),'glass',.025)
+    for dx in [-.5,.5]:cube('stern_gilt_frame',(x+dx,4.5,-14.45+.055*(x+dx)**2),(.08,1.25,.1),'brass',.01)
+for y in [3.65,5.2]:line('bowed_stern_moulding',[(x,y,-14.45+.055*x*x) for x in np.linspace(-3.3,3.3,19)],.055,'brass')
+for side in [-1,1]:
+    line('quarterdeck_rail',[(side*3,5.85,-10),(side*2.9,6.35,-12),(side*2.75,6.2,-14)],.065,'wood')
+for y in [-.8,.2,1.2]:rod('rudder_gudgeon',(0,y,-14.7),(0,y,-15.4),.22,'iron',10)
 cube('raised_quarterdeck',(0,5.65,-12),(6.2,.2,4.5),'deck',.1)
 rod('rudder_stock',(0,-1.5,-15),(0,4,-15),.18,'iron',16);cube('rudder_blade',(0,-.65,-15.5),(.32,3,1.3),'wood',.05)
 rod('bowsprit',(0,3,14),(0,5,22),.19,'wood',20)
 # Dense curved sails with edge ropes and authentic broad-seam construction.
-def sail(name,corners,nu=32,nv=24):
+def sail_point(name,corners,s,t):
+    a=np.array(corners[0])*(1-s)+np.array(corners[1])*s
+    b=np.array(corners[3])*(1-s)+np.array(corners[2])*s
+    p=a*(1-t)+b*t
+    seed=abs(corners[0][1]*.11+corners[0][2]*.17)
+    fullness=(.65+.3*math.sin(seed))*math.sin(math.pi*s)*math.sin(math.pi*t)**.8
+    p[0 if name=='forward_jib' else 2]+=fullness
+    p[1]-=.3*math.sin(math.pi*s)*(1-t)**2
+    return tuple(p)
+def sail(name,corners,nu=30,nv=22):
     vs=[];fs=[]
     for j in range(nv+1):
         t=j/nv
         for i in range(nu+1):
-            s=i/nu;a=np.array(corners[0])*(1-s)+np.array(corners[1])*s;b=np.array(corners[3])*(1-s)+np.array(corners[2])*s;p=a*(1-t)+b*t;p[2]+=.85*math.sin(math.pi*s)*math.sin(math.pi*t);vs.append(tuple(p))
+            s=i/nu;vs.append(sail_point(name,corners,s,t))
     for j in range(nv):
         for i in range(nu):a=j*(nu+1)+i;fs.append((a,a+1,a+nu+2,a+nu+1))
     o=mesh(name,vs,fs,'cloth');sol=o.modifiers.new('sewn_edge_thickness','SOLIDIFY');sol.thickness=.025
     for p in o.data.polygons:p.use_smooth=True
-    line('sail_bolt_rope',corners+[corners[0]],.035,'rope')
+    line('sail_bolt_rope',[sail_point(name,corners,s,0) for s in np.linspace(0,1,8)]+[sail_point(name,corners,1,t) for t in np.linspace(0,1,8)]+[sail_point(name,corners,s,1) for s in np.linspace(1,0,8)]+[sail_point(name,corners,0,t) for t in np.linspace(1,0,8)],.035,'rope')
     for i in range(1,12):
         s=i/12;a=np.array(corners[0])*(1-s)+np.array(corners[1])*s;b=np.array(corners[3])*(1-s)+np.array(corners[2])*s
         pts=[]
-        for t in np.linspace(0,1,15):p=a*(1-t)+b*t;p[2]+=.87*math.sin(math.pi*s)*math.sin(math.pi*t);pts.append(tuple(p))
+        for t in np.linspace(0,1,15):pts.append(sail_point(name,corners,s,t))
         line('canvas_broad_seam',pts,.012,'rope')
 for z,height in [(5,28),(-5,31)]:
     rod('lower_mast',(0,1,z),(0,height*.7,z),.31,'wood',24);rod('topmast',(0,height*.63,z),(0,height,z),.16,'wood',20)
@@ -241,14 +253,9 @@ reset('prop_stone_wall')
 for row in range(4):
     for col in range(10):cube('limestone_block',(-7.5+col*1.5+(row%2)*.2,row*.48+.24,0),(1.47,.46,.95),'stone',.06)
 cube('wall_cap',(0,2.05,0),(16,.25,1.25),'stone',.05);finish('prop_stone_wall','props')
-reset('port_quay');cube('quay_masonry',(0,1.3,0),(18,2.6,10),'stone',.08)
-for x in np.arange(-9,9,1.5):
-    for z in np.arange(-5,5,1):cube('quay_paver',(float(x)+.7,2.65,float(z)+.45),(1.44,.13,.92),'stone',.025)
-for k in range(5):cube('quay_stair',(0,.25+k*.25,-8+k*.65),(8,.5+k*.5,.68),'stone',.025)
-finish('port_quay','ports')
-reset('port_street')
-for x in np.arange(-4,4,.8):
-    for z in np.arange(-10,10,.65):cube('cobblestone',(float(x),.05,float(z)),(.76,.14,.61),'stone',.035)
+exec(Path(__file__).with_name('art06_quay.py').read_text())
+reset('port_street');cube('paved_roadbed',(0,0,0),(8,.14,20),'stone',.03)
+for x in [-4,4]:cube('street_curb',(x,.13,0),(.25,.24,20),'stone',.025)
 finish('port_street','ports')
 # Preserve smaller useful props from previous kit by regenerating their authored sections.
 prop_section=Path(__file__).with_name('build_visual_assets.py').read_text().split("reset('prop_barrel')")[1].split("reset('prop_palm')")[0]
@@ -270,36 +277,7 @@ def foliage_leaf(vs,fs,center,a,length,width,tilt=0):
     x,y,z=center;dx,dz=math.cos(a),math.sin(a);nx,nz=-dz,dx;i=len(vs)
     vs.extend([(x,y,z),(x+dx*length*.45+nx*width,y+tilt+.07,z+dz*length*.45+nz*width),(x+dx*length,y+tilt*.6,z+dz*length),(x+dx*length*.45-nx*width,y+tilt+.07,z+dz*length*.45-nz*width),(x+dx*length*.5,y+tilt+.15,z+dz*length*.5)])
     fs.extend([(i,i+1,i+4),(i+1,i+2,i+4),(i+2,i+3,i+4),(i+3,i,i+4)])
-for variant in [0,1]:
-    reset('prop_palm');height=12+variant*2;lean=1.8+variant
-    line('tapered_curving_trunk',[(lean*(t**1.7),height*t,.35*math.sin(t*2)) for t in np.linspace(0,1,24)],.24,'wood')
-    for y in np.arange(.3,height,.28):
-        t=y/height;line('trunk_growth_ring',[(lean*t**1.7+.255*math.cos(a),y,.35*math.sin(t*2)+.255*math.sin(a)) for a in np.linspace(0,math.tau,13)],.022,'deck')
-    vs=[];fs=[]
-    for k in range(15):
-        a=k*math.tau/15+variant*.2;length=5+RNG.random()*2
-        pts=[]
-        for t in np.linspace(0,1,22):pts.append((lean+math.cos(a)*length*t,height+2.1*math.sin(t*3)-2.8*t,.32+math.sin(a)*length*t))
-        line('frond_midstem',pts,.035,'leaflight')
-        for t in np.linspace(.08,.97,25):
-            c=(lean+math.cos(a)*length*t,height+2.1*math.sin(t*3)-2.8*t,.32+math.sin(a)*length*t)
-            for side in [-1,1]:foliage_leaf(vs,fs,c,a+side*1.05,1.15*math.sin(math.pi*t)**.5,.08,-.24)
-    mesh('individual_palm_leaflets',vs,fs,'leaflight');finish('prop_palm' if variant==0 else 'prop_palm_b','environment')
-RNG=np.random.default_rng(4804)
-for name,height,count in [('prop_tropical_tree',11,2100),('prop_tropical_tree_b',14,2450),('prop_bush',2.8,340)]:
-    reset(name);rod('tapered_trunk',(0,0,0),(.4,height*.65,0),height*.032,'wood',16);vs=[];fs=[]
-    for i in range(count):
-        cluster=i%7;angle=cluster*2.399;cx=math.cos(angle)*height*.20;cz=math.sin(angle)*height*.20;cy=height*(.60+(cluster%3)*.105);a=RNG.uniform(0,math.tau);rad=RNG.uniform(.1,1)**.5*height*.24;y=cy+RNG.uniform(-.17,.17)*height;c=(cx+math.cos(a)*rad,y,cz+math.sin(a)*rad)
-        if i%30==0:rod('branch',(.3,height*.4,0),c,.06,'wood',8)
-        foliage_leaf(vs,fs,c,a+RNG.uniform(-1,1),height*.12,height*.038,RNG.uniform(-.15,.15))
-    o=mesh('branch_leaf_clusters',vs,fs,'leaf')
-    cm=M['leaf'].copy();node=cm.node_tree.nodes.new('ShaderNodeVertexColor');node.layer_name='LeafColor';cm.node_tree.links.new(node.outputs['Color'],cm.node_tree.nodes.get('Principled BSDF').inputs['Base Color']);o.data.materials.clear();o.data.materials.append(cm)
-    ca=o.data.color_attributes.new(name='LeafColor',type='FLOAT_COLOR',domain='CORNER')
-    shades=[(.025,.065,.015),(.045,.12,.023),(.085,.18,.038),(.06,.145,.031)]
-    for poly in o.data.polygons:
-        c=shades[(poly.index//4)%4]
-        for li in poly.loop_indices:ca.data[li].color=(*c,1)
-    finish(name,'environment')
+exec(Path(__file__).with_name('art06_vegetation.py').read_text())
 reset('prop_rock');vs=[];fs=[]
 for k,(x,y,z,s) in enumerate([(-2,1,0,2.4),(1,1.5,.5,2.7),(0,.7,-2,1.5)]):
     bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=3,radius=1,location=coord((x,y,z)));o=bpy.context.object;o.scale=(s,s*.7,s*.65);o.data.materials.append(M['stone'])
@@ -307,55 +285,24 @@ for k,(x,y,z,s) in enumerate([(-2,1,0,2.4),(1,1.5,.5,2.7),(0,.7,-2,1.5)]):
 finish('prop_rock','environment')
 exec(Path(__file__).with_name('art05_modules.py').read_text())
 # A coastal peninsula with a scooped inlet, broad town terraces and craggy rear ridge.
-def terrain_height(x,z):
-    r=math.sqrt(((x+38)/94)**2+((z-78)/77)**2)
-    r+=.035*math.sin(x*.12)+.025*math.sin(z*.17+x*.055)
-    bay=math.exp(-((x-14)/31)**2-((z-20)/27)**2)*7
-    coast=np.clip((1-r)*30,-5,4.2)-bay
-    ridge=27*math.exp(-((x+75)/28)**2-((z-119)/22)**2)+18*math.exp(-((x+8)/24)**2-((z-128)/21)**2)
-    h=float(coast+max(0,1-r)*ridge*2)
-    terrace=min(x+108,34-x,z-38,98-z);b=np.clip(terrace/7,0,1)
-    h=h*(1-b)+4.2*b
-    if -112<x<5 and z<39: h=min(h, (z-32)*.75)
-    h+=max(0,min(1,(z-102)/14))*(1.2*math.sin(x*.23+z*.17)+.6*math.sin(z*.6-x*.3))
-    return max(-5,h)
+exec(Path(__file__).with_name('art06_site.py').read_text())
+exec(Path(__file__).with_name('art06_civilworks.py').read_text())
 reset('island_visual_test');vs=[];fs=[];nx=161;nz=133
 for z in np.linspace(-7,164,nz):
     for x in np.linspace(-141,68,nx):vs.append((float(x),terrain_height(x,z),float(z)))
 for j in range(nz-1):
     for i in range(nx-1):a=j*nx+i;fs.extend([(a,a+nx,a+1),(a+1,a+nx,a+nx+1)])
 o=mesh('eroded_peninsula',vs,fs,'ground')
-exec(Path(__file__).with_name('art05_terrain.py').read_text())
+exec(Path(__file__).with_name('art06_terrain.py').read_text())
 finish('island_visual_test','environment')
-manifest['havana']=[]
-def place(asset,x,z,heading=0,shadow=True,y=None):manifest['havana'].append({'asset':asset,'x':x,'y':terrain_height(x,z) if y is None else y,'z':z,'heading':heading,'shadow':shadow})
-# Harbor mouth stays at the authoritative port origin (ship docking location).
-for x in [-20,-46,-72]:place('port_pier',x,18,y=0)
-for x in [-18,-36,-54,-72,-90]:place('port_quay',x,39,y=1.45)
-for x in [-11,-37,-63,-89]:place('prop_stone_wall',x,45,y=3.9)
-for x,z,asset in [(-22,51,'building_warehouse'),(-51,52,'building_warehouse'),(-83,54,'building_warehouse_b'),(-49,86,'building_governor'),(-87,89,'building_church')]:place(asset,x,z)
-for x,z,asset in [(-7,73,'building_house_a'),(-23,75,'building_house_b'),(-7,93,'building_house_c'),(-23,96,'building_house_a'),(-68,78,'building_house_b'),(-107,76,'building_house_a'),(-108,99,'building_house_c'),(-68,99,'building_house_a'),(14,63,'building_house_b'),(14,85,'building_house_c')]:place(asset,x,z)
-for x in [-35,-64]:
-    for z in [56,76,96]:place('port_street',x,z,y=4.25)
-for x in [-88,-68,-48,-28,-8]:place('port_street',x,65,heading=math.pi/2,y=4.25)
-place('port_lighthouse',31,44)
-for x,z in [(-102,40),(-83,39),(-58,37),(-31,37),(-7,47),(8,52),(26,65),(30,86),(-113,62),(-108,112),(-61,114),(-28,111),(-9,116)]:place('prop_palm' if x%2 else 'prop_palm_b',x,z,shadow=True)
-for i in range(48):
-    x=float(RNG.uniform(-123,41));z=float(RNG.uniform(109,148));h=terrain_height(x,z)
-    if h>3:place('prop_tropical_tree' if i%3 else 'prop_tropical_tree_b',x,z,heading=float(RNG.uniform(0,6)),shadow=False)
-for i in range(55):
-    x=float(RNG.uniform(-125,42));z=float(RNG.uniform(30,149));h=terrain_height(x,z)
-    if h>1 and (z>107 or x<-113 or x>29):place('prop_bush',x,z,shadow=False)
-for x,z in [(-123,63),(-119,84),(-120,111),(-109,127),(-85,136),(-47,149),(4,136),(32,119),(45,91),(42,64),(29,36),(-110,30)]:place('prop_rock',x,z,heading=x,shadow=True,y=max(-.5,terrain_height(x,z)-.4))
-for i in range(24):place('prop_barrel' if i%3 else 'prop_crate',-91+(i%12)*6,34+(i//12)*5,shadow=False,y=4.2)
-for x,z in [(-40,62),(-62,62),(-17,64)]:place('prop_market_awning',x,z)
-for x,z in [(-76,40),(-32,41),(-6,64)]:place('prop_cart',x,z)
-for x,z in [(-11,13),(-34,16),(-58,14)]:place('prop_skiff',x,z,heading=.2,shadow=False,y=0)
-exec(Path(__file__).with_name('art05_layout.py').read_text())
+exec(Path(__file__).with_name('art06_layout.py').read_text())
 manifest['textures']=['/assets/'+str(Path(im.filepath_raw).relative_to(OUT)) for im in textures.values()]
-manifest['quality']='Task05 High-End Art Pass; generated original albedo atlas, metric UVs, modular city districts; LOD0'
+manifest['quality']='Task06 Hero Port Second Pass; generated original albedo atlas, metric UVs, modular city districts; LOD0'
 (SRC/'visual/manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2))
 print('HERO_ASSET_REPORT',json.dumps({k:v['triangles'] for k,v in manifest['assets'].items()}))
 
 import runpy
 runpy.run_path(str(ROOT/"scripts/optimize_visual_glb.py"))
+
+# Prepared native LOD1 levels are part of the reproducible delivery.
+runpy.run_path(str(SRC/"visual/build_lod1.py"))

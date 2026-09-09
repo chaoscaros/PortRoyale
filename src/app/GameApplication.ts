@@ -8,6 +8,7 @@ import { GameRenderer } from "../rendering/GameRenderer";
 export interface DebugSnapshot {
   world: WorldSnapshot;
   fps: number;
+  rendering: { drawCalls: number; activeMeshes: number; textures: number };
   tps: number;
   assetStatus: string;
   selection: SelectionState;
@@ -69,6 +70,7 @@ export class GameApplication {
     this.publish({
       world: this.simulation.snapshot(),
       fps: this.fps,
+      rendering: this.renderer.getStats(),
       tps: this.tps,
       assetStatus: this.assetStatus,
       selection: this.selection,
@@ -98,7 +100,7 @@ export class GameApplication {
       this.renderer.focus(world.fleets[0].position, 115);
     else {
       const p = world.ports[0].position;
-      this.renderer.focus({ x: p.x - 38, z: p.z + 60 }, 215);
+      this.renderer.focus({ x: p.x + 4, z: p.z + 69 }, 225);
     }
   }
   dispatch(command: Command) {

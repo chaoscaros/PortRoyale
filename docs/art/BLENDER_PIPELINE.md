@@ -2,13 +2,13 @@
 
 ## 可复现流程
 
-Blender 4.5.13 LTS。新一轮唯一完整构建入口：
+Blender 4.5.13 LTS。Task06 当前完整构建入口：
 
 ```sh
 /Applications/Blender.app/Contents/MacOS/Blender --background --python assets-source/blender/visual/build_high_end_assets.py
 ```
 
-脚本复用build_visual_assets.py的基础建模函数，重制英雄船、建筑、码头、环境并输出35个资产。末尾调用scripts/optimize_visual_glb.py，把重复嵌入图片按内容散列合并到public/assets/textures/shared；请等待完整构建结束再刷新游戏，避免读取生成中的文件。此前build_visual_assets.py是Task03重现入口，会覆盖现行资产，不应用它单独更新Task05；build_hero_assets.py 仅用于重现 Task04。
+脚本复用build_visual_assets.py的基础建模函数，重制英雄船、建筑、码头、环境并输出36套基础资产并制作4套LOD1。末尾调用scripts/optimize_visual_glb.py，把重复嵌入图片按内容散列合并到public/assets/textures/shared；请等待完整构建结束再刷新游戏，避免读取生成中的文件。此前build_visual_assets.py是Task03重现入口，会覆盖现行资产，不应用它单独更新Task05；build_hero_assets.py 仅用于重现 Task04。
 
 ## 坐标与命名
 
@@ -22,21 +22,21 @@ source按ships/buildings/ports/props/environment分类，runtime按相同分类G
 
 ## UV、材质和贴图
 
-MetricUV 按部件投影轴和米制尺度展开，AtlasUV 为独立颜色图集坐标，TerrainUV 是整岛连续烘焙坐标。禁止 Smart Project 覆盖已烘焙坐标。七组自制1024 PBR图片：wood/deck/cloth/wall/roof/stone/ground，各Color、Normal、Roughness。Normal/Roughness是Non-Color；材质显式连接Principled BSDF。墙/瓦与树叶使用表面顶点色；地形烘焙后必须移除 BeachMask/RockMask，不能作为 COLOR_0 输出。源文件打包所用图片，普通运行不需Blender。
+当前所有普通材质使用MetricUV：按部件主轴、模块坐标和4米铺贴尺度展开，BaseColor/Normal/Roughness共用同一通道。地形使用整岛TerrainUV，三通道共同烘焙；禁止重展开覆盖。Normal/Roughness为Non-Color；PBR材质显式连接Principled BSDF。墙/瓦与叶片保留BYTE_COLOR表面颜色，地形临时遮罩在烘焙后删除。源文件打包所用图片，运行无需Blender。
 
 GLB保留几何二进制，图片URI使用../../textures/shared/内容散列.png。Babylon预处理器将其规范化，并限制为当前站点/assets目录；不放宽到任意远程地址。运行时必须同时交付public/assets/models与public/assets/textures/shared，不能只复制一个GLB。manifest列出每项实际textureUris与共享集合。独立原始贴图保留用于编辑，运行只请求所需共享图片。
 
 ## 预算与LOD
 
-建议：Hero Ship LOD0 30k—80k tris，Hero Building 8k—25k，Secondary 3k—10k，Props 500—5k，Palm 2k—8k（实例化）。当前部分地标/棕榈高于参考，面数详见ASSET_CATALOG；需以性能观测判断，下一轮可制作LOD1/2，当前并未交付真实LOD。
+建议：Hero Ship LOD0 30k—80k tris，Hero Building 8k—25k，Secondary 3k—10k，Props 500—5k，Palm 2k—8k（实例化）。当前部分地标/棕榈高于参考，面数详见ASSET_CATALOG；需以性能观测判断，下一轮可制作LOD1/2，当前交付4套LOD1，其余资产仍仅LOD0。
 
-1K 微表面图为默认，颜色图集为1254，连续地表为2K，确有近景收益才提高分辨率，不无差别4K。共享贴图去重，避免重复纹理造成网络/GPU浪费。首次生成图片和大规模UV会耗时，勿为减等待省略可编辑源。
+当前颜色/法线/粗糙度配对族均为1K，连续地表为2K；1254颜色图集仅属于Task05历史输入，确有近景收益才提高分辨率，不无差别4K。共享贴图去重，避免重复纹理造成网络/GPU浪费。首次生成图片和大规模UV会耗时，勿为减等待省略可编辑源。
 
 ## 验证与版本控制
 
 资产测试校验源文件、GLB版本/长度/面数/缓冲区边界、图片路径、manifest模块引用、船体跨水线。浏览器另外检查材质加载、坐标校准、接地、阴影、帆装与默认构图。提交.blend、GLB、共享纹理、脚本和manifest；忽略.blend1、临时截图与工具缓存。禁止原作提取资源进入仓库。
 
-## Task05 材质生产与可编辑源
+## Task05 材质生产记录（历史，当前由Task06替代）
 
 完整入口调用 art05_surfaces.py（材质和双 UV）、art05_modules.py（商宅、港务所、设施）、art05_terrain.py（Blender Cycles 原生 EMIT 烘焙）、art05_layout.py（港区布局）。export_sources.py 可重新导出已经编辑的源文件，保留 ACTIVE 顶点色；最终自动运行共享贴图优化。源文件保留独立部件并打包引用图片，运行副本按材质合并、实例共享几何。
 
@@ -47,3 +47,17 @@ GLB保留几何二进制，图片URI使用../../textures/shared/内容散列.png
 图集仅作为材质输入；Blender 将整岛材质和高度遮罩烘焙成连续颜色图。临时遮罩使用 while 循环从源数据删除，避免删除属性后 Blender 引用失效。导出测试防止黑色遮罩乘到运行表面及图集错误 UV 通道回归。
 
 所有 35 套源和 GLB、原始纹理、共享纹理、manifest、脚本同时提交。几何自制，AI 辅助颜色素材不声称纯手绘或原作授权资产；没有原作资源、私人素材和启动依赖。当前仅 LOD0，新增植物实例仍需真实低配评估。
+
+## Task06 · 当前生产规范
+
+build_high_end_assets.py 调用 art06_materials.py、art06_vegetation.py、art06_site.py、art06_civilworks.py、art06_quay.py、art06_terrain.py、art06_layout.py，最后自动执行 build_lod1.py 和共享纹理优化。只新增一个必要的场地土建模块 port_civilworks；其余为既有资产的第二轮精修。LOD1属于同资产层级，不是新增城市内容。
+
+材质命名 art06_<Family>；10个材质族每族1K配对颜色/法线/粗糙度，统一4米铺贴；所有通道使用MetricUV，不再单独截取颜色图集。颜色、法线、粗糙度由同一确定性高度/磨损场生成，不声称扫描级PBR。SurfaceTint以BYTE_COLOR保存墙脚老化、少量立面与瓦片色差，减少原FLOAT_COLOR属性开销。
+
+HarborTerrain的2K颜色/法线/粗糙度均由Blender Cycles EMIT烘焙到同一TerrainUV；Normal和Roughness为Non-Color。烘焙后删除全部临时高度/材质遮罩，禁止导出COLOR_0遮罩乘色。256水深图HarborDepth.png由同一场地高程生成，线性编码(height+8)/48；海面在图边缘平滑过渡到深海，避免出现矩形浅水区。
+
+台地和路网数据记录在manifest.site：plots的尺寸/标高供复核，roads包含起终点标高和宽度。运行只读取资产与摆放，不导入Python美术逻辑；水深图同样是外部资源。building source保留可编辑部件，土建模块保留台基、边石、阶梯与坡道，绝不以单张贴图替代施工结构。
+
+build_lod1.py为总督府、教堂、棕榈A/B删除非轮廓细节并保守简化，保存独立*_lod1.blend/GLB，保留原LOD0。Babylon用原生mesh LOD，棕榈175米、地标240米；其他模块不声称已有LOD。Hero Ship不优先压缩。源、运行、shared PNG、manifest和脚本一起交付；旧材质图保留历史编辑来源，但运行仅请求当前实际引用文件。
+
+资产测试增加地形导出顶点与台地标高一致性、配对材质UV、LOD面数和标签保护区；浏览器仍必须检查真实接地、帆装、冠层与LOD切换，静态检查不证明美术达标。

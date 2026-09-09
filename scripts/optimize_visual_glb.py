@@ -34,11 +34,11 @@ for a in m['assets'].values():
     out=struct.pack('<III',0x46546c67,2,12+8+len(encoded)+8+len(newbin))+struct.pack('<II',len(encoded),0x4e4f534a)+encoded+struct.pack('<II',len(newbin),0x004e4942)+newbin;path.write_bytes(out)
     a['textureUris']=sorted({'/assets/textures/shared/'+im['uri'].split('/')[-1] for im in images if 'uri' in im})
     name=Path(a['source']).stem
-    a['provenance']='Original Blender geometry; original AI-assisted albedo atlas plus authored PBR surfaces'
+    a['provenance']='Original Blender geometry and paired authored PBR fields; Task05 atlas retained as historical source'
     a['category']=Path(a['source']).parent.name
     a['role']='Secondary' if a['category']=='props' or name in {'prop_bush','prop_grass','prop_rock'} else 'Hero'
     new={'building_merchant_a','building_merchant_b','building_harbor_office','prop_tropical_tree_b','prop_cargo_stack','prop_sacks','prop_mooring','port_crane','port_plaza','prop_grass','port_pier_small'}
-    a['status']='Task05新增模块' if name in new else ('次级简化，材质升级' if name in {'prop_barrel','prop_crate','prop_skiff','prop_market_awning'} else 'Task05美术升级')
+    a['status']='Task06 LOD1' if name.endswith('_lod1') else ('Task06 地形与道路连接' if name=='port_civilworks' else 'Task06 Second Pass')
 m['sharedTextures']=sorted({u for a in m['assets'].values() for u in a.get('textureUris',[])})
 manifest_path.write_text(json.dumps(m,ensure_ascii=False,indent=2))
 print('Shared textures:',len(m['sharedTextures']),'GLB bytes:',sum((ROOT/('public'+a['url'])).stat().st_size for a in m['assets'].values()))

@@ -6,10 +6,11 @@ import {
   type Scene,
   type ShadowGenerator,
 } from "@babylonjs/core";
-import type { PortId, PortSnapshot } from "../../simulation/world/types";
+import type { FleetSnapshot, PortId, PortSnapshot } from "../../simulation/world/types";
 import { createPortVisual } from "./createPortVisual";
 import type { VisualAssetLibrary } from "../assets/VisualAssetLibrary";
 import type { PickTarget, SelectionState } from "../../input/SelectionState";
+import { placePortLabel, type ScreenRect } from "./labelPlacement";
 export class PortRenderer {
   private readonly entries = new Map<
     PortId,
@@ -25,7 +26,7 @@ export class PortRenderer {
     private readonly assets: VisualAssetLibrary,
     private readonly shadows: ShadowGenerator,
   ) {}
-  update(ports: readonly PortSnapshot[], selection: SelectionState) {
+  update(ports: readonly PortSnapshot[], selection: SelectionState, fleets: readonly FleetSnapshot[] = []) {
     for (const port of ports) {
       if (this.entries.has(port.id)) continue;
       const root = new TransformNode(`port:${port.id}`, this.scene);
@@ -60,6 +61,24 @@ export class PortRenderer {
         engine.getRenderWidth(),
         engine.getRenderHeight(),
       );
+    const projectBounds = (x: number, z: number, radius: number, height: number): ScreenRect | null => {
+      const points = [-1, 1].flatMap(dx => [-1, 1].flatMap(dz => [0, height].map(y => Vector3.Project(new Vector3(x + dx * radius, y, z + dz * radius), Matrix.Identity(), this.scene.getTransformMatrix(), viewport))));
+      if (points.some(p => p.z < 0 || p.z > 1)) return null;
+      const sx = this.labels.clientWidth / engine.getRenderWidth(), sy = this.labels.clientHeight / engine.getRenderHeight();
+      return { left: Math.min(...points.map(p => p.x)) * sx, right: Math.max(...points.map(p => p.x)) * sx, top: Math.min(...points.map(p => p.y)) * sy, bottom: Math.max(...points.map(p => p.y)) * sy };
+    };
+    const obstacles: ScreenRect[] = [];
+    for (const fleet of fleets) {
+      const bounds = projectBounds(fleet.position.x, fleet.position.z, 19, 33);
+      if (bounds) obstacles.push(bounds);
+    }
+    const hero = ports.find(p => p.id === "port-havana");
+    if (hero) for (const [x,z,y,radius] of [[-46,103,28,13],[-91,99,40,13],[31,46,26,5]]) {
+      const bounds = projectBounds(hero.position.x+x,hero.position.z+z,radius,y);
+      if (bounds) obstacles.push(bounds);
+    }
+    const overlays = this.labels.parentElement?.querySelectorAll(".object-panel, .scene-caption, .port-navigation, .main-menu");
+    overlays?.forEach(element => obstacles.push(element.getBoundingClientRect()));
     for (const port of ports) {
       const entry = this.entries.get(port.id)!;
       const showPort =
@@ -90,8 +109,10 @@ export class PortRenderer {
         y > this.labels.clientHeight
           ? "none"
           : "";
-      entry.button.style.left = `${x}px`;
-      entry.button.style.top = `${y}px`;
+      const position = placePortLabel({ x, y }, { width: this.labels.clientWidth, height: this.labels.clientHeight }, obstacles);
+      if (!position) entry.button.style.display = "none";
+      entry.button.style.left = `${position?.x ?? x}px`;
+      entry.button.style.top = `${position?.y ?? y}px`;
       entry.button.classList.toggle(
         "far",
         Vector3.Distance(camera.position, anchor) > 330,

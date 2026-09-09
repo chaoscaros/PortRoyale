@@ -53,15 +53,15 @@ export function createEnvironment(scene: Scene, camera: Camera) {
     new Vector3(0, 1, 0),
     scene,
   );
-  ambient.intensity = 0.32;
+  ambient.intensity = 0.38;
   ambient.diffuse = new Color3(0.81, 0.91, 1);
   ambient.groundColor = new Color3(0.32, 0.3, 0.22);
   const sun = new DirectionalLight(
     "afternoon-sun",
-    new Vector3(-0.65, -1, 0.35).normalize(),
+    new Vector3(-0.7, -1, 0.2).normalize(),
     scene,
   );
-  sun.position.set(120, 250, -180);
+  sun.position.set(175, 250, -50);
   sun.diffuse = new Color3(1, 0.91, 0.76);
   sun.intensity = 3.0;
   sun.shadowMinZ = 1;
@@ -70,7 +70,7 @@ export function createEnvironment(scene: Scene, camera: Camera) {
   shadows.usePercentageCloserFiltering = true;
   shadows.filteringQuality = ShadowGenerator.QUALITY_MEDIUM;
   shadows.bias = 0.0003;
-  shadows.normalBias = 0.025;
+  shadows.normalBias = 0.018;
   shadows.setDarkness(0.2);
   const sky = MeshBuilder.CreateSphere(
     "tropical-sky",

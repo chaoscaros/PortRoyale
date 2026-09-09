@@ -42,6 +42,12 @@ UI 分为 Game、FleetPanel、PortPanel、DeveloperHUD、Icon；F3状态、选�
 
 右侧只显示一个对象面板；选港后保留客户端舰队选择以确认前往。顶部时钟为simulationTime派生的分秒，不是存档日期。菜单只有已实现的相机/调试/返回操作，不虚构经济或任务入口。
 
-## Task05 表现层增量
+## Task05 表现层增量（历史）
 
 新增模块、材质图集、双 UV 和整岛烘焙均属于 Blender 资产层，manifest.havana 只描述视觉摆放。createPortVisual 在定位完成后缓存静态节点世界矩阵；舰队动态变换不冻结，仍严格来自 Snapshot。默认镜头与哈瓦那聚焦目标统一为 (-128, 0, 30)。art-hud.css 作为统一视觉主题覆盖，不增加游戏系统或权威状态。Simulation 与 Data 本轮没有改动。
+
+## Task06 表现层边界
+
+场地高程/台地/道路统一在art06_site.py，输出GLB、manifest.site和水深图，仅供Rendering。Simulation、Navigation、Command、Snapshot没有修改。VisualAssetLibrary按作者约定的规范材质名复用并冻结材质，静态港区缓存世界矩阵；动态Fleet继续读取Snapshot。
+
+四套超预算模块接Babylon原生LOD1，不引入独立调度系统。PortRenderer根据投影后的帆船/地标包围区与HUD覆盖区选择铭牌位置；无可用位置时仅隐藏铭牌，港口列表保留操作入口。DeveloperHUD增加draw call、active mesh和GPU内部纹理计数，仅作为表现诊断，默认仍隐藏。

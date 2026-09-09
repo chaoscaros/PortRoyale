@@ -67,3 +67,11 @@ button:disabled { filter: saturate(.25); opacity: .42; }
   .quick-actions { gap: 3px; }
   .quick-actions button { min-width: 60px; }
 }
+
+/* Task06 keeps the HUD hierarchy and gives more of the harbor back to the scene. */
+.object-panel { width: 298px; right: 16px; }
+.object-illustration { height: 135px; }
+.object-content { padding: 18px 20px; }
+.port-card-content { padding: 16px 20px 20px; }
+.object-panel h2 { font-size: 27px; }
+@media(max-width:1450px) { .object-panel { width: 280px; right: 12px; } .object-illustration { height: 112px; } }

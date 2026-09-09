@@ -15,6 +15,10 @@ export function DeveloperHUD({ debug }: { debug: DebugSnapshot | null }) {
           </dd>
         </div>
         <div>
+          <dt>Draw calls / Active meshes / Textures</dt>
+          <dd>{debug?.rendering?.drawCalls ?? 0} / {debug?.rendering?.activeMeshes ?? 0} / {debug?.rendering?.textures ?? 0}</dd>
+        </div>
+        <div>
           <dt>Simulation seconds</dt>
           <dd data-testid="simulation-time">
             {clock?.simulationTime.toFixed(1) ?? 0}

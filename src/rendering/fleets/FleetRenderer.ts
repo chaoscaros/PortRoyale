@@ -94,7 +94,7 @@ export class FleetRenderer {
       }
       this.roots.set(fleet.id, root);
       root.position.set(fleet.position.x, 0.02, fleet.position.z);
-      root.rotation.y = fleet.status === "docked" ? 0.8 : fleet.heading;
+      root.rotation.y = fleet.status === "docked" ? 0.25 : fleet.heading;
     }
   }
   update(
@@ -110,7 +110,7 @@ export class FleetRenderer {
       const root = this.roots.get(fleet.id);
       if (!root) continue;
       root.position.set(fleet.position.x, 0.02, fleet.position.z);
-      root.rotation.y = fleet.status === "docked" ? 0.8 : fleet.heading;
+      root.rotation.y = fleet.status === "docked" ? 0.25 : fleet.heading;
       root.position.y = 0.02 + Math.sin(time * 1.1) * 0.06;
       root.rotation.z = Math.sin(time * 0.8) * 0.012;
       root.rotation.x = Math.cos(time * 0.7) * 0.007;
@@ -121,7 +121,7 @@ export class FleetRenderer {
       this.direction.setEnabled(true);
       this.direction.position.copyFrom(this.selectionRing.position);
       this.direction.rotation.y =
-        fleet.status === "docked" ? 0.8 : fleet.heading;
+        fleet.status === "docked" ? 0.25 : fleet.heading;
       const target = ports.find((port) => port.id === fleet.destinationPortId);
       if (target) {
         this.route = MeshBuilder.CreateDashedLines(

@@ -2,10 +2,10 @@ import { ArcRotateCamera, Vector3, type Scene } from "@babylonjs/core";
 export function createStrategyCamera(scene: Scene, canvas: HTMLCanvasElement) {
   const camera = new ArcRotateCamera(
     "strategy",
-    -1.20,
-    1.04,
-    215,
-    new Vector3(-128, 0, 30),
+    -1.05,
+    1.03,
+    225,
+    new Vector3(-86, 0, 39),
     scene,
   );
   camera.lowerBetaLimit = 0.3;

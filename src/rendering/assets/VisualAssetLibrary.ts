@@ -1,6 +1,8 @@
 import {
   LoadAssetContainerAsync,
   TransformNode,
+  Mesh,
+  type Material,
   type AssetContainer,
   type Scene,
   type ShadowGenerator,
@@ -47,6 +49,29 @@ export class VisualAssetLibrary {
         this.containers.set(id, container);
       }),
     );
+    // Authored family names are canonical; identical materials across modules share a draw state.
+    const shared = new Map<string, Material>();
+    for (const container of this.containers.values()) {
+      for (const mesh of container.meshes) {
+        const material = mesh.material;
+        if (!material) continue;
+        const existing = shared.get(material.name);
+        if (existing) mesh.material = existing;
+        else { shared.set(material.name, material); material.freeze(); }
+      }
+    }
+    // Native mesh LOD is sufficient for the four prepared modules; no new simulation system.
+    for (const [id, container] of this.containers) {
+      const definition = manifest.assets[id];
+      if (!("lodOf" in definition) || typeof definition.lodOf !== "string") continue;
+      const source = this.containers.get(definition.lodOf as VisualAssetId);
+      if (!source) continue;
+      for (const mesh of source.meshes) {
+        if (!(mesh instanceof Mesh) || !mesh.material) continue;
+        const lod = container.meshes.find(m => m instanceof Mesh && m.material?.name === mesh.material?.name);
+        if (lod instanceof Mesh) mesh.addLODLevel(id.includes("palm") ? 175 : 240, lod);
+      }
+    }
   }
   place(
     id: VisualAssetId,

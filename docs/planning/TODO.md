@@ -1,18 +1,22 @@
 # 待办
 
-## Task05 · High-End Visual Art Pass
+## Task06 · Hero Port Second Pass
 
-- [x] 35 套可编辑 Blender/GLB；商宅 A/B、港务所、广场、小码头、起重机、货包、货堆、系船设施、热带树 B 和草丛。
-- [x] 原创灰泥/木材/石材/草土颜色图集、米制双 UV、瓦片色差、连续 2K 地表烘焙。
-- [x] 港区装卸→仓储→商业街→广场/地标的空间组织，英雄船艏艉与木质表面升级。
-- [x] 温暖下午灯光、克制海面高光、统一海军蓝/黄铜 HUD。
-- [x] 导出遮罩/UV 回归保护；静态世界矩阵缓存；交接文档更新。
-- [x] typecheck / 33测试 / build；现有Chrome航行/改道、F3、三档桌面检查，视觉目标仍PARTIAL。
-- [ ] 用户确认是否达到目标美术品质；当前仍为 PARTIAL，不能按测试通过自动勾选。
-- [ ] 真实低配/长时性能、LOD/KTX2；树冠轮廓、裸岩山脊、建筑台地和道路切坡继续精修。
+- [x] 城市台地、挡土边、阶梯、道路高程和地形统一；重组主码头至高地住宅的动线。
+- [x] 护岸中央阶梯开口、三主码头对齐、装卸到仓库的视觉联系。
+- [x] 斜向山脊、沟槽、生态植被群落、四种冠型、岸线与共享水深。
+- [x] 10族配对PBR、统一米制UV、墙脚/立面/陶瓦变化、连续地表烘焙。
+- [x] 英雄船艉部/帆面与材质精修，保持约67k预算。
+- [x] 四套原生LOD1、共享材质、渲染计数、标签避让与右面板小修。
+- [x] typecheck / 39项测试 / build；最终运行结果见AI_HANDOFF。
+- [ ] 用户视觉认可；Hero Port second pass仍为PARTIAL。
+- [ ] 坡面与院落过渡、重复立面、船尾/帆布继续精修；低配/长时基准、更多LOD/KTX2待后续。
 
-## 下一任务候选
+下一任务仅从Hero Port third pass、Hero Ship third pass、Secondary Port Art Pass、Visual Performance Pass选择，等待用户指定。经济与所有新玩法继续冻结。
 
-优先 Hero Port second pass。备选 Hero Ship second pass、High-end HUD polish、Secondary port art pass，等待用户指定，不自动实施。
+## Task06 接续收尾 · 2026-09-09
 
-经济、商品、市场、交易、生产、国家、任务、战斗、存档和联机继续冻结。
+- [x] 最终资产三档分辨率、港口/船只多角度与暂停改道/精确抵达验收。
+- [x] 庭院边缘植被组、扩大铭牌候选并保护灯塔及HUD；视觉目标仍PARTIAL。
+- [x] 刷新后日志无error/warn；typecheck、39测试、build与diff检查通过。
+- [ ] 用户视觉认可及后续精修选择（未自动开展下一轮）。

@@ -3,6 +3,7 @@ import {
   Scene,
   Vector3,
   PointerEventTypes,
+  SceneInstrumentation,
   type ArcRotateCamera,
 } from "@babylonjs/core";
 import type { WorldSnapshot } from "../simulation/Simulation";
@@ -23,6 +24,7 @@ export class GameRenderer {
   private readonly assets: VisualAssetLibrary;
   private readonly ports: PortRenderer;
   private readonly fleets: FleetRenderer;
+  private readonly instrumentation: SceneInstrumentation;
   private assetsReady = false;
   private disposed = false;
   private focusTarget: { position: Vector3; radius: number } | null = null;
@@ -37,6 +39,7 @@ export class GameRenderer {
     this.engine.setHardwareScalingLevel(1);
     this.scene = new Scene(this.engine);
     this.scene.useRightHandedSystem = true;
+    this.instrumentation = new SceneInstrumentation(this.scene);
     this.camera = createStrategyCamera(this.scene, canvas);
     this.environment = createEnvironment(this.scene, this.camera);
     this.ocean = createOcean(this.scene, initial.ports);
@@ -118,7 +121,14 @@ export class GameRenderer {
       );
     this.scene.render();
     this.engine.endFrame();
-    if (this.assetsReady) this.ports.update(snapshot.ports, selection);
+    if (this.assetsReady) this.ports.update(snapshot.ports, selection, snapshot.fleets);
+  }
+  getStats() {
+    return {
+      drawCalls: this.instrumentation.drawCallsCounter.current,
+      activeMeshes: this.scene.getActiveMeshes().length,
+      textures: this.engine.getLoadedTexturesCache().length,
+    };
   }
   resize() {
     this.engine.resize();
@@ -129,6 +139,7 @@ export class GameRenderer {
     this.fleets.dispose();
     this.assets.dispose();
     this.environment.dispose();
+    this.instrumentation.dispose();
     this.scene.dispose();
     this.engine.dispose();
   }
